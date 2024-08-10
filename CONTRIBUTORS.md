@@ -8,6 +8,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
     [stacy Daniel](https://github.com/stacy-tech) 💃🏾
 
+- [Brianna Bland](https://github.com/bbland1) 👽
+
 ## Mentors
 
 ## Code of Conduct Contacts
