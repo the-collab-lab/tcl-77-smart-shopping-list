@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { useAuth, SignInButton, SignOutButton } from '../api/useAuth';
 
 import './Layout.css';
 
@@ -11,6 +12,8 @@ import './Layout.css';
  */
 
 export function Layout() {
+	let { user } = useAuth();
+
 	return (
 		<>
 			<div className="Layout">
@@ -21,6 +24,7 @@ export function Layout() {
 					<Outlet />
 				</main>
 				<nav className="Nav">
+					{!!user ? <SignOutButton /> : <SignInButton />}
 					<div className="Nav-container">
 						<button href="#" className="Nav-link">
 							Home
