@@ -33,15 +33,15 @@ export function Layout() {
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<a href="#" className="Nav-link">
+						<button href="#" className="Nav-link">
 							Home
-						</a>
-						<a href="#" className="Nav-link">
+						</button>
+						<button href="#" className="Nav-link">
 							List
-						</a>
-						<a href="#" className="Nav-link">
+						</button>
+						<button href="#" className="Nav-link">
 							Manage List
-						</a>
+						</button>
 					</div>
 				</nav>
 			</div>
