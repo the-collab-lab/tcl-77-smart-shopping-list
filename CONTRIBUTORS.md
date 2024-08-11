@@ -12,6 +12,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Mentors
 
-- [Alex D'Antonio](https://github.com/alex-andria) 👽
+- [Alex D'Antonio](https://github.com/alex-andria) 🌱
   
 ## Code of Conduct Contacts
