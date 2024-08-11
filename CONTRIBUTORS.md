@@ -6,12 +6,14 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
-    [stacy Daniel](https://github.com/stacy-tech) 💃🏾
+    - [stacy Daniel](https://github.com/stacy-tech) 💃🏾
 
-- [Brianna Bland](https://github.com/bbland1) 👽
+    - [Brianna Bland](https://github.com/bbland1) 👽
+
+    - [Falak Zahra](https://github.com/zahrafalak) 🎉
 
 ## Mentors
 
 - [Alex D'Antonio](https://github.com/alex-andria) 👽
-  
+
 ## Code of Conduct Contacts
