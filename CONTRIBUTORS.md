@@ -12,6 +12,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Falak Zahra](https://github.com/zahrafalak) 🎉
 
+- [Ross Clettenberg](https://github.com/RossaMania) 😎
+
 ## Mentors
 
 - [Alex D'Antonio](https://github.com/alex-andria) 👽
