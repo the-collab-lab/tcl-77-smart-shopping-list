@@ -24,8 +24,8 @@ export function Layout() {
 					<Outlet />
 				</main>
 				<nav className="Nav">
-					{!!user ? <SignOutButton /> : <SignInButton />}
 					<div className="Nav-container">
+						{!!user ? <SignOutButton /> : <SignInButton />}
 						<button href="#" className="Nav-link">
 							Home
 						</button>
