@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import { useAuth, SignInButton, SignOutButton } from '../api/useAuth';
 
 import './Layout.css';
@@ -26,15 +26,30 @@ export function Layout() {
 				<nav className="Nav">
 					<div className="Nav-container">
 						{!!user ? <SignOutButton /> : <SignInButton />}
-						<button href="#" className="Nav-link">
+						<NavLink
+							to="/"
+							className={({ isActive, isPending, isTransitioning }) =>
+								`Nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''} ${isTransitioning ? 'transitioning' : ''}`
+							}
+						>
 							Home
-						</button>
-						<button href="#" className="Nav-link">
+						</NavLink>
+						<NavLink
+							to="/list"
+							className={({ isActive, isPending, isTransitioning }) =>
+								`Nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''} ${isTransitioning ? 'transitioning' : ''}`
+							}
+						>
 							List
-						</button>
-						<button href="#" className="Nav-link">
+						</NavLink>
+						<NavLink
+							to="/manage-list"
+							className={({ isActive, isPending, isTransitioning }) =>
+								`Nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''} ${isTransitioning ? 'transitioning' : ''}`
+							}
+						>
 							Manage List
-						</button>
+						</NavLink>
 					</div>
 				</nav>
 			</div>
