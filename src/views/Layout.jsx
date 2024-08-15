@@ -26,28 +26,13 @@ export function Layout() {
 				<nav className="Nav">
 					<div className="Nav-container">
 						{!!user ? <SignOutButton /> : <SignInButton />}
-						<NavLink
-							to="/"
-							className={({ isActive }) =>
-								`Nav-link ${isActive ? 'active' : ''}`
-							}
-						>
+						<NavLink to="/" className="Nav-link">
 							Home
 						</NavLink>
-						<NavLink
-							to="/list"
-							className={({ isActive }) =>
-								`Nav-link ${isActive ? 'active' : ''}`
-							}
-						>
+						<NavLink to="/list" className="Nav-link">
 							List
 						</NavLink>
-						<NavLink
-							to="/manage-list"
-							className={({ isActive }) =>
-								`Nav-link ${isActive ? 'active' : ''}`
-							}
-						>
+						<NavLink to="/manage-list" className="Nav-link">
 							Manage List
 						</NavLink>
 					</div>
