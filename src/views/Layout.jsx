@@ -26,13 +26,17 @@ export function Layout() {
 				<nav className="Nav">
 					<div className="Nav-container">
 						{!!user ? <SignOutButton /> : <SignInButton />}
-						<NavLink to="/" className="Nav-link">
+						<NavLink to="/" className="Nav-link" aria-label="Home">
 							Home
 						</NavLink>
-						<NavLink to="/list" className="Nav-link">
+						<NavLink to="/list" className="Nav-link" aria-label="List">
 							List
 						</NavLink>
-						<NavLink to="/manage-list" className="Nav-link">
+						<NavLink
+							to="/manage-list"
+							className="Nav-link"
+							aria-label="Manage List"
+						>
 							Manage List
 						</NavLink>
 					</div>
