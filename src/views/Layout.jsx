@@ -28,24 +28,24 @@ export function Layout() {
 						{!!user ? <SignOutButton /> : <SignInButton />}
 						<NavLink
 							to="/"
-							className={({ isActive, isPending, isTransitioning }) =>
-								`Nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''} ${isTransitioning ? 'transitioning' : ''}`
+							className={({ isActive }) =>
+								`Nav-link ${isActive ? 'active' : ''}`
 							}
 						>
 							Home
 						</NavLink>
 						<NavLink
 							to="/list"
-							className={({ isActive, isPending, isTransitioning }) =>
-								`Nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''} ${isTransitioning ? 'transitioning' : ''}`
+							className={({ isActive }) =>
+								`Nav-link ${isActive ? 'active' : ''}`
 							}
 						>
 							List
 						</NavLink>
 						<NavLink
 							to="/manage-list"
-							className={({ isActive, isPending, isTransitioning }) =>
-								`Nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''} ${isTransitioning ? 'transitioning' : ''}`
+							className={({ isActive }) =>
+								`Nav-link ${isActive ? 'active' : ''}`
 							}
 						>
 							Manage List
