@@ -3,6 +3,8 @@ import { useAuth, SignInButton, SignOutButton } from '../api/useAuth';
 
 import './Layout.css';
 
+// 1) import NavLink component
+
 /**
  * TODO: The links defined in this file don't work!
  *

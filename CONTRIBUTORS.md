@@ -6,7 +6,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
-- [stacy Daniel](https://github.com/stacy-tech) 💃🏾
+- [Maha Ahmed](https://github.com/eternalmaha) 🌲
 
 - [Brianna Bland](https://github.com/bbland1) 👽
 
