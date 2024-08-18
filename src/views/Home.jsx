@@ -1,16 +1,23 @@
 import './Home.css';
+import { SingleList } from '../components';
 
 export function Home({ data, setListPath }) {
+	const hasList = data.length !== 0;
 	return (
 		<div className="Home">
 			<p>
 				Hello from the home (<code>/</code>) page!
 			</p>
 			<ul>
-				{/**
-				 * TODO: write some JavaScript that renders the `lists` array
-				 * so we can see which lists the user has access to.
-				 */}
+				{hasList &&
+					data.map((list, index) => (
+						<SingleList
+							key={index}
+							name={list.name}
+							path={list.path}
+							setListPath={setListPath}
+						/>
+					))}
 			</ul>
 		</div>
 	);

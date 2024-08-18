@@ -34,6 +34,7 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const lists = useShoppingLists(userId, userEmail);
+
 	/**
 	 * This custom hook takes our token and fetches the data for our list.
 	 * Check ./api/firestore.js for its implementation.
