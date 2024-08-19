@@ -10,7 +10,7 @@ export function ManageList() {
 				Hello from the <code>/manage-list</code> page!
 			</p>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="item">Item Name</label>
+				<label htmlFor="item">Item </label>
 				<input id="item" type="text" />
 				<br />
 				{/* radio inputs for how soon to buy. */}
