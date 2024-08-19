@@ -1,7 +1,13 @@
+import toast, { Toaster } from 'react-hot-toast';
+
 export function ManageList() {
+	const notify = () => toast.success('Item added to list!');
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('hi');
+
+		notify();
 	};
 
 	return (
@@ -25,6 +31,7 @@ export function ManageList() {
 				<br />
 				<button type="submit">Submit Item</button>
 			</form>
+			<Toaster />
 		</div>
 	);
 }
