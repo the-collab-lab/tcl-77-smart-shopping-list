@@ -165,6 +165,19 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	const listCollectionRef = collection(db, listPath, 'items');
 	// TODO: Replace this call to console.log with the appropriate
 	// Firebase function, so this information is sent to your database!
+
+	//This saves item to database.
+	await setDoc(listCollectionRef, {
+		owner: userId,
+	});
+
+	// This updates user record.
+	const userDocumentRef = doc(db, 'users', userEmail);
+
+	updateDoc(userDocumentRef, {
+		sharedLists: arrayUnion(listCollectionRef),
+	});
+
 	return console.log(listCollectionRef, {
 		dateCreated: new Date(),
 		// NOTE: This is null because the item has just been created.

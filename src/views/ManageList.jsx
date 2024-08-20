@@ -1,3 +1,4 @@
+import { addItem } from '../api/firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
 export function ManageList() {
@@ -5,8 +6,8 @@ export function ManageList() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		addItem({ itemName: item });
 		console.log('hi');
-
 		notify();
 	};
 
