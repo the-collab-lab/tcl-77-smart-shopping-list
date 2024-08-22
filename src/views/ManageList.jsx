@@ -1,19 +1,34 @@
+import { useState } from 'react';
 import { addItem } from '../api/firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
-export function ManageList() {
+export function ManageList({ listPath }) {
+	const [itemName, setItemName] = useState('');
+	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState('');
 	const notify = () => toast.success('Item added to list!');
 
-	const handleSubmit = (e) => {
+	const handleItemNameTextChange = (e) => {
+		setItemName(e.target.value);
+	};
+
+	const handleNextPurchaseChange = (e) => {
+		setItemNextPurchaseTimeline(e.target.value);
+	};
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const itemInfoForm = new FormData(e.target);
+
+		// if (itemName && itemNextPurchaseTimeline) {
+
+		// 	await addItem(listPath, { itemName: itemName, daysUntilNextPurchase: itemNextPurchaseTimeline });
+		// }
 
 		console.log({
-			itemName: itemInfoForm.get('item'),
-			daysUntilNextPurchaseSelect: itemInfoForm.get('when-to-buy-select'),
-			daysUntilNextPurchaseRadio: itemInfoForm.get('when-to-buy-radio'),
+			listPath: listPath,
+			itemName: itemName,
+			daysUntilNextPurchaseRadio: itemNextPurchaseTimeline,
 		});
-		// addItem({ itemName: itemInfoForm.get("item"), daysUntilNextPurchase: itemInfoForm.get("when-to-buy")});
+
 		notify();
 	};
 
@@ -23,26 +38,32 @@ export function ManageList() {
 				Hello from the <code>/manage-list</code> page!
 			</p>
 			<form onSubmit={handleSubmit}>
-				<label>
-					Item: <input id="item" type="text" name="item" required />
+				<label htmlFor="item-name">
+					Item:
+					<input
+						id="item-name"
+						type="text"
+						name="item"
+						value={itemName}
+						onChange={handleItemNameTextChange}
+						required
+						aria-label="Enter the item name"
+					/>
 				</label>
 				<br />
-
-				<label htmlFor="when-to-buy">
-					When to buy:{' '}
-					<select id="when-to-buy" name="when-to-buy-select" required>
-						<option value="" disabled>
-							Select when to buy next
-						</option>
-						<option value="7">Soon (7 days)</option>
-						<option value="14">Kind of Soon (14 days)</option>
-						<option value="30">Not Soon (30 days)</option>
-					</select>
-				</label>
 				<p>
 					When to buy: <br />
 					<label htmlFor="soon">
-						<input type="radio" id="soon" name="when-to-buy-radio" value="7" />
+						<input
+							type="radio"
+							id="soon"
+							name="when-to-buy"
+							value="7"
+							required
+							onChange={handleNextPurchaseChange}
+							checked={itemNextPurchaseTimeline === '7'}
+							aria-label="Set buy to soon, within 7 days"
+						/>
 						Soon
 					</label>
 					<br />
@@ -50,8 +71,12 @@ export function ManageList() {
 						<input
 							type="radio"
 							id="kind-of-soon"
-							name="when-to-buy-radio"
+							name="when-to-buy"
 							value="14"
+							required
+							onChange={handleNextPurchaseChange}
+							checked={itemNextPurchaseTimeline === '14'}
+							aria-label="Set buy to kind of soon, within 14 days"
 						/>
 						Kind of soon
 					</label>
@@ -60,8 +85,12 @@ export function ManageList() {
 						<input
 							type="radio"
 							id="not-soon"
-							name="when-to-buy-radio"
+							name="when-to-buy"
 							value="30"
+							required
+							onChange={handleNextPurchaseChange}
+							checked={itemNextPurchaseTimeline === '30'}
+							aria-label="Set buy to not soon, within 30 days"
 						/>
 						Not soon
 					</label>
