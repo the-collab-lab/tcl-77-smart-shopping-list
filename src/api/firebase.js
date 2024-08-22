@@ -2,6 +2,7 @@ import {
 	arrayUnion,
 	getDoc,
 	setDoc,
+	addDoc,
 	collection,
 	doc,
 	onSnapshot,
@@ -166,24 +167,12 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	// TODO: Replace this call to console.log with the appropriate
 	// Firebase function, so this information is sent to your database!
 
-	//This saves item to database.
-	await setDoc(listCollectionRef, {
-		owner: userId,
-	});
-
-	// This updates user record.
-	const userDocumentRef = doc(db, 'users', userEmail);
-
-	updateDoc(userDocumentRef, {
-		sharedLists: arrayUnion(listCollectionRef),
-	});
-
-	return console.log(listCollectionRef, {
+	await addDoc(listCollectionRef, {
 		dateCreated: new Date(),
 		// NOTE: This is null because the item has just been created.
 		// We'll use updateItem to put a Date here when the item is purchased!
 		dateLastPurchased: null,
-		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
+		dateNextPurchased: getFutureDate(parseInt(daysUntilNextPurchase)),
 		name: itemName,
 		totalPurchases: 0,
 	});

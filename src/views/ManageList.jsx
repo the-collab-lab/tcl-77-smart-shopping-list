@@ -5,7 +5,6 @@ import toast, { Toaster } from 'react-hot-toast';
 export function ManageList({ listPath }) {
 	const [itemName, setItemName] = useState('');
 	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState('');
-	const notify = () => toast.success('Item added to list!');
 
 	const handleItemNameTextChange = (e) => {
 		setItemName(e.target.value);
@@ -18,18 +17,22 @@ export function ManageList({ listPath }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// if (itemName && itemNextPurchaseTimeline) {
-
-		// 	await addItem(listPath, { itemName: itemName, daysUntilNextPurchase: itemNextPurchaseTimeline });
-		// }
-
-		console.log({
-			listPath: listPath,
-			itemName: itemName,
-			daysUntilNextPurchaseRadio: itemNextPurchaseTimeline,
-		});
-
-		notify();
+		await toast.promise(
+			addItem(listPath, {
+				itemName,
+				daysUntilNextPurchase: itemNextPurchaseTimeline,
+			}),
+			{
+				pending: 'Adding item to list.',
+				success: `${itemName} successfully added to your list!`,
+				error: `${itemName} failed to add to your list. Please try again!`,
+			},
+			{
+				style: {
+					minWidth: '250px',
+				},
+			},
+		);
 	};
 
 	return (
