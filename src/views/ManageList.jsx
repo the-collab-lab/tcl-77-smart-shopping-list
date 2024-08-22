@@ -40,6 +40,7 @@ export function ManageList({ listPath }) {
 						minWidth: '250px',
 					},
 				},
+				console.log('Item added to list:', itemName),
 			);
 		} catch (error) {
 			console.error('Failed to add item:', error);
