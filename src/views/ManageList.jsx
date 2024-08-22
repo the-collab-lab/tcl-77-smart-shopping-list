@@ -17,22 +17,32 @@ export function ManageList({ listPath }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		await toast.promise(
-			addItem(listPath, {
-				itemName,
-				daysUntilNextPurchase: itemNextPurchaseTimeline,
-			}),
-			{
-				pending: 'Adding item to list.',
-				success: `${itemName} successfully added to your list!`,
-				error: `${itemName} failed to add to your list. Please try again!`,
-			},
-			{
-				style: {
-					minWidth: '250px',
+		console.log('Submitting item:', {
+			itemName,
+			itemNextPurchaseTimeline,
+			listPath,
+		});
+
+		try {
+			await toast.promise(
+				addItem(listPath, {
+					itemName,
+					daysUntilNextPurchase: itemNextPurchaseTimeline,
+				}),
+				{
+					pending: 'Adding item to list.',
+					success: `${itemName} successfully added to your list!`,
+					error: `${itemName} failed to add to your list. Please try again!`,
 				},
-			},
-		);
+				{
+					style: {
+						minWidth: '250px',
+					},
+				},
+			);
+		} catch (error) {
+			console.error('Failed to add item:', error);
+		}
 	};
 
 	return (
