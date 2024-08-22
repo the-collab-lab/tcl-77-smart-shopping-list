@@ -3,6 +3,7 @@ import { addItem } from '../api/firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
 export function ManageList({ listPath }) {
+	console.log('listPath:', listPath);
 	const [itemName, setItemName] = useState('');
 	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState('');
 
