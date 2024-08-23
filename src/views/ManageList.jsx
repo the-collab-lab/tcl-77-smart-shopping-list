@@ -18,12 +18,6 @@ export function ManageList({ listPath }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log('Submitting item:', {
-			itemName,
-			itemNextPurchaseTimeline,
-			listPath,
-		});
-
 		try {
 			await toast.promise(
 				addItem(listPath, {
@@ -79,7 +73,7 @@ export function ManageList({ listPath }) {
 							checked={itemNextPurchaseTimeline === '7'}
 							aria-label="Set buy to soon, within 7 days"
 						/>
-						Soon
+						Soon -- Within 7 days!
 					</label>
 					<br />
 					<label htmlFor="kind-of-soon">
@@ -93,7 +87,7 @@ export function ManageList({ listPath }) {
 							checked={itemNextPurchaseTimeline === '14'}
 							aria-label="Set buy to kind of soon, within 14 days"
 						/>
-						Kind of soon
+						Kind of soon -- Within 14 days!
 					</label>
 					<br />
 					<label htmlFor="not-soon">
@@ -107,7 +101,7 @@ export function ManageList({ listPath }) {
 							checked={itemNextPurchaseTimeline === '30'}
 							aria-label="Set buy to not soon, within 30 days"
 						/>
-						Not soon
+						Not soon -- Within 30 days!
 					</label>
 				</fieldset>
 				<button type="submit" aria-label="Add item to shopping list">
