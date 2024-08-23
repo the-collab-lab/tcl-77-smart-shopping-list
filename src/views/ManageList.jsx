@@ -2,6 +2,12 @@ import { useState } from 'react';
 import { addItem } from '../api/firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
+const purchaseTimelines = {
+	soon: 7,
+	kindOfSoon: 14,
+	notSoon: 30,
+};
+
 export function ManageList({ listPath }) {
 	console.log('listPath:', listPath);
 	const [itemName, setItemName] = useState('');
@@ -18,11 +24,13 @@ export function ManageList({ listPath }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
+
 		try {
 			await toast.promise(
 				addItem(listPath, {
 					itemName,
-					daysUntilNextPurchase: itemNextPurchaseTimeline,
+					daysUntilNextPurchase,
 				}),
 				{
 					pending: 'Adding item to list.',
@@ -67,10 +75,10 @@ export function ManageList({ listPath }) {
 							type="radio"
 							id="soon"
 							name="when-to-buy"
-							value="7"
+							value="soon"
 							required
 							onChange={handleNextPurchaseChange}
-							checked={itemNextPurchaseTimeline === '7'}
+							checked={itemNextPurchaseTimeline === 'soon'}
 							aria-label="Set buy to soon, within 7 days"
 						/>
 						Soon -- Within 7 days!
@@ -81,10 +89,10 @@ export function ManageList({ listPath }) {
 							type="radio"
 							id="kind-of-soon"
 							name="when-to-buy"
-							value="14"
+							value="kindOfSoon"
 							required
 							onChange={handleNextPurchaseChange}
-							checked={itemNextPurchaseTimeline === '14'}
+							checked={itemNextPurchaseTimeline === 'kindOfSoon'}
 							aria-label="Set buy to kind of soon, within 14 days"
 						/>
 						Kind of soon -- Within 14 days!
@@ -95,10 +103,10 @@ export function ManageList({ listPath }) {
 							type="radio"
 							id="not-soon"
 							name="when-to-buy"
-							value="30"
+							value="notSoon"
 							required
 							onChange={handleNextPurchaseChange}
-							checked={itemNextPurchaseTimeline === '30'}
+							checked={itemNextPurchaseTimeline === 'notSoon'}
 							aria-label="Set buy to not soon, within 30 days"
 						/>
 						Not soon -- Within 30 days!
