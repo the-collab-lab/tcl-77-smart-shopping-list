@@ -110,7 +110,9 @@ export function ManageList({ listPath }) {
 						Not soon
 					</label>
 				</fieldset>
-				<button type="submit">Submit Item</button>
+				<button type="submit" aria-label="Add item to shopping list">
+					Submit Item
+				</button>
 			</form>
 			<Toaster />
 		</div>
