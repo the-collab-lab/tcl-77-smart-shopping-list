@@ -39,8 +39,6 @@ export function ManageList({ listPath }) {
 						return `${itemName} successfully added to your list!`;
 					},
 					error: () => {
-						setItemName(itemName);
-						setItemNextPurchaseTimeline(itemNextPurchaseTimeline);
 						return `${itemName} failed to add to your list. Please try again!`;
 					},
 				},
