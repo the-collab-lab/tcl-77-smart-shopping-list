@@ -66,8 +66,8 @@ export function ManageList({ listPath }) {
 					/>
 				</label>
 				<br />
-				<p>
-					When to buy: <br />
+				<fieldset>
+					<legend>When to buy:</legend>
 					<label htmlFor="soon">
 						<input
 							type="radio"
@@ -109,7 +109,7 @@ export function ManageList({ listPath }) {
 						/>
 						Not soon
 					</label>
-				</p>
+				</fieldset>
 				<button type="submit">Submit Item</button>
 			</form>
 			<Toaster />
