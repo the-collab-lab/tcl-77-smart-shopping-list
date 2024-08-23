@@ -164,8 +164,6 @@ export async function shareList(listPath, currentUserId, recipientEmail) {
  */
 export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	const listCollectionRef = collection(db, listPath, 'items');
-	// TODO: Replace this call to console.log with the appropriate
-	// Firebase function, so this information is sent to your database!
 
 	await addDoc(listCollectionRef, {
 		dateCreated: new Date(),

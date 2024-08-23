@@ -9,7 +9,6 @@ const purchaseTimelines = {
 };
 
 export function ManageList({ listPath }) {
-	console.log('listPath:', listPath);
 	const [itemName, setItemName] = useState('');
 	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState('');
 
@@ -34,15 +33,22 @@ export function ManageList({ listPath }) {
 				}),
 				{
 					pending: 'Adding item to list.',
-					success: `${itemName} successfully added to your list!`,
-					error: `${itemName} failed to add to your list. Please try again!`,
+					success: () => {
+						setItemName('');
+						setItemNextPurchaseTimeline('');
+						return `${itemName} successfully added to your list!`;
+					},
+					error: () => {
+						setItemName(itemName);
+						setItemNextPurchaseTimeline(itemNextPurchaseTimeline);
+						return `${itemName} failed to add to your list. Please try again!`;
+					},
 				},
 				{
 					style: {
 						minWidth: '250px',
 					},
 				},
-				console.log('Item added to list:', itemName),
 			);
 		} catch (error) {
 			console.error('Failed to add item:', error);
