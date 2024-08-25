@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
+import { validateTrimmedString } from '../utils';
 import toast, { Toaster } from 'react-hot-toast';
 
 const SOON = 'soon';
@@ -27,12 +28,18 @@ export function ManageList({ listPath }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const trimmedItemName = validateTrimmedString(itemName);
 
-		const trimmedItemName = itemName.trim();
-
-		if (trimmedItemName.length === 0) {
+		if (!trimmedItemName) {
 			toast.error(
 				'Item name cannot be empty or just spaces. Please enter a valid name.',
+			);
+			return;
+		}
+
+		if (!(itemNextPurchaseTimeline in purchaseTimelines)) {
+			toast.error(
+				'Selected purchase timeline is invalid. Please choose a valid option.',
 			);
 			return;
 		}
@@ -49,7 +56,7 @@ export function ManageList({ listPath }) {
 					pending: 'Adding item to list.',
 					success: () => {
 						setItemName('');
-						setItemNextPurchaseTimeline('');
+						setItemNextPurchaseTimeline(SOON);
 						return `${itemName} successfully added to your list!`;
 					},
 					error: () => {
@@ -78,6 +85,7 @@ export function ManageList({ listPath }) {
 						onChange={handleItemNameTextChange}
 						required
 						aria-label="Enter the item name"
+						aria-required
 					/>
 				</label>
 				<br />
