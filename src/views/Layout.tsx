@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useAuth, SignInButton, SignOutButton } from '../api/useAuth';
 
@@ -14,7 +15,7 @@ import './Layout.css';
  */
 
 export function Layout() {
-	let { user } = useAuth();
+	const { user } = useAuth();
 
 	return (
 		<>

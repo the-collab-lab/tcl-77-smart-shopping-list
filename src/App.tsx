@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Home, Layout, List, ManageList } from './views';
@@ -25,8 +27,8 @@ export function App() {
 	 * Check ./api/useAuth.jsx for its implementation.
 	 */
 	const { user } = useAuth();
-	const userId = user?.uid;
-	const userEmail = user?.email;
+	const userId = user?.uid ?? '';
+	const userEmail = user?.email ?? '';
 
 	/**
 	 * This custom hook takes a user ID and email and fetches

@@ -1,7 +1,14 @@
+import React from 'react';
 import './Home.css';
 import { SingleList } from '../components';
+import { List } from '../api/firebase';
 
-export function Home({ data, setListPath }) {
+interface Props {
+	data: List[];
+	setListPath: (path: string) => void;
+}
+
+export function Home({ data, setListPath }: Props) {
 	const hasList = data.length !== 0;
 	return (
 		<div className="Home">
