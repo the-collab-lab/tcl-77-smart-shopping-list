@@ -170,7 +170,7 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 		// NOTE: This is null because the item has just been created.
 		// We'll use updateItem to put a Date here when the item is purchased!
 		dateLastPurchased: null,
-		dateNextPurchased: getFutureDate(parseInt(daysUntilNextPurchase)),
+		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 		name: itemName,
 		totalPurchases: 0,
 	});
