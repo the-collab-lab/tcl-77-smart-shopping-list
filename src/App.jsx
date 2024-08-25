@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Home, Layout, List, ManageList } from './views';
+import { Home, Layout, List, ManageList } from "./views";
 
-import { useAuth, useShoppingListData, useShoppingLists } from './api';
+import { useAuth, useShoppingListData, useShoppingLists } from "./api";
 
-import { useStateWithStorage } from './utils';
+import { useStateWithStorage } from "./utils";
 
 export function App() {
 	/**
@@ -16,7 +16,7 @@ export function App() {
 	 * to create and switch between lists.
 	 */
 	const [listPath, setListPath] = useStateWithStorage(
-		'tcl-shopping-list-path',
+		"tcl-shopping-list-path",
 		null,
 	);
 

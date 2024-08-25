@@ -7,10 +7,10 @@ import {
 	doc,
 	onSnapshot,
 	updateDoc,
-} from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { db } from './config';
-import { getFutureDate } from '../utils';
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "./config";
+import { getFutureDate } from "../utils";
 
 /**
  * A custom hook that subscribes to the user's shopping lists in our Firestore
@@ -30,7 +30,7 @@ export function useShoppingLists(userId, userEmail) {
 		if (!userId || !userEmail) return;
 
 		// When we get a userEmail, we use it to subscribe to real-time updates
-		const userDocRef = doc(db, 'users', userEmail);
+		const userDocRef = doc(db, "users", userEmail);
 
 		onSnapshot(userDocRef, (docSnap) => {
 			if (docSnap.exists()) {
@@ -64,7 +64,7 @@ export function useShoppingListData(listPath) {
 
 		// When we get a listPath, we use it to subscribe to real-time updates
 		// from Firestore.
-		return onSnapshot(collection(db, listPath, 'items'), (snapshot) => {
+		return onSnapshot(collection(db, listPath, "items"), (snapshot) => {
 			// The snapshot is a real-time update. We iterate over the documents in it
 			// to get the data.
 			const nextData = snapshot.docs.map((docSnapshot) => {
@@ -93,7 +93,7 @@ export function useShoppingListData(listPath) {
  */
 export async function addUserToDatabase(user) {
 	// Check if the user already exists in the database.
-	const userDoc = await getDoc(doc(db, 'users', user.email));
+	const userDoc = await getDoc(doc(db, "users", user.email));
 	// If the user already exists, we don't need to do anything.
 	if (userDoc.exists()) {
 		return;
@@ -102,7 +102,7 @@ export async function addUserToDatabase(user) {
 		// We'll use the user's email as the document id
 		// because it's more likely that the user will know their email
 		// than their uid.
-		await setDoc(doc(db, 'users', user.email), {
+		await setDoc(doc(db, "users", user.email), {
 			email: user.email,
 			name: user.displayName,
 			uid: user.uid,
@@ -123,7 +123,7 @@ export async function createList(userId, userEmail, listName) {
 		owner: userId,
 	});
 
-	const userDocumentRef = doc(db, 'users', userEmail);
+	const userDocumentRef = doc(db, "users", userEmail);
 
 	updateDoc(userDocumentRef, {
 		sharedLists: arrayUnion(listDocRef),
@@ -141,7 +141,7 @@ export async function shareList(listPath, currentUserId, recipientEmail) {
 		return;
 	}
 	// Get the document for the recipient user.
-	const usersCollectionRef = collection(db, 'users');
+	const usersCollectionRef = collection(db, "users");
 	const recipientDoc = await getDoc(doc(usersCollectionRef, recipientEmail));
 	// If the recipient user doesn't exist, we can't share the list.
 	if (!recipientDoc.exists()) {
@@ -149,7 +149,7 @@ export async function shareList(listPath, currentUserId, recipientEmail) {
 	}
 	// Add the list to the recipient user's sharedLists array.
 	const listDocumentRef = doc(db, listPath);
-	const userDocumentRef = doc(db, 'users', recipientEmail);
+	const userDocumentRef = doc(db, "users", recipientEmail);
 	updateDoc(userDocumentRef, {
 		sharedLists: arrayUnion(listDocumentRef),
 	});
