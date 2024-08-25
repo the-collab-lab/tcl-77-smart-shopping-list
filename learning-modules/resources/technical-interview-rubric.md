@@ -1,4 +1,5 @@
 ## Accessibility
+
 ### 1. What are some of the tools you can use to test the accessibility of a web page or web application?
 
 <table>
@@ -25,6 +26,7 @@
 </table>
 
 ### 2. How is the `alt` attribute on an `img` element used?
+
 <table>
   <tbody>
     <tr>
@@ -49,6 +51,7 @@
 </table>
 
 ### 3. When should you use a link versus a button?
+
 <table>
   <tbody>
     <tr>
@@ -67,6 +70,7 @@
 </table>
 
 ### 4. What are the advantages for accessibility of using <code>em</code> or <code>rem</code> as a CSS unit versus <code>px</code>?
+
 <table>
   <tbody>
     <tr>
@@ -85,6 +89,7 @@
 </table>
 
 ### 5. What are ARIA attributes and how are they useful?
+
 <table>
   <tbody>
     <tr>
@@ -109,6 +114,7 @@
 </table>
 
 ### 6. Why is color alone insufficient to to convey information in a UI?
+
 <table>
   <tbody>
     <tr>
@@ -127,6 +133,7 @@
 </table>
 
 ## React
+
 ### 1. What are `state` and `props` in React? How are they best used?
 
 <table>
@@ -154,10 +161,9 @@
 </tbody>
 </table>
 
-
 ### 2. What are “stateless” components in React? How are they useful?
 
-<b>Note 1:</b> This question is a natural extension of the purpose of `state`. If the discussion in question 1 covers it, feel free to skip. 
+<b>Note 1:</b> This question is a natural extension of the purpose of `state`. If the discussion in question 1 covers it, feel free to skip.
 
 <b>Note 2:</b> candidate may not have heard this term before, or may also know it as a 'presentational component' You can define it for them, e.g. 'A component that has no state.'
 
