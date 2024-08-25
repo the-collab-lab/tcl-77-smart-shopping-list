@@ -7,57 +7,109 @@ import {
 	doc,
 	onSnapshot,
 	updateDoc,
+	Timestamp,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./config";
 import { getFutureDate } from "../utils";
 
+import * as t from "io-ts";
+import { isLeft } from "fp-ts/lib/Either";
+import { PathReporter } from "io-ts/PathReporter";
+
+const FirebaseTimestamp = new t.Type<
+	Timestamp,
+	{ seconds: number; nanoseconds: number },
+	unknown
+>(
+	"FirebaseTimestamp",
+	(input): input is Timestamp => input instanceof Timestamp,
+	(input, context) => {
+		if (input instanceof Timestamp) {
+			return t.success(input);
+		}
+
+		return t.failure(input, context);
+	},
+	(timestamp) => ({
+		seconds: timestamp.seconds,
+		nanoseconds: timestamp.nanoseconds,
+	}),
+);
+
+const ListModel = t.type({
+	id: t.string,
+	path: t.string,
+});
+
+type ListModel = t.TypeOf<typeof ListModel>;
+
+export interface List {
+	name: string;
+	path: string;
+}
+
 /**
  * A custom hook that subscribes to the user's shopping lists in our Firestore
  * database and returns new data whenever the lists change.
- * @param {string | null} userId
- * @param {string | null} userEmail
- * @returns
  */
-export function useShoppingLists(userId, userEmail) {
+export function useShoppingLists(user: User | null) {
 	// Start with an empty array for our data.
-	const initialState = [];
-	const [data, setData] = useState(initialState);
+	const [data, setData] = useState<List[]>([]);
 
 	useEffect(() => {
 		// If we don't have a userId or userEmail (the user isn't signed in),
 		// we can't get the user's lists.
-		if (!userId || !userEmail) return;
+		if (!user) return;
 
 		// When we get a userEmail, we use it to subscribe to real-time updates
-		const userDocRef = doc(db, "users", userEmail);
+		const userDocRef = doc(db, "users", user.email);
 
 		onSnapshot(userDocRef, (docSnap) => {
 			if (docSnap.exists()) {
-				const listRefs = docSnap.data().sharedLists;
-				const newData = listRefs.map((listRef) => {
-					// We keep the list's id and path so we can use them later.
-					return { name: listRef.id, path: listRef.path };
+				// deserialize the list into a typed List
+				const data = docSnap.data().sharedLists.map((list: unknown) => {
+					const decoded = ListModel.decode(list);
+					if (isLeft(decoded)) {
+						throw Error(
+							`Could not validate data: ${PathReporter.report(decoded).join("\n")}`,
+						);
+					}
+
+					const model = decoded.right;
+					return {
+						name: model.id,
+						path: model.path,
+					};
 				});
-				setData(newData);
+				setData(data);
 			}
 		});
-	}, [userId, userEmail]);
+	}, [user?.email, user?.name]);
 
 	return data;
 }
 
+const ListItemModel = t.type({
+	id: t.string,
+	name: t.string,
+	dateLastPurchased: t.union([FirebaseTimestamp, t.null]),
+	dateNextPurchased: FirebaseTimestamp,
+	totalPurchases: t.number,
+	dateCreated: FirebaseTimestamp,
+});
+
+export type ListItem = t.TypeOf<typeof ListItemModel>;
+
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
  * and returns new data whenever the list changes.
- * @param {string | null} listPath
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
-export function useShoppingListData(listPath) {
+export function useShoppingListData(listPath: string | null) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */
-	const initialState = [];
-	const [data, setData] = useState(initialState);
+	const [data, setData] = useState<ListItem[]>([]);
 
 	useEffect(() => {
 		if (!listPath) return;
@@ -75,7 +127,14 @@ export function useShoppingListData(listPath) {
 				// but it is very useful, so we add it to the data ourselves.
 				item.id = docSnapshot.id;
 
-				return item;
+				const decoded = ListItemModel.decode(item);
+				if (isLeft(decoded)) {
+					throw Error(
+						`Could not validate data: ${PathReporter.report(decoded).join("\n")}`,
+					);
+				}
+
+				return decoded.right;
 			});
 
 			// Update our React state with the new data.
@@ -87,11 +146,18 @@ export function useShoppingListData(listPath) {
 	return data;
 }
 
+// Designed to replace Firestore's User type in most contexts.
+// Firestore's User type allows "email" to be optional.
+export interface User {
+	email: string;
+	name: string;
+	uid: string;
+}
+
 /**
  * Add a new user to the users collection in Firestore.
- * @param {Object} user The user object from Firebase Auth.
  */
-export async function addUserToDatabase(user) {
+export async function addUserToDatabase(user: User) {
 	// Check if the user already exists in the database.
 	const userDoc = await getDoc(doc(db, "users", user.email));
 	// If the user already exists, we don't need to do anything.
@@ -104,7 +170,7 @@ export async function addUserToDatabase(user) {
 		// than their uid.
 		await setDoc(doc(db, "users", user.email), {
 			email: user.email,
-			name: user.displayName,
+			name: user.name,
 			uid: user.uid,
 		});
 	}
@@ -112,18 +178,15 @@ export async function addUserToDatabase(user) {
 
 /**
  * Create a new list and add it to a user's lists in Firestore.
- * @param {string} userId The id of the user who owns the list.
- * @param {string} userEmail The email of the user who owns the list.
- * @param {string} listName The name of the new list.
  */
-export async function createList(userId, userEmail, listName) {
-	const listDocRef = doc(db, userId, listName);
+export async function createList(user: User, listName: string) {
+	const listDocRef = doc(db, user.uid, listName);
 
 	await setDoc(listDocRef, {
-		owner: userId,
+		owner: user.uid,
 	});
 
-	const userDocumentRef = doc(db, "users", userEmail);
+	const userDocumentRef = doc(db, "users", user.email);
 
 	updateDoc(userDocumentRef, {
 		sharedLists: arrayUnion(listDocRef),
@@ -135,9 +198,13 @@ export async function createList(userId, userEmail, listName) {
  * @param {string} listPath The path to the list to share.
  * @param {string} recipientEmail The email of the user to share the list with.
  */
-export async function shareList(listPath, currentUserId, recipientEmail) {
+export async function shareList(
+	listPath: string,
+	currentUser: User,
+	recipientEmail: string,
+) {
 	// Check if current user is owner.
-	if (!listPath.includes(currentUserId)) {
+	if (!listPath.includes(currentUser.uid)) {
 		return;
 	}
 	// Get the document for the recipient user.
@@ -157,13 +224,13 @@ export async function shareList(listPath, currentUserId, recipientEmail) {
 
 /**
  * Add a new item to the user's list in Firestore.
- * @param {string} listPath The path of the list we're adding to.
- * @param {Object} itemData Information about the new item.
- * @param {string} itemData.itemName The name of the item.
- * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
-export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
-	const listCollectionRef = collection(db, listPath, 'items');
+export async function addItem(
+	listPath: string,
+	name: string,
+	daysUntilNextPurchase: number,
+) {
+	const listCollectionRef = collection(db, listPath, "items");
 
 	await addDoc(listCollectionRef, {
 		dateCreated: new Date(),
@@ -171,7 +238,7 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 		// We'll use updateItem to put a Date here when the item is purchased!
 		dateLastPurchased: null,
 		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-		name: itemName,
+		name,
 		totalPurchases: 0,
 	});
 }

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Home, Layout, List, ManageList } from "./views";
@@ -25,15 +27,13 @@ export function App() {
 	 * Check ./api/useAuth.jsx for its implementation.
 	 */
 	const { user } = useAuth();
-	const userId = user?.uid;
-	const userEmail = user?.email;
 
 	/**
 	 * This custom hook takes a user ID and email and fetches
 	 * the shopping lists that the user has access to.
 	 * Check ./api/firestore.js for its implementation.
 	 */
-	const lists = useShoppingLists(userId, userEmail);
+	const lists = useShoppingLists(user);
 
 	/**
 	 * This custom hook takes our token and fetches the data for our list.
@@ -48,12 +48,7 @@ export function App() {
 					<Route
 						index
 						element={
-							<Home
-								data={lists}
-								setListPath={setListPath}
-								userId={userId}
-								userEmail={userEmail}
-							/>
+							<Home data={lists} setListPath={setListPath} user={user} />
 						}
 					/>
 					<Route path="/list" element={<List data={data} />} />

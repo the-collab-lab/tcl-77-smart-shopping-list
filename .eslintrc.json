@@ -3,6 +3,7 @@
 		"plugin:react/recommended",
 		"plugin:react/jsx-runtime",
 		"plugin:jsx-a11y/recommended",
+		"plugin:@typescript-eslint/recommended",
 		"prettier"
 	],
 	"env": {
@@ -12,12 +13,23 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"settings": { "react": { "version": "detect" } },
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
 	"rules": {
 		"no-duplicate-imports": "warn",
-		"no-unused-vars": "warn",
-		"react/jsx-filename-extension": [1, { "allow": "as-needed" }],
+		"@typescript-eslint/no-unused-vars": "warn",
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"allow": "as-needed",
+				"extensions": [".jsx", ".tsx"]
+			}
+		],
 		"react/prop-types": "off",
-		"react/jsx-no-target-blank": "off"
+		"react/jsx-no-target-blank": "off",
+		"react/jsx-uses-react": "error"
 	}
 }
