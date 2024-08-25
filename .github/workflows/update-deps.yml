@@ -12,6 +12,6 @@ jobs:
       - run: rm -rf .github/
       - uses: EndBug/add-and-commit@latest
         with:
-          add: '.'
+          add: "."
           message: 'Update dependencies with "npm update"'
           push: true

@@ -80,7 +80,7 @@ Es la sección más importante o una de las secciones más importantes de Linked
 
 1. **[0:50]** Mala experiencia #1: Solo se pone la posición, pero no se incluye información sobre lo que hizo en dicha posición. Esto no ayuda a las personas que revisan perfiles a poder entender qué hicieron en esa posición, ya que por ejemplo un "Technical Solutions Consultant" puede significar una cosa para una empresa, y una cosa diferente para otra empresa, por lo que puede hacer que el recruiter decida no tener en cuenta el perfil.
 2. **[1:40]** Mala experiencia #2: Hay más información sobre la posición, pero no se entiende ya que el inglés que se está usando es muy complejo. No quieres que no lo entienda un reclutador o la persona que está revisando tu perfil.
-3. **[2:40]** Buena experiencia #1:  Importante que lo pueda entender un reclutador o un hiring manager.
+3. **[2:40]** Buena experiencia #1: Importante que lo pueda entender un reclutador o un hiring manager.
    - **[4:20]** Escoger un título acorde a la experiencia o al rol que se quiera ejecutar (e.g. Full-stack developer). El título se usa como palabras clave cuando buscan perfiles en LinkedIn.
    - **[4:48]** Usar bullet points para mostrar los logros y/o fortalezas conseguidas en cada posición.
    - **[4:58]** Usar un inglés más simple, claro y directo al grano. (ej "Led the Code Connector community and organize the largest tech meetups in Memphis").
@@ -108,7 +108,6 @@ Es la sección más importante o una de las secciones más importantes de Linked
 - Opcional, pero también ayuda con tu perfil.
 - **[11:22]** No tiene que ser únicamente relacionada con tech. Puede ser ayudando gente en cocinas, ayudando a personas entregando domicilios, ayudando a crear una librería, cualquier cosa en el mundo que ayude a un ser humano.
 - **[11:45]** Muestra que somos humanos, que somos seres profesionales modernos, que tenemos una experiencia humana que compartimos con el mundo y eso también es muy importante.
-
 
 > 👉 Ahora a actualizar sus perfiles con lo que hemos aprendido en éste video.
 
@@ -147,11 +146,9 @@ Acá está el video: [https://www.loom.com/share/23450a56da8f4d4996177b4e8e55673
 - Opción que permite mostrar a los reclutadores de que estás abierto a buscar empleos.
 - Esto lo puedes configurar en tus settings.
 - Hay dos opciones:
-   - **[7:26]** Una pública, que todo el mundo puede ver, y que se muestra en tu foto de perfil como un banner verde.
-   - **[7:36]** Una privada, que solo los reclutadores pueden ver.
-
+  - **[7:26]** Una pública, que todo el mundo puede ver, y que se muestra en tu foto de perfil como un banner verde.
+  - **[7:36]** Una privada, que solo los reclutadores pueden ver.
 
 > 📢 **[8:32]** Ahora que hemos visto todo esto, es su turno de actualizar su perfil de LinkedIn y una vez finalicen, **envíen esto a su mentor para poder recibir feedback**.
-
 
 Muchas gracias a todos por atender la sesión y buena suerte con su búsqueda 🚀.

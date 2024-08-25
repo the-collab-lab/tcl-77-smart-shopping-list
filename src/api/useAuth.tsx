@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { auth } from './config';
-import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
-import { addUserToDatabase } from './firebase';
+import { useEffect, useState } from "react";
+import { auth } from "./config.js";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { addUserToDatabase, User } from "./firebase";
 
 /**
  * A button that signs the user in using Google OAuth. When clicked,
@@ -35,11 +35,24 @@ export const useAuth = () => {
 	const [user, setUser] = useState<User | null>(null);
 
 	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
-			setUser(user);
-			if (user) {
-				addUserToDatabase(user);
+		auth.onAuthStateChanged((firebaseUser) => {
+			if (firebaseUser === null) {
+				setUser(null);
+				return;
 			}
+
+			if (firebaseUser.email === null || firebaseUser.displayName === null) {
+				throw Error("Missing critical user information");
+			}
+
+			const user = {
+				email: firebaseUser.email,
+				name: firebaseUser.displayName,
+				uid: firebaseUser.uid,
+			};
+
+			setUser(user);
+			addUserToDatabase(user);
 		});
 	}, []);
 

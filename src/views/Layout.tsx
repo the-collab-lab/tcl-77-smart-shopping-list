@@ -1,8 +1,8 @@
-import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
-import { useAuth, SignInButton, SignOutButton } from '../api/useAuth';
+import React from "react";
+import { Outlet, NavLink } from "react-router-dom";
+import { useAuth, SignInButton, SignOutButton } from "../api/useAuth";
 
-import './Layout.css';
+import "./Layout.css";
 
 // 1) import NavLink component
 

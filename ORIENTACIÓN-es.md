@@ -2,7 +2,6 @@
 
 ⚠️ **Este documento contiene información desactualizada** ⚠️
 
-
 ## ¿Qué es The Collab Lab?
 
 The Collab Lab existe para ayudar a ingenierxs recien empezando sus careras ganar experiencia trabajando colaborativamente con otrxs en un equipo de desarollo de software. Trabajamos remotamente en proyectos reales con otrxs ingenierxs recien empezando sus careras.
