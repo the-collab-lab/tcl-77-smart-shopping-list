@@ -16,7 +16,7 @@ export function List({ data }: Props) {
 			<ul>
 				{hasItem &&
 					data.map((item) => (
-						<ListItemComponent key={item.itemName} itemName={item.itemName} />
+						<ListItemComponent key={item.id} name={item.name} />
 					))}
 			</ul>
 		</>

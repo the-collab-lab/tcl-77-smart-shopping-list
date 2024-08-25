@@ -6,25 +6,47 @@ import {
 	doc,
 	onSnapshot,
 	updateDoc,
+	Timestamp,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
 import { User } from 'firebase/auth';
 
-interface ListModel {
-	id: string;
-	path: string;
-}
+import * as t from 'io-ts';
+import { isLeft } from 'fp-ts/lib/Either';
+import { PathReporter } from 'io-ts/PathReporter';
+
+const FirebaseTimestamp = new t.Type<
+	Timestamp,
+	{ seconds: number; nanoseconds: number },
+	unknown
+>(
+	'FirebaseTimestamp',
+	(input): input is Timestamp => input instanceof Timestamp,
+	(input, context) => {
+		if (input instanceof Timestamp) {
+			return t.success(input);
+		}
+
+		return t.failure(input, context);
+	},
+	(timestamp) => ({
+		seconds: timestamp.seconds,
+		nanoseconds: timestamp.nanoseconds,
+	}),
+);
+
+const ListModel = t.type({
+	id: t.string,
+	path: t.string,
+});
+
+type ListModel = t.TypeOf<typeof ListModel>;
 
 export interface List {
 	name: string;
 	path: string;
-}
-
-export interface ListItem {
-	itemName: string;
-	daysUntilNextPurchase: number;
 }
 
 /**
@@ -48,18 +70,39 @@ export function useShoppingLists(userId: string, userEmail: string) {
 
 		onSnapshot(userDocRef, (docSnap) => {
 			if (docSnap.exists()) {
-				const listRefs = docSnap.data().sharedLists as ListModel[];
-				const newData = listRefs.map((listRef) => {
-					// We keep the list's id and path so we can use them later.
-					return { name: listRef.id, path: listRef.path };
+				// deserialize the list into a typed List
+				const data = docSnap.data().sharedLists.map((list: unknown) => {
+					const decoded = ListModel.decode(list);
+					if (isLeft(decoded)) {
+						throw Error(
+							`Could not validate data: ${PathReporter.report(decoded).join('\n')}`,
+						);
+					}
+
+					const model = decoded.right;
+					return {
+						name: model.id,
+						path: model.path,
+					};
 				});
-				setData(newData);
+				setData(data);
 			}
 		});
 	}, [userId, userEmail]);
 
 	return data;
 }
+
+const ListItemModel = t.type({
+	id: t.string,
+	name: t.string,
+	dateLastPurchased: t.union([FirebaseTimestamp, t.null]),
+	dateNextPurchased: FirebaseTimestamp,
+	totalPurchases: t.number,
+	dateCreated: FirebaseTimestamp,
+});
+
+export type ListItem = t.TypeOf<typeof ListItemModel>;
 
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
@@ -88,8 +131,14 @@ export function useShoppingListData(listPath: string | null) {
 				// but it is very useful, so we add it to the data ourselves.
 				item.id = docSnapshot.id;
 
-				// todo: validate
-				return item as ListItem;
+				const decoded = ListItemModel.decode(item);
+				if (isLeft(decoded)) {
+					throw Error(
+						`Could not validate data: ${PathReporter.report(decoded).join('\n')}`,
+					);
+				}
+
+				return decoded.right;
 			});
 
 			// Update our React state with the new data.
@@ -182,12 +231,13 @@ export async function shareList(
  * Add a new item to the user's list in Firestore.
  * @param {string} listPath The path of the list we're adding to.
  * @param {Object} itemData Information about the new item.
- * @param {string} itemData.itemName The name of the item.
+ * @param {string} itemData.name The name of the item.
  * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
 export async function addItem(
 	listPath: string,
-	{ itemName, daysUntilNextPurchase }: ListItem,
+	name: string,
+	daysUntilNextPurchase: number,
 ) {
 	const listCollectionRef = collection(db, listPath, 'items');
 	// TODO: Replace this call to console.log with the appropriate
@@ -198,7 +248,7 @@ export async function addItem(
 		// We'll use updateItem to put a Date here when the item is purchased!
 		dateLastPurchased: null,
 		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-		name: itemName,
+		name,
 		totalPurchases: 0,
 	});
 }
