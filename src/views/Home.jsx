@@ -1,15 +1,12 @@
 import './Home.css';
 import { SingleList } from '../components';
 import { useState } from 'react';
-import { createList, useAuth } from '../api';
+import { createList } from '../api';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
-export function Home({ data, setListPath }) {
+export function Home({ data, setListPath, userId, userEmail }) {
 	const hasList = data.length !== 0;
-
-	const { user } = useAuth();
-	const userId = user?.uid;
-	const userEmail = user?.email;
 
 	const [inputValue, setInputValue] = useState('');
 	const navigate = useNavigate();
@@ -17,16 +14,25 @@ export function Home({ data, setListPath }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		// Ensure inputValue has a length > 0 after trimming
+		if (!inputValue.trim()) {
+			toast.error('List name cannot be empty.');
+			return;
+		}
+
 		try {
 			await createList(userId, userEmail, inputValue);
 			const path = `${user.uid}/${inputValue}`;
 			setListPath(path);
 			setInputValue('');
-			alert('Success: Your New List is Created!');
-			navigate('/list');
+			toast.success('Success: Your New List is Created!');
+			// Delay for toast notification before redirecting
+			setTimeout(() => {
+				navigate('/list');
+			}, 1500); // 1.5 seconds delay
 		} catch {
 			console.error('Error creating list:', error);
-			alert('Failed to create the list. Please try again.');
+			toast.error('Failed to create the list. Please try again.');
 		}
 	};
 
@@ -34,38 +40,41 @@ export function Home({ data, setListPath }) {
 		setInputValue(e.target.value);
 	};
 	return (
-		<div className="Home">
-			<p>
-				Hello from the home (<code>/</code>) page!
-			</p>
-			<ul>
-				{hasList &&
-					data.map((list, index) => (
-						<SingleList
-							key={index}
-							name={list.name}
-							path={list.path}
-							setListPath={setListPath}
-						/>
-					))}
-			</ul>
+		<>
+			<div className="Home">
+				<p>
+					Hello from the home (<code>/</code>) page!
+				</p>
+				<ul>
+					{hasList &&
+						data.map((list, index) => (
+							<SingleList
+								key={index}
+								name={list.name}
+								path={list.path}
+								setListPath={setListPath}
+							/>
+						))}
+				</ul>
 
-			<form onSubmit={handleSubmit}>
-				<h3>Create New Shopping List</h3>
-				<label htmlFor="newListName">Name Your List</label>
-				<br />
-				<input
-					type="text"
-					value={inputValue}
-					onChange={handleChange}
-					name="newListName"
-					required
-					aria-label="Shopping List Name"
-					aria-required="true" // Indicates that this field is required
-				/>
-				<br />
-				<button aria-label="Create new shopping list">Create List</button>
-			</form>
-		</div>
+				<form onSubmit={handleSubmit}>
+					<h3>Create New Shopping List</h3>
+					<label htmlFor="newListName">Name Your List</label>
+					<br />
+					<input
+						type="text"
+						value={inputValue}
+						onChange={handleChange}
+						name="newListName"
+						id="newListName"
+						aria-label="Shopping List Name"
+						aria-required="true" // Indicates that this field is required
+					/>
+					<br />
+					<button aria-label="Create new shopping list">Create List</button>
+				</form>
+				<Toaster />
+			</div>
+		</>
 	);
 }
