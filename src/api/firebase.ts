@@ -56,7 +56,10 @@ export interface List {
  * @param {string | null} userEmail
  * @returns
  */
-export function useShoppingLists(userId: string, userEmail: string) {
+export function useShoppingLists(
+	userId: string | null,
+	userEmail: string | null,
+) {
 	// Start with an empty array for our data.
 	const [data, setData] = useState<List[]>([]);
 

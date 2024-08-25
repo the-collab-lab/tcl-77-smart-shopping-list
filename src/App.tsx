@@ -27,8 +27,8 @@ export function App() {
 	 * Check ./api/useAuth.jsx for its implementation.
 	 */
 	const { user } = useAuth();
-	const userId = user?.uid ?? '';
-	const userEmail = user?.email ?? '';
+	const userId = user?.uid ?? null;
+	const userEmail = user?.email ?? null;
 
 	/**
 	 * This custom hook takes a user ID and email and fetches
