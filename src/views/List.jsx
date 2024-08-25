@@ -1,4 +1,4 @@
-import { ListItem } from '../components';
+import { ListItem } from "../components";
 
 export function List({ data }) {
 	const hasItem = data.length !== 0;

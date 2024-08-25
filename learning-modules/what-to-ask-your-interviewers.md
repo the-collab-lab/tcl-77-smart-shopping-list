@@ -21,4 +21,3 @@ Reflect on positive and negative experiences that you’ve had in previous jobs.
 What do you want to know to help you make an informed decision about whether you want to work at this place? These questions typically revolve around the team, your manager, the product or service, and the company itself.
 
 > **Note:** It is totally valid to want to know things like the salary range, the company’s time off policy, how health and other benefits work, etc. Those questions are better suited for a recruiter or HR/people operations representative than a hiring manager or fellow developer.
-

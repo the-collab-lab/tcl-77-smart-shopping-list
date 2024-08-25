@@ -19,5 +19,5 @@ The following are suggested questions for the job fit mock interview:
 - What questions do you have for me?
   What would you like to know about the role, the company, etc.?
 - Two good final questions:
-    - What do you think would be the biggest challenge for you in this role?
-    - What is the biggest strength you think you’d bring to the role?
+  - What do you think would be the biggest challenge for you in this role?
+  - What is the biggest strength you think you’d bring to the role?

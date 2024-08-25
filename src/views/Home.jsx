@@ -2,6 +2,7 @@ import './Home.css';
 import { SingleList } from '../components';
 import { CreateList } from '../components/CreateList';
 
+
 export function Home({ data, setListPath, userId, userEmail }) {
 	const hasList = data.length !== 0;
 
