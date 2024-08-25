@@ -2,15 +2,20 @@ import { useState } from 'react';
 import { addItem } from '../api/firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
+const SOON = 'soon';
+const KIND_OF_SOON = 'kindOfSoon';
+const NOT_SOON = 'notSoon';
+
 const purchaseTimelines = {
-	soon: 7,
-	kindOfSoon: 14,
-	notSoon: 30,
+	[SOON]: 7,
+	[KIND_OF_SOON]: 14,
+	[NOT_SOON]: 30,
 };
 
 export function ManageList({ listPath }) {
 	const [itemName, setItemName] = useState('');
-	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState('');
+	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] =
+		useState(SOON);
 
 	const handleItemNameTextChange = (e) => {
 		setItemName(e.target.value);
@@ -23,12 +28,21 @@ export function ManageList({ listPath }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const trimmedItemName = itemName.trim();
+
+		if (trimmedItemName.length === 0) {
+			toast.error(
+				'Item name cannot be empty or just spaces. Please enter a valid name.',
+			);
+			return;
+		}
+
 		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
 
 		try {
 			await toast.promise(
 				addItem(listPath, {
-					itemName,
+					itemName: trimmedItemName,
 					daysUntilNextPurchase,
 				}),
 				{
@@ -40,11 +54,6 @@ export function ManageList({ listPath }) {
 					},
 					error: () => {
 						return `${itemName} failed to add to your list. Please try again!`;
-					},
-				},
-				{
-					style: {
-						minWidth: '250px',
 					},
 				},
 			);
@@ -74,46 +83,46 @@ export function ManageList({ listPath }) {
 				<br />
 				<fieldset>
 					<legend>When to buy:</legend>
-					<label htmlFor="soon">
+					<label htmlFor={SOON}>
 						<input
 							type="radio"
-							id="soon"
+							id={SOON}
 							name="when-to-buy"
-							value="soon"
+							value={SOON}
 							required
 							onChange={handleNextPurchaseChange}
-							checked={itemNextPurchaseTimeline === 'soon'}
-							aria-label="Set buy to soon, within 7 days"
+							checked={itemNextPurchaseTimeline === SOON}
+							aria-label={`Set buy to soon, within ${purchaseTimelines[SOON]} days`}
 						/>
-						Soon -- Within 7 days!
+						Soon -- Within {purchaseTimelines[SOON]} days!
 					</label>
 					<br />
-					<label htmlFor="kind-of-soon">
+					<label htmlFor={KIND_OF_SOON}>
 						<input
 							type="radio"
-							id="kind-of-soon"
+							id={KIND_OF_SOON}
 							name="when-to-buy"
-							value="kindOfSoon"
+							value={KIND_OF_SOON}
 							required
 							onChange={handleNextPurchaseChange}
-							checked={itemNextPurchaseTimeline === 'kindOfSoon'}
-							aria-label="Set buy to kind of soon, within 14 days"
+							checked={itemNextPurchaseTimeline === KIND_OF_SOON}
+							aria-label={`Set buy to kind of soon, within ${purchaseTimelines[KIND_OF_SOON]} days`}
 						/>
-						Kind of soon -- Within 14 days!
+						Kind of soon -- Within {purchaseTimelines[KIND_OF_SOON]} days!
 					</label>
 					<br />
-					<label htmlFor="not-soon">
+					<label htmlFor={NOT_SOON}>
 						<input
 							type="radio"
-							id="not-soon"
+							id={NOT_SOON}
 							name="when-to-buy"
-							value="notSoon"
+							value={NOT_SOON}
 							required
 							onChange={handleNextPurchaseChange}
-							checked={itemNextPurchaseTimeline === 'notSoon'}
-							aria-label="Set buy to not soon, within 30 days"
+							checked={itemNextPurchaseTimeline === NOT_SOON}
+							aria-label={`Set buy to not soon, within ${purchaseTimelines[NOT_SOON]} days`}
 						/>
-						Not soon -- Within 30 days!
+						Not soon -- Within {purchaseTimelines[NOT_SOON]} days!
 					</label>
 				</fieldset>
 				<button type="submit" aria-label="Add item to shopping list">
