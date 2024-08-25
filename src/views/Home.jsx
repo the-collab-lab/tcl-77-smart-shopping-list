@@ -1,5 +1,5 @@
-import './Home.css';
-import { SingleList } from '../components';
+import "./Home.css";
+import { SingleList } from "../components";
 
 export function Home({ data, setListPath }) {
 	const hasList = data.length !== 0;

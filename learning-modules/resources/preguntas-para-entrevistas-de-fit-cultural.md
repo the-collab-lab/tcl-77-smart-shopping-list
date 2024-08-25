@@ -1,7 +1,9 @@
 # Preguntas para entrevistas de fit cultural
+
 ​
 Las siguientes preguntas son sugeridas para entrevistas de fit cultural:
 ​
+
 - Cuentame acerca de como empezaste con Desarrollo web.
 - Qué estás buscando para tu nueva oportunidad de trabajo?
 - Qué estás buscando en un equipo?
