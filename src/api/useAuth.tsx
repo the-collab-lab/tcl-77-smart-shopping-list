@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
@@ -32,7 +32,7 @@ export const SignOutButton = () => {
 				auth
 					.signOut()
 					.then(() => {
-						navigate("/");
+						navigate("/", { replace: true });
 					})
 					.catch((error) => {
 						console.error(error);

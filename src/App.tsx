@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Home, Layout, List, ManageList } from "./views";
+import { Home, Layout, List, ManageList, PageNotFound } from "./views";
 
 import { useAuth, useShoppingListData, useShoppingLists } from "./api";
 
@@ -56,11 +56,13 @@ export function App() {
 			<Routes>
 				<Route path="/" element={<Layout user={user} />}>
 					<Route
-						index
+						path="/"
 						element={
 							<Home data={lists} setListPath={setListPath} user={user} />
 						}
 					/>
+
+					{/* protected routes */}
 					<Route element={<ProtectRoute user={user} redirectPath="/" />}>
 						<Route path="/list" element={<List data={data} />} />
 					</Route>
@@ -70,6 +72,9 @@ export function App() {
 							element={<ManageList listPath={listPath} />}
 						/>
 					</Route>
+
+					{/* a catch all route for if someone tries to manually navigate to something not created yet */}
+					<Route path="*" element={<PageNotFound />} />
 				</Route>
 			</Routes>
 		</Router>
