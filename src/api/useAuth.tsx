@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
