@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
+import toast from "react-hot-toast";
 
 /**
  * A button that signs the user in using Google OAuth. When clicked,
@@ -20,11 +22,30 @@ export const SignInButton = () => (
 /**
  * A button that signs the user out of the app using Firebase Auth.
  */
-export const SignOutButton = () => (
-	<button type="button" onClick={() => auth.signOut()}>
-		Sign Out
-	</button>
-);
+export const SignOutButton = () => {
+	const navigate = useNavigate();
+
+	return (
+		<button
+			type="button"
+			onClick={() => {
+				auth
+					.signOut()
+					.then(() => {
+						navigate("/");
+					})
+					.catch((error) => {
+						console.error(error);
+						toast.error(
+							"An error occurred while signing out. Please try again.",
+						);
+					});
+			}}
+		>
+			Sign Out
+		</button>
+	);
+};
 
 /**
  * A custom hook that listens for changes to the user's auth state.
