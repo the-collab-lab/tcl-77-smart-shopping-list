@@ -18,25 +18,28 @@ export function Layout({ user }: Props) {
 				</header>
 				<main className="Layout-main">
 					<Outlet />
+					{!!user ? null : <SignInButton />}
 				</main>
-				<nav className="Nav">
-					<div className="Nav-container">
-						{!!user ? <SignOutButton /> : <SignInButton />}
-						<NavLink to="/" className="Nav-link" aria-label="Home">
-							Home
-						</NavLink>
-						<NavLink to="/list" className="Nav-link" aria-label="List">
-							List
-						</NavLink>
-						<NavLink
-							to="/manage-list"
-							className="Nav-link"
-							aria-label="Manage List"
-						>
-							Manage List
-						</NavLink>
-					</div>
-				</nav>
+				{user ? (
+					<nav className="Nav">
+						<div className="Nav-container">
+							{!!user ? <SignOutButton /> : null}
+							<NavLink to="/" className="Nav-link" aria-label="Home">
+								Home
+							</NavLink>
+							<NavLink to="/list" className="Nav-link" aria-label="List">
+								List
+							</NavLink>
+							<NavLink
+								to="/manage-list"
+								className="Nav-link"
+								aria-label="Manage List"
+							>
+								Manage List
+							</NavLink>
+						</div>
+					</nav>
+				) : null}
 			</div>
 		</>
 	);
