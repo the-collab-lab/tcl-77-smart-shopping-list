@@ -152,7 +152,6 @@ export function ManageList({ listPath }: Props) {
 							Submit Item
 						</button>
 					</form>
-					<Toaster />
 				</>
 			)}
 		</div>

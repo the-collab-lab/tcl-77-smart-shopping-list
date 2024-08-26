@@ -10,6 +10,13 @@ import { useStateWithStorage } from "./utils";
 
 import { ProtectRoute } from "./components";
 
+/**
+ * Putting Toaster at the top level of the App allows
+ * react-hot-toast to work anywhere in the app by just
+ * importing toast as done in useAuth.
+ */
+import { Toaster } from "react-hot-toast";
+
 export function App() {
 	/**
 	 * This custom hook takes the path of a shopping list
@@ -45,6 +52,7 @@ export function App() {
 
 	return (
 		<Router>
+			<Toaster />
 			<Routes>
 				<Route path="/" element={<Layout user={user} />}>
 					<Route

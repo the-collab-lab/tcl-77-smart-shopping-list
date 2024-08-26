@@ -60,7 +60,6 @@ export function CreateList({ user, setListPath }: Props) {
 					<br />
 					<button aria-label="Create new shopping list">Create List</button>
 				</form>
-				<Toaster />
 			</li>
 		</>
 	);
