@@ -1,22 +1,15 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { useAuth, SignInButton, SignOutButton } from "../api/useAuth";
+import { SignInButton, SignOutButton } from "../api/useAuth";
+import { User } from "../api/firebase";
 
 import "./Layout.css";
 
-// 1) import NavLink component
+interface Props {
+	user: User | null;
+}
 
-/**
- * TODO: The links defined in this file don't work!
- *
- * Instead of anchor element, they should use a component
- * from `react-router-dom` to navigate to the routes
- * defined in `App.jsx`.
- */
-
-export function Layout() {
-	const { user } = useAuth();
-
+export function Layout({ user }: Props) {
 	return (
 		<>
 			<div className="Layout">
