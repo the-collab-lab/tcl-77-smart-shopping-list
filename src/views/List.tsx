@@ -13,7 +13,6 @@ export function List({ data }: Props) {
 	const filteredData = data.filter((item) =>
 		item.name.toLowerCase().includes(searchTerm.toLowerCase()),
 	);
-	console.log(filteredData);
 
 	const hasItem = filteredData.length !== 0;
 	return (

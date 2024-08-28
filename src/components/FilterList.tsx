@@ -3,7 +3,6 @@ import { ListItem } from "../api";
 
 interface FilterListProps {
 	searchTerm: string;
-	// setSearchTerm: React.Dispatch<React.SetStateAction<string>>
 	setSearchTerm: (term: string) => void;
 }
 
@@ -15,13 +14,12 @@ export function FilterList({ searchTerm, setSearchTerm }: FilterListProps) {
 		<>
 			<form>
 				<label htmlFor="filterList">
-					{" "}
 					Filter List:
 					<input
 						type="text"
 						onChange={handleChange}
 						value={searchTerm}
-						id="filerList"
+						id="filterList"
 						aria-label="Filter Shopping List"
 						placeholder="Search items..."
 					/>
