@@ -15,6 +15,7 @@ export function List({ data }: Props) {
 	);
 
 	const hasItem = filteredData.length !== 0;
+
 	return (
 		<>
 			<p>

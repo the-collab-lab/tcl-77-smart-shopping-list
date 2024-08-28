@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import { ListItem } from "../api";
 
 interface FilterListProps {
 	searchTerm: string;
@@ -10,6 +9,7 @@ export function FilterList({ searchTerm, setSearchTerm }: FilterListProps) {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value);
 	};
+
 	return (
 		<>
 			<form>
