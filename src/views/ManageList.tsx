@@ -1,7 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { addItem } from "../api/firebase";
+import { addItem, shareList } from "../api/firebase";
 import { validateTrimmedString } from "../utils";
 import toast, { Toaster } from "react-hot-toast";
+
+import { useAuth } from "../api/useAuth";
 
 interface Props {
 	listPath: string | null;
@@ -20,10 +22,13 @@ const purchaseTimelines = {
 };
 
 export function ManageList({ listPath }: Props) {
+	const { user: currentUser } = useAuth();
+
 	const [itemName, setItemName] = useState("");
 	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState(
 		PurchaseTime.soon,
 	);
+	const [emailName, setEmailName] = useState("");
 
 	const handleItemNameTextChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setItemName(e.target.value);
@@ -31,6 +36,10 @@ export function ManageList({ listPath }: Props) {
 
 	const handleNextPurchaseChange = (changed: PurchaseTime) => {
 		setItemNextPurchaseTimeline(changed);
+	};
+
+	const handleEmailNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setEmailName(e.target.value);
 	};
 
 	const handleSubmit = async (
@@ -73,6 +82,43 @@ export function ManageList({ listPath }: Props) {
 			);
 		} catch (error) {
 			console.error("Failed to add item:", error);
+		}
+	};
+
+	const handleInvite = async (
+		e: FormEvent<HTMLFormElement>,
+		listPath: string,
+	) => {
+		console.log("Button clicked! Inviting user!");
+		e.preventDefault();
+
+		const trimmedEmailName = validateTrimmedString(emailName);
+
+		if (!trimmedEmailName) {
+			toast.error(
+				"Oops! Email cannot be empty or just spaces. Please enter a valid email.",
+			);
+			return;
+		}
+
+		if (currentUser === null) {
+			toast.error("You are not logged in! Cannot invite.");
+			return;
+		}
+
+		try {
+			await toast.promise(shareList(listPath, currentUser, trimmedEmailName), {
+				loading: "sharing list with existing user",
+				success: () => {
+					setEmailName("");
+					return `${emailName} successfully invited to your list!`;
+				},
+				error: () => {
+					return `${emailName} Oops! Failed to invite to your list. Please try again!`;
+				},
+			});
+		} catch (error) {
+			console.error("Oops! Failed to invite user:", error);
 		}
 	};
 
@@ -150,6 +196,24 @@ export function ManageList({ listPath }: Props) {
 						</fieldset>
 						<button type="submit" aria-label="Add item to shopping list">
 							Submit Item
+						</button>
+					</form>
+					<Toaster />
+					<form onSubmit={(e) => handleInvite(e, listPath)}>
+						<label htmlFor="receipient-email">
+							<input
+								id="receipient-email"
+								type="email"
+								name="receipient-email"
+								value={emailName}
+								onChange={handleEmailNameChange}
+								required
+								aria-label="Enter the user name to share list"
+								aria-required
+							/>
+						</label>
+						<button type="submit" aria-label="Add item to shopping list">
+							Invite User
 						</button>
 					</form>
 					<Toaster />
