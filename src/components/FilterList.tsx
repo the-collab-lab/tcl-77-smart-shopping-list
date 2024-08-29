@@ -16,7 +16,7 @@ export function FilterList({ searchTerm, setSearchTerm }: FilterListProps) {
 				<label htmlFor="filterList">
 					Filter List:
 					<input
-						type="text"
+						type="search"
 						onChange={handleChange}
 						value={searchTerm}
 						id="filterList"
