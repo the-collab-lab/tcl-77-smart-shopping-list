@@ -20,7 +20,7 @@ export function FilterList({ searchTerm, setSearchTerm }: FilterListProps) {
 						onChange={handleChange}
 						value={searchTerm}
 						id="filterList"
-						aria-label="Filter Shopping List"
+						aria-label="Filter items in the list"
 						placeholder="Search items..."
 					/>
 				</label>
