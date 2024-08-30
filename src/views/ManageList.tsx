@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, shareList } from "../api/firebase";
 import { validateTrimmedString } from "../utils";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import { useAuth } from "../api/useAuth";
 
@@ -112,10 +112,10 @@ export function ManageList({ listPath }: Props) {
 				loading: "sharing list with existing user",
 				success: () => {
 					setEmailName("");
-					return `${emailName} successfully invited to your list!`;
+					return `Successfully invited ${emailName} to your list!`;
 				},
 				error: () => {
-					return `${emailName} Oops! Failed to invite to your list. Please try again!`;
+					return `Oops! Failed to invite ${emailName} to your list. Please verify correct email!`;
 				},
 			});
 		} catch (error) {
@@ -208,12 +208,14 @@ export function ManageList({ listPath }: Props) {
 								type="email"
 								name="recipient-email"
 								value={emailName}
+								placeholder="Enter e-mail address. . ."
 								onChange={handleEmailNameChange}
 								required
 								aria-label="Enter the user name to share list"
 								aria-required
 							/>
 						</label>
+						<br />
 						<button type="submit" aria-label="Add item to shopping list">
 							Invite User
 						</button>
