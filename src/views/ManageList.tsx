@@ -102,7 +102,8 @@ export function ManageList({ listPath }: Props) {
 		}
 
 		if (currentUser === null) {
-			toast.error("You are not logged in! Cannot invite.");
+			toast.error(`You are not logged in! Cannot invite.`);
+
 			return;
 		}
 
@@ -198,13 +199,14 @@ export function ManageList({ listPath }: Props) {
 							Submit Item
 						</button>
 					</form>
-					<Toaster />
+
 					<form onSubmit={(e) => handleInvite(e, listPath)}>
-						<label htmlFor="receipient-email">
+						<label htmlFor="recipient-email">
+							Recipient Email:
 							<input
-								id="receipient-email"
+								id="recipient-email"
 								type="email"
-								name="receipient-email"
+								name="recipient-email"
 								value={emailName}
 								onChange={handleEmailNameChange}
 								required
