@@ -52,11 +52,11 @@ export const SignOutButton = () => {
  * Check out the Firebase docs for more info on auth listeners:
  * @see https://firebase.google.com/docs/auth/web/start#set_an_authentication_state_observer_and_get_user_data
  */
-export const useAuth = () => {
+export const useFindUser = () => {
 	const [user, setUser] = useState<User | null>(null);
 
 	useEffect(() => {
-		auth.onAuthStateChanged((firebaseUser) => {
+		const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
 			if (firebaseUser === null) {
 				setUser(null);
 				return;
@@ -75,7 +75,23 @@ export const useAuth = () => {
 			setUser(user);
 			addUserToDatabase(user);
 		});
+
+		// Cleanup the subscription when the component unmounts
+		return () => unsubscribe();
 	}, []);
+
+	return { user };
+};
+
+export const useGetUser = () => {
+	const { user } = useFindUser();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (user === null) {
+			navigate("/", { replace: true });
+		}
+	}, [user, navigate]);
 
 	return { user };
 };

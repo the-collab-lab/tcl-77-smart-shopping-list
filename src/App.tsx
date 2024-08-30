@@ -1,10 +1,10 @@
 import React from "react";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { Home, Layout, List, ManageList, PageNotFound } from "./views";
 
-import { useAuth, useShoppingListData, useShoppingLists } from "./api";
+import { useGetUser, useShoppingListData, useShoppingLists } from "./api";
 
 import { useStateWithStorage } from "./utils";
 
@@ -35,7 +35,7 @@ export function App() {
 	 * This custom hook holds info about the current signed in user.
 	 * Check ./api/useAuth.jsx for its implementation.
 	 */
-	const { user } = useAuth();
+	const { user } = useGetUser();
 
 	/**
 	 * This custom hook takes a user ID and email and fetches
@@ -51,7 +51,7 @@ export function App() {
 	const data = useShoppingListData(listPath);
 
 	return (
-		<Router>
+		<>
 			<Toaster />
 			<Routes>
 				<Route path="/" element={<Layout user={user} />}>
@@ -77,6 +77,6 @@ export function App() {
 					<Route path="*" element={<PageNotFound />} />
 				</Route>
 			</Routes>
-		</Router>
+		</>
 	);
 }
