@@ -1,6 +1,7 @@
 import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
-import { SignInButton, SignOutButton, User } from "../api";
+import { Outlet } from "react-router-dom";
+import { SignInButton, User } from "../api";
+import { NavBar } from "../components";
 
 import "./Layout.css";
 
@@ -19,26 +20,7 @@ export function Layout({ user }: Props) {
 					<Outlet />
 					{!user && <SignInButton />}
 				</main>
-				{user && (
-					<nav className="Nav">
-						<div className="Nav-container">
-							<SignOutButton />
-							<NavLink to="/" className="Nav-link" aria-label="Home">
-								Home
-							</NavLink>
-							<NavLink to="/list" className="Nav-link" aria-label="List">
-								List
-							</NavLink>
-							<NavLink
-								to="/manage-list"
-								className="Nav-link"
-								aria-label="Manage List"
-							>
-								Manage List
-							</NavLink>
-						</div>
-					</nav>
-				)}
+				{user && <NavBar />}
 			</div>
 		</>
 	);
