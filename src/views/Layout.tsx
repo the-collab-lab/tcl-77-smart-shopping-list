@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { SignInButton, SignOutButton } from "../api/useAuth";
-import { User } from "../api/firebase";
+import { SignInButton, SignOutButton, User } from "../api";
 
 import "./Layout.css";
 
@@ -18,12 +17,12 @@ export function Layout({ user }: Props) {
 				</header>
 				<main className="Layout-main">
 					<Outlet />
-					{!!user ? null : <SignInButton />}
+					{!user && <SignInButton />}
 				</main>
-				{user ? (
+				{user && (
 					<nav className="Nav">
 						<div className="Nav-container">
-							{!!user ? <SignOutButton /> : null}
+							<SignOutButton />
 							<NavLink to="/" className="Nav-link" aria-label="Home">
 								Home
 							</NavLink>
@@ -39,7 +38,7 @@ export function Layout({ user }: Props) {
 							</NavLink>
 						</div>
 					</nav>
-				) : null}
+				)}
 			</div>
 		</>
 	);
