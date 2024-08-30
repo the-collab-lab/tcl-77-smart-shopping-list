@@ -82,16 +82,3 @@ export const useFindUser = () => {
 
 	return { user };
 };
-
-export const useGetUser = () => {
-	const { user } = useFindUser();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (user === null) {
-			navigate("/", { replace: true });
-		}
-	}, [user, navigate]);
-
-	return { user };
-};

@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { Home, Layout, List, ManageList, PageNotFound } from "./views";
 
-import { useGetUser, useShoppingListData, useShoppingLists } from "./api";
+import { useFindUser, useShoppingListData, useShoppingLists } from "./api";
 
 import { useStateWithStorage } from "./utils";
 
@@ -35,7 +35,7 @@ export function App() {
 	 * This custom hook holds info about the current signed in user.
 	 * Check ./api/useAuth.jsx for its implementation.
 	 */
-	const { user } = useGetUser();
+	const { user } = useFindUser();
 
 	/**
 	 * This custom hook takes a user ID and email and fetches
