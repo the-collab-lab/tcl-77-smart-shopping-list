@@ -8,6 +8,8 @@ import { useAuth, useShoppingListData, useShoppingLists } from "./api";
 
 import { useStateWithStorage } from "./utils";
 
+import { Toaster } from "react-hot-toast";
+
 export function App() {
 	/**
 	 * This custom hook takes the path of a shopping list
@@ -58,6 +60,7 @@ export function App() {
 					/>
 				</Route>
 			</Routes>
+			<Toaster />
 		</Router>
 	);
 }
