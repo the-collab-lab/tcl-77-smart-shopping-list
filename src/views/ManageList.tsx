@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem } from "../api/firebase";
 import { validateTrimmedString } from "../utils";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 interface Props {
 	listPath: string | null;
