@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { shareList } from "../../api/firebase";
-import { validateTrimmedString } from "../../utils";
 
 import toast from "react-hot-toast";
 
@@ -34,14 +33,8 @@ const ShareListForm = ({ listPath }: Props) => {
 			return;
 		}
 
-		const trimmedEmailName = validateTrimmedString(emailName);
-
-		if (!trimmedEmailName) {
-			return;
-		}
-
 		try {
-			await toast.promise(shareList(listPath, currentUser, trimmedEmailName), {
+			await toast.promise(shareList(listPath, currentUser, emailName), {
 				loading: "sharing list with existing user",
 				success: () => {
 					setEmailName("");
@@ -68,12 +61,12 @@ const ShareListForm = ({ listPath }: Props) => {
 					placeholder="Enter e-mail address. . ."
 					onChange={handleEmailNameChange}
 					required
-					aria-label="Enter the user name to share list"
+					aria-label="Enter the user email address to share list"
 					aria-required
 				/>
 			</label>
 			<br />
-			<button type="submit" aria-label="Add item to shopping list">
+			<button type="submit" aria-label="submits form to share shopping list">
 				Invite User
 			</button>
 		</form>
