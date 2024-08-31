@@ -29,10 +29,6 @@ const ShareListForm = ({ listPath }: Props) => {
 			return;
 		}
 
-		if (!currentUser) {
-			return;
-		}
-
 		try {
 			await toast.promise(shareList(listPath, currentUser, emailName), {
 				loading: "sharing list with existing user",
@@ -50,26 +46,33 @@ const ShareListForm = ({ listPath }: Props) => {
 	};
 
 	return (
-		<form onSubmit={(e) => handleInvite(e, listPath)}>
-			<label htmlFor="recipient-email">
-				Recipient Email:
-				<input
-					id="recipient-email"
-					type="email"
-					name="recipient-email"
-					value={emailName}
-					placeholder="Enter e-mail address. . ."
-					onChange={handleEmailNameChange}
-					required
-					aria-label="Enter the user email address to share list"
-					aria-required
-				/>
-			</label>
-			<br />
-			<button type="submit" aria-label="submits form to share shopping list">
-				Invite User
-			</button>
-		</form>
+		<>
+			{currentUser && (
+				<form onSubmit={(e) => handleInvite(e, listPath)}>
+					<label htmlFor="recipient-email">
+						Recipient Email:
+						<input
+							id="recipient-email"
+							type="email"
+							name="recipient-email"
+							value={emailName}
+							placeholder="Enter e-mail address. . ."
+							onChange={handleEmailNameChange}
+							required
+							aria-label="Enter the user email address to share list"
+							aria-required
+						/>
+					</label>
+					<br />
+					<button
+						type="submit"
+						aria-label="submits form to share shopping list"
+					>
+						Invite User
+					</button>
+				</form>
+			)}
+		</>
 	);
 };
 
