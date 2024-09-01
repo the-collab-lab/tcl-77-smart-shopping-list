@@ -14,7 +14,7 @@ export function List({ data: unfilteredListItems }: Props) {
 		return unfilteredListItems.filter((item) =>
 			item.name.toLowerCase().includes(searchTerm.toLowerCase()),
 		);
-	}, [searchTerm, unfilteredListItems]);
+	}, [searchTerm]);
 
 	return (
 		<>
