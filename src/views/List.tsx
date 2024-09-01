@@ -7,14 +7,12 @@ interface Props {
 	data: ListItem[];
 }
 
-export function List({ data }: Props) {
+export function List({ data: unfilteredListItems }: Props) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	const filteredData = data.filter((item) =>
+	const filteredListItems = unfilteredListItems.filter((item) =>
 		item.name.toLowerCase().includes(searchTerm.toLowerCase()),
 	);
-
-	const hasItem = filteredData.length !== 0;
 
 	return (
 		<>
@@ -22,16 +20,17 @@ export function List({ data }: Props) {
 				Hello from the <code>/list</code> page!
 			</p>
 
-			<FilterListComponent
-				searchTerm={searchTerm}
-				setSearchTerm={setSearchTerm}
-			/>
+			{filteredListItems.length > 0 && (
+				<FilterListComponent
+					searchTerm={searchTerm}
+					setSearchTerm={setSearchTerm}
+				/>
+			)}
 
 			<ul>
-				{hasItem &&
-					filteredData.map((item) => (
-						<ListItemComponent key={item.id} name={item.name} />
-					))}
+				{filteredListItems.map((item) => (
+					<ListItemComponent key={item.id} name={item.name} />
+				))}
 			</ul>
 		</>
 	);
