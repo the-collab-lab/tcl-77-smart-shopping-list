@@ -1,10 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from "react";
 
-import { Home, Layout, List, ManageList } from "./views";
+import { Routes, Route } from "react-router-dom";
 
-import { useAuth, useShoppingListData, useShoppingLists } from "./api";
+import { Home, Layout, List, ManageList, PageNotFound } from "./views";
+
+import { useFindUser, useShoppingListData, useShoppingLists } from "./api";
 
 import { useStateWithStorage } from "./utils";
+import { ProtectRoute } from "./components";
+
+/**
+ * Putting Toaster at the top level of the App allows
+ * react-hot-toast to work anywhere in the app by just
+ * importing toast as done in useAuth.
+ */
 
 import { Toaster } from "react-hot-toast";
 
@@ -26,7 +35,7 @@ export function App() {
 	 * This custom hook holds info about the current signed in user.
 	 * Check ./api/useAuth.jsx for its implementation.
 	 */
-	const { user } = useAuth();
+	const { user } = useFindUser();
 
 	/**
 	 * This custom hook takes a user ID and email and fetches
@@ -42,23 +51,30 @@ export function App() {
 	const data = useShoppingListData(listPath);
 
 	return (
-		<Router>
+		<>
+			<Toaster />
 			<Routes>
-				<Route path="/" element={<Layout />}>
+				<Route path="/" element={<Layout user={user} />}>
 					<Route
-						index
+						path="/"
 						element={
 							<Home data={lists} setListPath={setListPath} user={user} />
 						}
 					/>
-					<Route path="/list" element={<List data={data} />} />
-					<Route
-						path="/manage-list"
-						element={<ManageList listPath={listPath} />}
-					/>
+
+					{/* protected routes */}
+					<Route element={<ProtectRoute user={user} redirectPath="/" />}>
+						<Route path="/list" element={<List data={data} />} />
+						<Route
+							path="/manage-list"
+							element={<ManageList listPath={listPath} />}
+						/>
+					</Route>
+
+					{/* a catch all route for if someone tries to manually navigate to something not created yet */}
+					<Route path="*" element={<PageNotFound />} />
 				</Route>
 			</Routes>
-			<Toaster />
-		</Router>
+		</>
 	);
 }

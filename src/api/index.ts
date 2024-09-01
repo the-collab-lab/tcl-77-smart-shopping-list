@@ -1,2 +1,2 @@
 export * from "./firebase";
-export { useAuth } from "./useAuth";
+export { useFindUser, SignInButton, SignOutButton } from "./useAuth";

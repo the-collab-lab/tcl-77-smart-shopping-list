@@ -1,22 +1,15 @@
 import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
-import { useAuth, SignInButton, SignOutButton } from "../api/useAuth";
+import { Outlet } from "react-router-dom";
+import { SignInButton, User } from "../api";
+import { AuthenticatedNavBar } from "../components";
 
 import "./Layout.css";
 
-// 1) import NavLink component
+interface Props {
+	user: User | null;
+}
 
-/**
- * TODO: The links defined in this file don't work!
- *
- * Instead of anchor element, they should use a component
- * from `react-router-dom` to navigate to the routes
- * defined in `App.jsx`.
- */
-
-export function Layout() {
-	const { user } = useAuth();
-
+export function Layout({ user }: Props) {
 	return (
 		<>
 			<div className="Layout">
@@ -25,25 +18,9 @@ export function Layout() {
 				</header>
 				<main className="Layout-main">
 					<Outlet />
+					{!user && <SignInButton />}
 				</main>
-				<nav className="Nav">
-					<div className="Nav-container">
-						{!!user ? <SignOutButton /> : <SignInButton />}
-						<NavLink to="/" className="Nav-link" aria-label="Home">
-							Home
-						</NavLink>
-						<NavLink to="/list" className="Nav-link" aria-label="List">
-							List
-						</NavLink>
-						<NavLink
-							to="/manage-list"
-							className="Nav-link"
-							aria-label="Manage List"
-						>
-							Manage List
-						</NavLink>
-					</div>
-				</nav>
+				{user && <AuthenticatedNavBar />}
 			</div>
 		</>
 	);

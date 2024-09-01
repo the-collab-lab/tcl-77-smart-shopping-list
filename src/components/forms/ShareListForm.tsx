@@ -1,18 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { shareList } from "../../api/firebase";
+import { shareList } from "../../api";
+import { getUser } from "../ProtectedRoute";
 
 import toast from "react-hot-toast";
-
-import { useAuth } from "../../api/useAuth";
-
-import { User } from "../../api/firebase";
 
 interface Props {
 	listPath: string | null;
 }
 
 const ShareListForm = ({ listPath }: Props) => {
-	const { user: currentUser } = useAuth();
+	const { user: currentUser } = getUser();
 
 	const [emailName, setEmailName] = useState("");
 
@@ -24,7 +21,6 @@ const ShareListForm = ({ listPath }: Props) => {
 		e: FormEvent<HTMLFormElement>,
 		listPath: string | null,
 	) => {
-		console.log("Button clicked! Inviting user!");
 		e.preventDefault();
 
 		if (!listPath) {
@@ -32,7 +28,7 @@ const ShareListForm = ({ listPath }: Props) => {
 		}
 
 		try {
-			await toast.promise(shareList(listPath, currentUser as User, emailName), {
+			await toast.promise(shareList(listPath, currentUser, emailName), {
 				loading: "sharing list with existing user",
 				success: () => {
 					setEmailName("");
