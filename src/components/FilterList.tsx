@@ -11,20 +11,18 @@ export function FilterList({ searchTerm, setSearchTerm }: FilterListProps) {
 	};
 
 	return (
-		<>
-			<form>
-				<label htmlFor="filterList">
-					Filter List:
-					<input
-						type="search"
-						onChange={handleChange}
-						value={searchTerm}
-						id="filterList"
-						aria-label="Filter items in the list"
-						placeholder="Search items..."
-					/>
-				</label>
-			</form>
-		</>
+		<form>
+			<label htmlFor="filterList">
+				Filter List:
+				<input
+					type="search"
+					onChange={handleChange}
+					value={searchTerm}
+					id="filterList"
+					aria-label="Filter items in the list"
+					placeholder="Search items..."
+				/>
+			</label>
+		</form>
 	);
 }
