@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { SignInButton, User } from "../api";
-import { NavBar } from "../components";
+import { AuthenticatedNavBar } from "../components";
 
 import "./Layout.css";
 
@@ -20,7 +20,7 @@ export function Layout({ user }: Props) {
 					<Outlet />
 					{!user && <SignInButton />}
 				</main>
-				{user && <NavBar />}
+				{user && <AuthenticatedNavBar />}
 			</div>
 		</>
 	);
