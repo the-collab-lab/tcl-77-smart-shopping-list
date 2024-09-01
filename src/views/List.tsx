@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { ListItem as ListItemComponent } from "../components/ListItem";
 import { FilterListInput as FilterListComponent } from "../components/FilterListInput";
 import { ListItem } from "../api";
@@ -10,9 +10,11 @@ interface Props {
 export function List({ data: unfilteredListItems }: Props) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	const filteredListItems = unfilteredListItems.filter((item) =>
-		item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-	);
+	const filteredListItems = useMemo(() => {
+		return unfilteredListItems.filter((item) =>
+			item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+		);
+	}, [searchTerm, unfilteredListItems]);
 
 	return (
 		<>
