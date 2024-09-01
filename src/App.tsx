@@ -7,7 +7,6 @@ import { Home, Layout, List, ManageList, PageNotFound } from "./views";
 import { useFindUser, useShoppingListData, useShoppingLists } from "./api";
 
 import { useStateWithStorage } from "./utils";
-
 import { ProtectRoute } from "./components";
 
 /**
@@ -15,6 +14,7 @@ import { ProtectRoute } from "./components";
  * react-hot-toast to work anywhere in the app by just
  * importing toast as done in useAuth.
  */
+
 import { Toaster } from "react-hot-toast";
 
 export function App() {

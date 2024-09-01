@@ -3,6 +3,8 @@ import { addItem } from "../api/firebase";
 import { validateTrimmedString } from "../utils";
 import toast from "react-hot-toast";
 
+import ShareListForm from "../components/forms/ShareListForm";
+
 interface Props {
 	listPath: string | null;
 }
@@ -154,6 +156,7 @@ export function ManageList({ listPath }: Props) {
 					</form>
 				</>
 			)}
+			<ShareListForm listPath={listPath} />
 		</div>
 	);
 }
