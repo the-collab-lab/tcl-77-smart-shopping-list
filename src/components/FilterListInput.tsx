@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 interface FilterListProps {
 	searchTerm: string;
@@ -13,8 +13,12 @@ export function FilterListInput({
 		setSearchTerm(e.target.value);
 	};
 
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+	};
+
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<label htmlFor="filterList">
 				Filter List:
 				<input
