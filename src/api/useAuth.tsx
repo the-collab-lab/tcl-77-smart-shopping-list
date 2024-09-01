@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
@@ -23,23 +22,14 @@ export const SignInButton = () => (
  * A button that signs the user out of the app using Firebase Auth.
  */
 export const SignOutButton = () => {
-	const navigate = useNavigate();
-
 	return (
 		<button
 			type="button"
 			onClick={() => {
-				auth
-					.signOut()
-					.then(() => {
-						navigate("/", { replace: true });
-					})
-					.catch((error) => {
-						console.error(error);
-						toast.error(
-							"An error occurred while signing out. Please try again.",
-						);
-					});
+				auth.signOut().catch((error) => {
+					console.error(error);
+					toast.error("An error occurred while signing out. Please try again.");
+				});
 			}}
 		>
 			Sign Out
