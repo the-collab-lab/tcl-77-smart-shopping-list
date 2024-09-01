@@ -5,7 +5,10 @@ interface FilterListProps {
 	setSearchTerm: (term: string) => void;
 }
 
-export function FilterList({ searchTerm, setSearchTerm }: FilterListProps) {
+export function FilterListInput({
+	searchTerm,
+	setSearchTerm,
+}: FilterListProps) {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value);
 	};

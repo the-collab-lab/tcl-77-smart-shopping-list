@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ListItem as ListItemComponent } from "../components/ListItem";
-import { FilterList as FilterListComponent } from "../components/FilterList";
+import { FilterListInput as FilterListComponent } from "../components/FilterListInput";
 import { ListItem } from "../api";
 
 interface Props {
