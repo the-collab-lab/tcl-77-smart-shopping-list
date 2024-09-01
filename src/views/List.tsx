@@ -20,7 +20,7 @@ export function List({ data: unfilteredListItems }: Props) {
 				Hello from the <code>/list</code> page!
 			</p>
 
-			{filteredListItems.length > 0 && (
+			{unfilteredListItems.length > 0 && (
 				<FilterListComponent
 					searchTerm={searchTerm}
 					setSearchTerm={setSearchTerm}
