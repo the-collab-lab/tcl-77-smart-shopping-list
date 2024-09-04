@@ -1,13 +1,14 @@
 import { useState, useMemo } from "react";
-import { ListItem as ListItemComponent } from "../components/ListItem";
+import { ListItemCheckBox as ListItemComponent } from "../components/ListItem";
 import { FilterListInput as FilterListComponent } from "../components/FilterListInput";
 import { ListItem } from "../api";
 
 interface Props {
 	data: ListItem[];
+	listPath: string | null;
 }
 
-export function List({ data: unfilteredListItems }: Props) {
+export function List({ data: unfilteredListItems, listPath }: Props) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const filteredListItems = useMemo(() => {
@@ -31,7 +32,7 @@ export function List({ data: unfilteredListItems }: Props) {
 
 			<ul>
 				{filteredListItems.map((item) => (
-					<ListItemComponent key={item.id} name={item.name} />
+					<ListItemComponent key={item.id} item={item} listPath={listPath} />
 				))}
 			</ul>
 		</>

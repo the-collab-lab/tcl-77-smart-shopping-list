@@ -16,6 +16,7 @@ import { getFutureDate } from "../utils";
 import * as t from "io-ts";
 import { isLeft } from "fp-ts/lib/Either";
 import { PathReporter } from "io-ts/PathReporter";
+import { date } from "fp-ts";
 
 const FirebaseTimestamp = new t.Type<
 	Timestamp,
@@ -258,11 +259,15 @@ export type UpdateListItem = Partial<Omit<ListItem, "id" | "dateCreated">>;
 export async function updateItem(
 	listPath: string,
 	itemId: string,
+
 	newData: UpdateListItem,
 ) {
 	const itemDocRef = doc(db, listPath, "items", itemId);
 
-	await updateDoc(itemDocRef, newData);
+	await updateDoc(itemDocRef, {
+		totalPurchases: 0,
+		dateLastPurchased: new Date(),
+	});
 }
 
 export async function deleteItem() {
