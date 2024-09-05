@@ -3,6 +3,7 @@ import { addItem } from "../../api";
 import { validateTrimmedString } from "../../utils";
 import toast from "react-hot-toast";
 
+import { useNavigate } from "react-router-dom";
 import ShareListForm from "../../components/forms/ShareListForm";
 
 interface Props {
@@ -22,6 +23,8 @@ const purchaseTimelines = {
 };
 
 export function ManageList({ listPath }: Props) {
+	const navigate = useNavigate();
+
 	const [itemName, setItemName] = useState("");
 	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState(
 		PurchaseTime.soon,
@@ -78,6 +81,10 @@ export function ManageList({ listPath }: Props) {
 		}
 	};
 
+	const navigateToListPage = () => {
+		navigate("/list");
+	};
+
 	return (
 		<div>
 			<p>
@@ -86,6 +93,7 @@ export function ManageList({ listPath }: Props) {
 			{listPath && (
 				<>
 					<form onSubmit={(e) => handleSubmit(e, listPath)}>
+						<h3>First, add your item!</h3>
 						<label htmlFor="item-name">
 							Item:
 							<input
@@ -100,6 +108,7 @@ export function ManageList({ listPath }: Props) {
 							/>
 						</label>
 						<br />
+						<h3>Next, pick when you plan on buying this item again!</h3>
 						<fieldset>
 							<legend>When to buy:</legend>
 							<label htmlFor={PurchaseTime.soon}>
@@ -154,6 +163,8 @@ export function ManageList({ listPath }: Props) {
 							Submit Item
 						</button>
 					</form>
+					<h4>Let&apos;s look at your list!</h4>
+					<button onClick={navigateToListPage}>{"Let's go!"}</button>
 				</>
 			)}
 			<ShareListForm listPath={listPath} />
