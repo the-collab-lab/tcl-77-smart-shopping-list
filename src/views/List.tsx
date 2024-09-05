@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import { ListItemCheckBox as ListItemComponent } from "../components/ListItem";
-import { FilterListInput as FilterListComponent } from "../components/FilterListInput";
+import { ListItemCheckBox } from "../components/ListItem";
+import { FilterListInput } from "../components/FilterListInput";
 import { ListItem } from "../api";
 
 interface Props {
@@ -24,17 +24,17 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 			</p>
 
 			{unfilteredListItems.length > 0 && (
-				<FilterListComponent
+				<FilterListInput
 					searchTerm={searchTerm}
 					setSearchTerm={setSearchTerm}
 				/>
 			)}
 
-			<ul>
+			<div>
 				{filteredListItems.map((item) => (
-					<ListItemComponent key={item.id} item={item} listPath={listPath} />
+					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
 				))}
-			</ul>
+			</div>
 		</>
 	);
 }
