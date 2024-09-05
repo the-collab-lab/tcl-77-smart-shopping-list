@@ -254,10 +254,12 @@ export async function updateItem(
 
 	const updates: Partial<ListItem> = {};
 
-	if (isPurchased) {
-		updates.totalPurchases = item.totalPurchases + 1;
-		updates.dateLastPurchased = Timestamp.fromDate(new Date());
+	if (!isPurchased) {
+		throw new Error(`Item not marked as purchased. Try again.`);
 	}
+
+	updates.totalPurchases = item.totalPurchases + 1;
+	updates.dateLastPurchased = Timestamp.fromDate(new Date());
 
 	await updateDoc(itemDocRef, updates);
 }
