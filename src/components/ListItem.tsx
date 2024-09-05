@@ -7,17 +7,21 @@ interface Props {
 }
 
 export function ListItemCheckBox({ item, listPath }: Props) {
+	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log("checked");
+	};
 	return (
-		<li className="ListItem">
-			<label htmlFor="purchased-shopping-list-item">
-				{item.name}
+		<div className="ListItem">
+			<label htmlFor={`checkbox-${item.id}`}>
 				<input
 					type="checkbox"
-					id="purchased-shopping-list-item"
-					aria-label="checking off a purchased shopping list item"
-					onChange={updateItem(listPath, item.id)}
+					id={`checkbox-${item.id}`}
+					aria-label={`Mark ${item.name} as purchased.`}
+					value={item.id}
+					onChange={handleChange}
 				/>
+				{item.name}
 			</label>
-		</li>
+		</div>
 	);
 }
