@@ -1,7 +1,8 @@
 import "./ListItem.css";
 import { updateItem, ListItem } from "../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { is24HoursLater } from "../utils";
 
 interface Props {
 	item: ListItem;
@@ -9,27 +10,37 @@ interface Props {
 }
 
 export function ListItemCheckBox({ item, listPath }: Props) {
-	const [purchased, setToPurchased] = useState(false);
+	const [checked, setChecked] = useState(false);
 
-	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+	useEffect(() => {
+		const purchaseDate = item.dateLastPurchased
+			? item.dateLastPurchased.toDate()
+			: item.dateLastPurchased;
+
+		if (!purchaseDate) {
+			return;
+		}
+
+		setChecked(!is24HoursLater(purchaseDate));
+	}, [item]);
+
+	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
-		setToPurchased(isChecked);
+		setChecked(isChecked);
 
 		if (!listPath) {
 			toast.error("Error: listPath is missing or invalid.");
 			return;
 		}
 
-		if (isChecked) {
-			await toast.promise(updateItem(listPath, item, isChecked), {
-				loading: `Marking ${item.name} as purchased!`,
-				success: `${item.name} successfully added to your list!`,
-				error: () => {
-					setToPurchased(!isChecked);
-					return `${item.name} failed to add to your list. Please try again!`;
-				},
-			});
-		}
+		await toast.promise(updateItem(listPath, item, isChecked), {
+			loading: `Marking ${item.name} as purchased!`,
+			success: `${item.name} successfully added to your list!`,
+			error: () => {
+				setChecked(false);
+				return `${item.name} failed to add to your list. Please try again!`;
+			},
+		});
 	};
 
 	return (
@@ -40,9 +51,9 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					id={`checkbox-${item.id}`}
 					aria-label={`Mark ${item.name} as purchased.`}
 					value={item.id}
-					checked={purchased}
-					onChange={handleChange}
-					aria-checked={purchased}
+					checked={checked}
+					onChange={handleCheckChange}
+					aria-checked={checked}
 				/>
 				{item.name}
 			</label>
