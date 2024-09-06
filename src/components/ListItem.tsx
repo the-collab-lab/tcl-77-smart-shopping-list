@@ -22,10 +22,26 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 
 		setChecked(!is24HoursLater(purchaseDate));
-	}, [item]);
+	}, [item.dateLastPurchased]);
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
+
+		const purchaseDate = item.dateLastPurchased
+			? item.dateLastPurchased.toDate()
+			: item.dateLastPurchased;
+
+		if (!purchaseDate) {
+			return;
+		}
+
+		if (!isChecked && !is24HoursLater(purchaseDate)) {
+			toast.error(
+				`${item.name} has already been marked as purchased in the last 24 hours.`,
+			);
+			return;
+		}
+
 		setChecked(isChecked);
 
 		if (!listPath) {
@@ -33,11 +49,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			return;
 		}
 
-		await toast.promise(updateItem(listPath, item, isChecked), {
+		await toast.promise(updateItem(listPath, item), {
 			loading: `Marking ${item.name} as purchased!`,
 			success: `${item.name} successfully added to your list!`,
 			error: () => {
-				setChecked(false);
+				setChecked(!isChecked);
 				return `${item.name} failed to add to your list. Please try again!`;
 			},
 		});

@@ -245,18 +245,10 @@ export async function addItem(
 	});
 }
 
-export async function updateItem(
-	listPath: string,
-	item: ListItem,
-	isPurchased: boolean,
-) {
+export async function updateItem(listPath: string, item: ListItem) {
 	const itemDocRef = doc(db, listPath, "items", item.id);
 
 	const updates: Partial<ListItem> = {};
-
-	if (!isPurchased) {
-		throw new Error(`Item not marked as purchased. Try again.`);
-	}
 
 	updates.totalPurchases = item.totalPurchases + 1;
 	updates.dateLastPurchased = Timestamp.fromDate(new Date());
