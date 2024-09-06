@@ -1,9 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { addItem } from "../api/firebase";
-import { validateTrimmedString } from "../utils";
+import { addItem } from "../../api";
+import { validateTrimmedString } from "../../utils";
 import toast from "react-hot-toast";
 
-import ShareListForm from "../components/forms/ShareListForm";
+import ShareListForm from "../../components/forms/ShareListForm";
 
 interface Props {
 	listPath: string | null;

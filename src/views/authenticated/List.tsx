@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
-import { ListItemCheckBox } from "../components/ListItem";
-import { FilterListInput } from "../components/FilterListInput";
-import { ListItem } from "../api";
+import { ListItemCheckBox } from "../../components/ListItem";
+import { FilterListInput } from "../../components/FilterListInput";
+import { ListItem } from "../../api";
 
 interface Props {
 	data: ListItem[];
