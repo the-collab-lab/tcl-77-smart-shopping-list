@@ -22,7 +22,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		} else {
 			setChecked(false);
 		}
-	}, [purchaseDate]);
+	}, [item.dateLastPurchased]);
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
