@@ -85,7 +85,7 @@ export function AddItemForm({ listPath }: Props) {
 	};
 
 	return (
-		<div>
+		<section>
 			{listPath && (
 				<>
 					<form onSubmit={(e) => handleSubmit(e, listPath)}>
@@ -159,10 +159,10 @@ export function AddItemForm({ listPath }: Props) {
 							Submit Item
 						</button>
 					</form>
-					<h4>Let&apos;s look at your list!</h4>
-					<button onClick={navigateToListPage}>{"Let's go!"}</button>
+					<h4>Let&apos;s go look at your list!</h4>
+					<button onClick={navigateToListPage}>{"View List"}</button>
 				</>
 			)}
-		</div>
+		</section>
 	);
 }
