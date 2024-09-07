@@ -2,7 +2,7 @@ import "./ListItem.css";
 import { updateItem, ListItem } from "../api";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { is24HoursLater } from "../utils";
+import { moreThan24HoursPassed } from "../utils";
 
 interface Props {
 	item: ListItem;
@@ -18,16 +18,16 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 	useEffect(() => {
 		if (purchaseDate) {
-			setChecked(!is24HoursLater(purchaseDate));
-		} else {
-			setChecked(false);
+			setChecked(!moreThan24HoursPassed(purchaseDate));
+			return;
 		}
+		setChecked(false);
 	}, [item.dateLastPurchased]);
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
 
-		if (!isChecked && purchaseDate && !is24HoursLater(purchaseDate)) {
+		if (!isChecked && purchaseDate && !moreThan24HoursPassed(purchaseDate)) {
 			toast.error(
 				`${item.name} has already been marked as purchased in the last 24 hours.`,
 			);
