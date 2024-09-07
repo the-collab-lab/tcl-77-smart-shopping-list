@@ -234,26 +234,34 @@ export async function addItem(
 ) {
 	const listCollectionRef = collection(db, listPath, "items");
 
-	await addDoc(listCollectionRef, {
-		dateCreated: new Date(),
-		// NOTE: This is null because the item has just been created.
-		// We'll use updateItem to put a Date here when the item is purchased!
-		dateLastPurchased: null,
-		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-		name,
-		totalPurchases: 0,
-	});
+	try {
+		await addDoc(listCollectionRef, {
+			dateCreated: new Date(),
+			// NOTE: This is null because the item has just been created.
+			// We'll use updateItem to put a Date here when the item is purchased!
+			dateLastPurchased: null,
+			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
+			name,
+			totalPurchases: 0,
+		});
+	} catch (error) {
+		console.error("Error adding an item", error);
+	}
 }
 
 export async function updateItem(listPath: string, item: ListItem) {
 	const itemDocRef = doc(db, listPath, "items", item.id);
 
-	const updates: Partial<ListItem> = {};
+	const updates: Pick<ListItem, "totalPurchases" | "dateLastPurchased"> = {
+		totalPurchases: item.totalPurchases + 1,
+		dateLastPurchased: Timestamp.fromDate(new Date()),
+	};
 
-	updates.totalPurchases = item.totalPurchases + 1;
-	updates.dateLastPurchased = Timestamp.fromDate(new Date());
-
-	await updateDoc(itemDocRef, updates);
+	try {
+		await updateDoc(itemDocRef, updates);
+	} catch (error) {
+		console.error("Error updating document", error);
+	}
 }
 
 export async function deleteItem() {
