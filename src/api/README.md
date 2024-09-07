@@ -50,7 +50,12 @@ This function takes user-provided data and uses it to create a new item in the F
 
 ### `updateItem`
 
-🚧 To be completed! 🚧
+This function takes user-provided data and uses it to update an exiting item in the Firestore database.
+
+| Parameter  | Type     | Description                                                     |
+| ---------- | -------- | --------------------------------------------------------------- |
+| `listPath` | `string` | The Firestore path of the list to which the item will be added. |
+| `item`     | `string` | The item object.                                                |
 
 ### `deleteItem`
 
