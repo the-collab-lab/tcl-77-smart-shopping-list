@@ -27,14 +27,12 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
 
-		if (!isChecked && purchaseDate && !moreThan24HoursPassed(purchaseDate)) {
+		if (!isChecked) {
 			toast.error(
 				`${item.name} has already been marked as purchased in the last 24 hours.`,
 			);
 			return;
 		}
-
-		setChecked(isChecked);
 
 		if (!listPath) {
 			toast.error("Error: listPath is missing or invalid.");
@@ -43,11 +41,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 		await toast.promise(updateItem(listPath, item), {
 			loading: `Marking ${item.name} as purchased!`,
-			success: `${item.name} is now marked as purchased!`,
-			error: () => {
-				setChecked(!isChecked);
-				return `${item.name} failed to add to your list of purchases. Please try again!`;
+			success: () => {
+				setChecked(isChecked);
+				return `${item.name} is now marked as purchased!`;
 			},
+			error: `${item.name} failed to add to your list of purchases. Please try again!`,
 		});
 	};
 
