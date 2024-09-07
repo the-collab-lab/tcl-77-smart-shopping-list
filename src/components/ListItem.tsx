@@ -12,9 +12,7 @@ interface Props {
 export function ListItemCheckBox({ item, listPath }: Props) {
 	const [checked, setChecked] = useState(false);
 
-	const purchaseDate = item.dateLastPurchased
-		? item.dateLastPurchased.toDate()
-		: item.dateLastPurchased;
+	const purchaseDate = item.dateLastPurchased?.toDate();
 
 	useEffect(() => {
 		if (purchaseDate) {
@@ -26,13 +24,6 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
-
-		if (!isChecked) {
-			toast.error(
-				`${item.name} has already been marked as purchased in the last 24 hours.`,
-			);
-			return;
-		}
 
 		if (!listPath) {
 			toast.error("Error: listPath is missing or invalid.");
@@ -60,6 +51,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					checked={checked}
 					onChange={handleCheckChange}
 					aria-checked={checked}
+					disabled={checked}
 				/>
 				{item.name}
 			</label>
