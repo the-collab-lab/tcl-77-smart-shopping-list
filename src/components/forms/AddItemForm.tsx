@@ -21,7 +21,7 @@ const purchaseTimelines = {
 	[PurchaseTime.notSoon]: 30,
 };
 
-const AddItemForm = ({ listPath }: Props) => {
+export function AddItemForm({ listPath }: Props) {
 	const navigate = useNavigate();
 
 	const [itemName, setItemName] = useState("");
@@ -165,6 +165,4 @@ const AddItemForm = ({ listPath }: Props) => {
 			)}
 		</div>
 	);
-};
-
-export default AddItemForm;
+}

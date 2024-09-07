@@ -1,4 +1,4 @@
-import AddItemForm from "../../components/forms/AddItemForm";
+import { AddItemForm } from "../../components/forms/AddItemForm";
 import ShareListForm from "../../components/forms/ShareListForm";
 
 interface Props {
