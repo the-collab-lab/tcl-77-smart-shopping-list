@@ -46,10 +46,6 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				success: `${item.name} is now marked as purchased!`,
 				error: `${item.name} failed to add to your list of purchases. Please try again!`,
 			});
-		} catch (error) {
-			console.error("Error in updating purchase", error);
-			// revert to local state in case of failure
-			setUpdatedCheckState({ kind: "none" });
 		} finally {
 			// reset local state
 			setUpdatedCheckState({ kind: "none" });

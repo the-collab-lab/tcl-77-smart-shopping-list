@@ -246,6 +246,7 @@ export async function addItem(
 		});
 	} catch (error) {
 		console.error("Error adding an item", error);
+		throw error;
 	}
 }
 
@@ -261,6 +262,7 @@ export async function updateItem(listPath: string, item: ListItem) {
 		await updateDoc(itemDocRef, updates);
 	} catch (error) {
 		console.error("Error updating document", error);
+		throw error;
 	}
 }
 
