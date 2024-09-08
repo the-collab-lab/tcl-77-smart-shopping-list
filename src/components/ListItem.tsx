@@ -1,6 +1,6 @@
 import "./ListItem.css";
 import { updateItem, ListItem } from "../api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed } from "../utils";
 
@@ -8,36 +8,52 @@ interface Props {
 	item: ListItem;
 	listPath: string | null;
 }
+interface None {
+	kind: "none";
+}
+
+interface Set {
+	kind: "set";
+	value: boolean;
+}
 
 export function ListItemCheckBox({ item, listPath }: Props) {
-	const [checked, setChecked] = useState(false);
+	const [updatedCheckState, setUpdatedCheckState] = useState<None | Set>({
+		kind: "none",
+	});
 
-	const purchaseDate = item.dateLastPurchased?.toDate();
-
-	useEffect(() => {
-		if (purchaseDate) {
-			setChecked(!moreThan24HoursPassed(purchaseDate));
-			return;
-		}
-		setChecked(false);
-	}, [item.dateLastPurchased]);
+	const isChecked =
+		updatedCheckState.kind === "set"
+			? updatedCheckState.value
+			: item.dateLastPurchased
+				? !moreThan24HoursPassed(item.dateLastPurchased.toDate())
+				: false;
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-		const isChecked = e.target.checked;
+		const newCheckedState = e.target.checked;
+
+		// Temporarily store the updated check state
+		setUpdatedCheckState({ kind: "set", value: newCheckedState });
 
 		if (!listPath) {
 			toast.error("Error: listPath is missing or invalid.");
 			return;
 		}
 
-		await toast.promise(updateItem(listPath, item), {
-			loading: `Marking ${item.name} as purchased!`,
-			success: () => {
-				setChecked(isChecked);
-				return `${item.name} is now marked as purchased!`;
-			},
-			error: `${item.name} failed to add to your list of purchases. Please try again!`,
-		});
+		try {
+			await toast.promise(updateItem(listPath, item), {
+				loading: `Marking ${item.name} as purchased!`,
+				success: `${item.name} is now marked as purchased!`,
+				error: `${item.name} failed to add to your list of purchases. Please try again!`,
+			});
+		} catch (error) {
+			console.error("Error in updating purchase", error);
+			// revert to local state in case of failure
+			setUpdatedCheckState({ kind: "none" });
+		} finally {
+			// reset local state
+			setUpdatedCheckState({ kind: "none" });
+		}
 	};
 
 	return (
@@ -48,10 +64,10 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					id={`checkbox-${item.id}`}
 					aria-label={`Mark ${item.name} as purchased.`}
 					value={item.id}
-					checked={checked}
+					checked={isChecked}
 					onChange={handleCheckChange}
-					aria-checked={checked}
-					disabled={checked}
+					aria-checked={isChecked}
+					disabled={isChecked}
 				/>
 				{item.name}
 			</label>
