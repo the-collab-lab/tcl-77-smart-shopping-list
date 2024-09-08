@@ -1,8 +1,72 @@
-import * as api from '../api';
-import './ListItem.css';
+import "./ListItem.css";
+import { updateItem, ListItem } from "../api";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { moreThan24HoursPassed } from "../utils";
 
-type Props = Pick<api.ListItem, 'name'>;
+interface Props {
+	item: ListItem;
+	listPath: string | null;
+}
+interface None {
+	kind: "none";
+}
 
-export function ListItem({ name }: Props) {
-	return <li className="ListItem">{name}</li>;
+interface Set {
+	kind: "set";
+	value: boolean;
+}
+
+export function ListItemCheckBox({ item, listPath }: Props) {
+	const [updatedCheckState, setUpdatedCheckState] = useState<None | Set>({
+		kind: "none",
+	});
+
+	const isChecked =
+		updatedCheckState.kind === "set"
+			? updatedCheckState.value
+			: item.dateLastPurchased
+				? !moreThan24HoursPassed(item.dateLastPurchased.toDate())
+				: false;
+
+	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newCheckedState = e.target.checked;
+
+		// Temporarily store the updated check state
+		setUpdatedCheckState({ kind: "set", value: newCheckedState });
+
+		if (!listPath) {
+			toast.error("Error: listPath is missing or invalid.");
+			return;
+		}
+
+		try {
+			await toast.promise(updateItem(listPath, item), {
+				loading: `Marking ${item.name} as purchased!`,
+				success: `${item.name} is now marked as purchased!`,
+				error: `${item.name} failed to add to your list of purchases. Please try again!`,
+			});
+		} finally {
+			// reset local state
+			setUpdatedCheckState({ kind: "none" });
+		}
+	};
+
+	return (
+		<div className="ListItem">
+			<label htmlFor={`checkbox-${item.id}`}>
+				<input
+					type="checkbox"
+					id={`checkbox-${item.id}`}
+					aria-label={`Mark ${item.name} as purchased.`}
+					value={item.id}
+					checked={isChecked}
+					onChange={handleCheckChange}
+					aria-checked={isChecked}
+					disabled={isChecked}
+				/>
+				{item.name}
+			</label>
+		</div>
+	);
 }

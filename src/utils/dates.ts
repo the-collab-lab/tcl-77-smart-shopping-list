@@ -10,3 +10,12 @@ const ONE_DAY_IN_MILLISECONDS = 86400000;
 export function getFutureDate(offset: number) {
 	return new Date(Date.now() + offset * ONE_DAY_IN_MILLISECONDS);
 }
+
+export function moreThan24HoursPassed(purchaseDate: Date): boolean {
+	const currentTime = new Date();
+
+	const timeElapsedInMilliseconds =
+		currentTime.getTime() - purchaseDate.getTime();
+
+	return timeElapsedInMilliseconds >= ONE_DAY_IN_MILLISECONDS;
+}

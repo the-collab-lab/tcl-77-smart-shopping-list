@@ -1,16 +1,16 @@
 import { useState, useMemo } from "react";
-import { ListItem as ListItemComponent } from "../../components/ListItem";
-import { FilterListInput as FilterListComponent } from "../../components/FilterListInput";
+import { ListItemCheckBox } from "../../components/ListItem";
+import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
 	data: ListItem[];
+	listPath: string | null;
 }
 
-export function List({ data: unfilteredListItems }: Props) {
+export function List({ data: unfilteredListItems, listPath }: Props) {
 	const navigate = useNavigate();
-
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const filteredListItems = useMemo(() => {
@@ -50,24 +50,27 @@ export function List({ data: unfilteredListItems }: Props) {
 			<p>
 				Hello from the <code>/list</code> page!
 			</p>
-			<section>
-				<FilterListComponent
-					searchTerm={searchTerm}
-					setSearchTerm={setSearchTerm}
-				/>
-				<h3>Want to add more items to your list?</h3>
-				<button
-					onClick={() => navigate("/manage-list")}
-					aria-label="Navigate to add more items to your list"
-				>
-					{"Add items"}
-				</button>
-			</section>
-			<ul>
+
+			<div>
+				<section>
+					{unfilteredListItems.length > 0 && (
+						<FilterListInput
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+						/>
+					)}
+					<h3>Want to add more items to your list?</h3>
+					<button
+						onClick={() => navigate("/manage-list")}
+						aria-label="Navigate to add more items to your list"
+					>
+						{"Add items"}
+					</button>
+				</section>
 				{filteredListItems.map((item) => (
-					<ListItemComponent key={item.id} name={item.name} />
+					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
 				))}
-			</ul>
+			</div>
 		</>
 	);
 }
