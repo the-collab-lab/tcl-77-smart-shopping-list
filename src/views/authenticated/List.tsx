@@ -51,28 +51,22 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				Hello from the <code>/list</code> page!
 			</p>
 
-			{unfilteredListItems.length > 0 && (
-				<FilterListInput
-					searchTerm={searchTerm}
-					setSearchTerm={setSearchTerm}
-				/>
-			)}
-
 			<div>
-			<section>
-				<FilterListComponent
-					searchTerm={searchTerm}
-					setSearchTerm={setSearchTerm}
-				/>
-				<h3>Want to add more items to your list?</h3>
-				<button
-					onClick={() => navigate("/manage-list")}
-					aria-label="Navigate to add more items to your list"
-				>
-					{"Add items"}
-				</button>
-			</section>
-			<ul>
+				<section>
+					{unfilteredListItems.length > 0 && (
+						<FilterListInput
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+						/>
+					)}
+					<h3>Want to add more items to your list?</h3>
+					<button
+						onClick={() => navigate("/manage-list")}
+						aria-label="Navigate to add more items to your list"
+					>
+						{"Add items"}
+					</button>
+				</section>
 				{filteredListItems.map((item) => (
 					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
 				))}
