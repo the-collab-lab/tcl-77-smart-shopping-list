@@ -264,10 +264,33 @@ export async function updateItem(listPath: string, item: ListItem) {
 		item.dateNextPurchased.toDate(),
 	);
 
-	const updates: Pick<ListItem, "totalPurchases" | "dateLastPurchased"> = {
+	const daysSinceLastPurchased = getDaysBetweenDates(
+		new Date(),
+		lastUpdatedDate.toDate(),
+	);
+
+	const newDateNextPurchased = getFutureDate(
+		calculateEstimate(
+			previousEstimate,
+			daysSinceLastPurchased,
+			item.totalPurchases,
+		),
+	);
+
+	// console.log("item created:", item.dateCreated.toDate());
+	// console.log("item date last purchased:", item.dateLastPurchased?.toDate());
+	// console.log("item date next purchased:", item.dateNextPurchased.toDate());
+	// console.log("previous estimate:", previousEstimate);
+	// console.log("Original next purchase date:", item.dateNextPurchased.toDate());
+	// console.log("Estimated Next Purchase Date!", newDateNextPurchased);
+
+	const updates: Pick<
+		ListItem,
+		"totalPurchases" | "dateLastPurchased" | "dateNextPurchased"
+	> = {
 		totalPurchases: item.totalPurchases + 1,
 		dateLastPurchased: Timestamp.fromDate(new Date()),
-		// dateNextPurchased: Timestamp.toDate()
+		dateNextPurchased: Timestamp.fromDate(newDateNextPurchased),
 	};
 
 	try {
