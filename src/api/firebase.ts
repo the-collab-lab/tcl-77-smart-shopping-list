@@ -11,11 +11,13 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./config";
-import { getFutureDate } from "../utils";
+import { getFutureDate, getDaysBetweenDates } from "../utils";
+import { calculateEstimate } from "@the-collab-lab/shopping-list-utils";
 
 import * as t from "io-ts";
 import { isLeft } from "fp-ts/lib/Either";
 import { PathReporter } from "io-ts/PathReporter";
+import { last } from "fp-ts/lib/ReadonlyNonEmptyArray";
 
 const FirebaseTimestamp = new t.Type<
 	Timestamp,
@@ -253,9 +255,19 @@ export async function addItem(
 export async function updateItem(listPath: string, item: ListItem) {
 	const itemDocRef = doc(db, listPath, "items", item.id);
 
+	const lastUpdatedDate = item.dateLastPurchased
+		? item.dateLastPurchased
+		: item.dateCreated;
+
+	const previousEstimate = getDaysBetweenDates(
+		lastUpdatedDate.toDate(),
+		item.dateNextPurchased.toDate(),
+	);
+
 	const updates: Pick<ListItem, "totalPurchases" | "dateLastPurchased"> = {
 		totalPurchases: item.totalPurchases + 1,
 		dateLastPurchased: Timestamp.fromDate(new Date()),
+		// dateNextPurchased: Timestamp.toDate()
 	};
 
 	try {
