@@ -17,7 +17,6 @@ import { calculateEstimate } from "@the-collab-lab/shopping-list-utils";
 import * as t from "io-ts";
 import { isLeft } from "fp-ts/lib/Either";
 import { PathReporter } from "io-ts/PathReporter";
-import { last } from "fp-ts/lib/ReadonlyNonEmptyArray";
 
 const FirebaseTimestamp = new t.Type<
 	Timestamp,
@@ -277,13 +276,6 @@ export async function updateItem(listPath: string, item: ListItem) {
 			item.totalPurchases,
 		),
 	);
-
-	// console.log("item created:", item.dateCreated.toDate());
-	// console.log("item date last purchased:", item.dateLastPurchased?.toDate());
-	// console.log("item date next purchased:", item.dateNextPurchased.toDate());
-	// console.log("previous estimate:", previousEstimate);
-	// console.log("Original next purchase date:", item.dateNextPurchased.toDate());
-	// console.log("Estimated Next Purchase Date!", newDateNextPurchased);
 
 	const updates: Pick<
 		ListItem,
