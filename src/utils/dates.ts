@@ -19,3 +19,14 @@ export function moreThan24HoursPassed(purchaseDate: Date): boolean {
 
 	return timeElapsedInMilliseconds >= ONE_DAY_IN_MILLISECONDS;
 }
+
+export function getDaysBetweenDates(date1: Date, date2: Date): number {
+	const numberOfDaysBetween =
+		Math.abs(date1.getTime() - date2.getTime()) / ONE_DAY_IN_MILLISECONDS;
+
+	if (numberOfDaysBetween < 1) {
+		return 0;
+	}
+
+	return numberOfDaysBetween;
+}
