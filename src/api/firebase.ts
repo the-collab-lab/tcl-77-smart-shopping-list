@@ -259,6 +259,7 @@ export async function updateItem(listPath: string, item: ListItem) {
 		? item.dateLastPurchased
 		: item.dateCreated;
 
+	// Last estimated date of next purchase, or previous dateNextPurchased in whole number
 	const previousEstimate = getDaysBetweenDates(
 		lastUpdatedDate.toDate(),
 		item.dateNextPurchased.toDate(),
