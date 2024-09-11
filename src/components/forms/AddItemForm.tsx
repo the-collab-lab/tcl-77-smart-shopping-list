@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem } from "../../api";
-import { validateTrimmedString } from "../../utils";
+import { validateItemString } from "../../utils";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
@@ -42,12 +42,10 @@ export function AddItemForm({ listPath }: Props) {
 		listPath: string,
 	) => {
 		e.preventDefault();
-		const trimmedItemName = validateTrimmedString(itemName);
+		const validItemName = validateItemString(itemName);
 
-		if (!trimmedItemName) {
-			toast.error(
-				"Item name cannot be empty or just spaces. Please enter a valid name.",
-			);
+		if (!validItemName) {
+			toast.error("Item name cannot be empty.");
 			return;
 		}
 
@@ -62,7 +60,7 @@ export function AddItemForm({ listPath }: Props) {
 
 		try {
 			await toast.promise(
-				addItem(listPath, trimmedItemName, daysUntilNextPurchase),
+				addItem(listPath, validItemName, daysUntilNextPurchase),
 				{
 					loading: "Adding item to list.",
 					success: () => {
@@ -98,7 +96,6 @@ export function AddItemForm({ listPath }: Props) {
 								name="item"
 								value={itemName}
 								onChange={handleItemNameTextChange}
-								required
 								aria-label="Enter the item name"
 								aria-required
 							/>
