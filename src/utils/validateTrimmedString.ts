@@ -10,7 +10,6 @@ export function validateItemString(input: string) {
 	const removedPunctuation = /[^\p{L}]/gu;
 
 	const validatedString = trimmedInput.replace(removedPunctuation, "");
-	console.log(validatedString);
 
-	return validatedString;
+	return validatedString.length > 0 ? validatedString : null;
 }

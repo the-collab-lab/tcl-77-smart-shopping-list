@@ -45,7 +45,7 @@ export function AddItemForm({ listPath }: Props) {
 		const validItemName = validateItemString(itemName);
 
 		if (!validItemName) {
-			toast.error("Item name cannot be empty.");
+			toast.error("Please enter a valid item name.");
 			return;
 		}
 
@@ -66,10 +66,10 @@ export function AddItemForm({ listPath }: Props) {
 					success: () => {
 						setItemName("");
 						setItemNextPurchaseTimeline(PurchaseTime.soon);
-						return `${itemName} successfully added to your list!`;
+						return `${validItemName} successfully added to your list!`;
 					},
 					error: () => {
-						return `${itemName} failed to add to your list. Please try again!`;
+						return `${validItemName} failed to add to your list. Please try again!`;
 					},
 				},
 			);
