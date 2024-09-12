@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { addItem } from "../../api";
+import { addItem, ListItem } from "../../api";
 import { validateItemString } from "../../utils";
 import toast from "react-hot-toast";
 
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
 	listPath: string | null;
+	data: ListItem[];
 }
 
 enum PurchaseTime {
@@ -21,7 +22,7 @@ const purchaseTimelines = {
 	[PurchaseTime.notSoon]: 30,
 };
 
-export function AddItemForm({ listPath }: Props) {
+export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	const navigate = useNavigate();
 
 	const [itemName, setItemName] = useState("");
@@ -42,7 +43,8 @@ export function AddItemForm({ listPath }: Props) {
 		listPath: string,
 	) => {
 		e.preventDefault();
-		const validItemName = validateItemString(itemName);
+
+		const validItemName = validateItemString(itemName, unfilteredListItems);
 
 		if (!validItemName) {
 			toast.error("Please enter a valid item name.");
@@ -58,23 +60,25 @@ export function AddItemForm({ listPath }: Props) {
 
 		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
 
-		try {
-			await toast.promise(
-				addItem(listPath, validItemName, daysUntilNextPurchase),
-				{
-					loading: "Adding item to list.",
-					success: () => {
-						setItemName("");
-						setItemNextPurchaseTimeline(PurchaseTime.soon);
-						return `${validItemName} successfully added to your list!`;
+		if (validItemName) {
+			try {
+				await toast.promise(
+					addItem(listPath, validItemName, daysUntilNextPurchase),
+					{
+						loading: "Adding item to list.",
+						success: () => {
+							setItemName("");
+							setItemNextPurchaseTimeline(PurchaseTime.soon);
+							return `${validItemName} successfully added to your list!`;
+						},
+						error: () => {
+							return `${validItemName} failed to add to your list. Please try again!`;
+						},
 					},
-					error: () => {
-						return `${validItemName} failed to add to your list. Please try again!`;
-					},
-				},
-			);
-		} catch (error) {
-			console.error("Failed to add item:", error);
+				);
+			} catch (error) {
+				console.error("Failed to add item:", error);
+			}
 		}
 	};
 
