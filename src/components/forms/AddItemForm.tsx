@@ -44,10 +44,11 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	) => {
 		e.preventDefault();
 
-		const validItemName = validateItemString(itemName, unfilteredListItems);
+		// Validate the item name
+		const validationError = validateItemString(itemName, unfilteredListItems);
 
-		if (!validItemName) {
-			toast.error("Please enter a valid item name.");
+		if (validationError) {
+			toast.error(validationError);
 			return;
 		}
 
@@ -60,25 +61,20 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 
 		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
 
-		if (validItemName) {
-			try {
-				await toast.promise(
-					addItem(listPath, validItemName, daysUntilNextPurchase),
-					{
-						loading: "Adding item to list.",
-						success: () => {
-							setItemName("");
-							setItemNextPurchaseTimeline(PurchaseTime.soon);
-							return `${validItemName} successfully added to your list!`;
-						},
-						error: () => {
-							return `${validItemName} failed to add to your list. Please try again!`;
-						},
-					},
-				);
-			} catch (error) {
-				console.error("Failed to add item:", error);
-			}
+		try {
+			await toast.promise(addItem(listPath, itemName, daysUntilNextPurchase), {
+				loading: "Adding item to list.",
+				success: () => {
+					setItemName("");
+					setItemNextPurchaseTimeline(PurchaseTime.soon);
+					return `${itemName} successfully added to your list!`;
+				},
+				error: () => {
+					return `${itemName} failed to add to your list. Please try again!`;
+				},
+			});
+		} catch (error) {
+			console.error("Failed to add item:", error);
 		}
 	};
 

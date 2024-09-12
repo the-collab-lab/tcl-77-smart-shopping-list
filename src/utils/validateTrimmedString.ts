@@ -3,13 +3,13 @@ import { ListItem } from "../api";
 // makes sure the string passed into the function isn't an empty string
 export function validateItemString(
 	input: string,
-	itemList: ListItem[] = [],
+	itemList: ListItem[],
 ): string | null {
 	const trimmedInput = input.trim(); //removes leading and trailing whitespaces
 
 	// Condition 1: Check if the input is empty
 	if (trimmedInput.length === 0) {
-		return null;
+		return "Item cannot be empty";
 	}
 
 	//Remove punctuation marks and normalize input
@@ -26,15 +26,14 @@ export function validateItemString(
 
 	//Condition 2: check each item from the normalized list against the normalized input for duplicates
 	const isItemOnList = (validatedString: string): boolean => {
-		return normalizedItemNames.some(
-			(item) => item.toLowerCase() === validatedString.toLowerCase(),
-		);
+		return normalizedItemNames.some((item) => item === validatedString);
 	};
 
-	//return validatedString input if no duplicates found
+	//return error if the item already exists
 	if (isItemOnList(validatedString)) {
-		throw new Error("Item already exists");
-	} else {
-		return validatedString;
+		return "Item already exists in the list.";
 	}
+
+	// Return null if no errors are found
+	return null;
 }
