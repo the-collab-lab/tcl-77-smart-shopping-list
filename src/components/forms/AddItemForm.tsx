@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
-import { validateItemString } from "../../utils";
+import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
@@ -44,11 +44,15 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	) => {
 		e.preventDefault();
 
-		// Validate the item name
-		const validationError = validateItemString(itemName, unfilteredListItems);
+		// Validate the item name input
+		const validationErrorMessage = validateItemName(
+			itemName,
+			unfilteredListItems,
+		);
 
-		if (validationError) {
-			toast.error(validationError);
+		// If there's a validation error, show the error and return early
+		if (validationErrorMessage) {
+			toast.error(validationErrorMessage);
 			return;
 		}
 

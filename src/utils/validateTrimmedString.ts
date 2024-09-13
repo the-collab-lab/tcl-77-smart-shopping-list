@@ -1,9 +1,9 @@
 import { ListItem } from "../api";
 
-// makes sure the string passed into the function isn't an empty string
-export function validateItemString(
+// Validates the item name input for a shopping list
+export function validateItemName(
 	input: string,
-	itemList: ListItem[],
+	existingItems: ListItem[],
 ): string | null {
 	const trimmedInput = input.trim(); //removes leading and trailing whitespaces
 
@@ -13,27 +13,29 @@ export function validateItemString(
 	}
 
 	//Remove punctuation marks and normalize input
-	const removedPunctuation = /[^\p{L}\s]/gu;
+	const punctuationRegex = /[^\p{L}\s]/gu;
 
-	const validatedString = trimmedInput
-		.replace(removedPunctuation, "")
+	const normalizedInputName = trimmedInput
+		.replace(punctuationRegex, "")
 		.toLowerCase();
 
-	//Create a normalized list of items already present in the list
-	const normalizedItemNames = itemList.map((listItem) => {
-		return listItem.name.replace(removedPunctuation, "").toLowerCase();
+	//Create a list of  normalized existing item names
+	const normalizedExistingItemNames = existingItems.map((existingItem) => {
+		return existingItem.name.replace(punctuationRegex, "").toLowerCase();
 	});
 
-	//Condition 2: check each item from the normalized list against the normalized input for duplicates
-	const isItemOnList = (validatedString: string): boolean => {
-		return normalizedItemNames.some((item) => item === validatedString);
+	// Condition 2: Check if the normalized input matches any existing item
+	const isDuplicateItem = (normalizedInputName: string): boolean => {
+		return normalizedExistingItemNames.some(
+			(item) => item === normalizedInputName,
+		);
 	};
 
 	//return error if the item already exists
-	if (isItemOnList(validatedString)) {
+	if (isDuplicateItem(normalizedInputName)) {
 		return "Item already exists in the list.";
 	}
 
-	// Return null if no errors are found
+	// Return null if no errors are found (input is valid)
 	return null;
 }
