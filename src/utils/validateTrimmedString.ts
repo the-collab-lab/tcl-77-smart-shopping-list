@@ -33,7 +33,7 @@ export function validateItemName(
 
 	//return error if the item already exists
 	if (isDuplicateItem(normalizedInputName)) {
-		return "Item already exists in the list.";
+		return ` ${normalizedInputName} already exists in the list`;
 	}
 
 	// Return null if no errors are found (input is valid)
