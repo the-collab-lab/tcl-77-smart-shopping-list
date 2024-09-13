@@ -13,7 +13,7 @@ export function validateItemName(
 	}
 
 	//Remove punctuation marks and normalize input
-	const punctuationRegex = /[^\p{L}\s]/gu;
+	const punctuationRegex = /[^\p{L}]/gu;
 
 	const normalizedInputName = trimmedInput
 		.replace(punctuationRegex, "")
