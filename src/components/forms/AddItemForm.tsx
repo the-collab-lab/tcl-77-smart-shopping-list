@@ -62,22 +62,24 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
 
 		try {
-			await toast.promise(addItem(listPath, itemName, daysUntilNextPurchase), {
-				loading: "Adding item to list.",
-				success: () => {
-					setItemName("");
-					setItemNextPurchaseTimeline(PurchaseTime.soon);
-					return `${itemName} successfully added to your list!`;
+			await toast.promise(
+				addItem(listPath, itemName, daysUntilNextPurchase), // saving original input
+				{
+					loading: "Adding item to list.",
+					success: () => {
+						setItemName("");
+						setItemNextPurchaseTimeline(PurchaseTime.soon);
+						return `${itemName} successfully added to your list!`; // showing original input
+					},
+					error: () => {
+						return `${itemName} failed to add to your list. Please try again!`;
+					},
 				},
-				error: () => {
-					return `${itemName} failed to add to your list. Please try again!`;
-				},
-			});
+			);
 		} catch (error) {
 			console.error("Failed to add item:", error);
 		}
 	};
-
 	const navigateToListPage = () => {
 		navigate("/list");
 	};
