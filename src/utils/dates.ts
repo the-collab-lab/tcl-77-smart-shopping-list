@@ -28,5 +28,5 @@ export function getDaysBetweenDates(date1: Date, date2: Date): number {
 		return 0;
 	}
 
-	return Math.round(numberOfDaysBetween);
+	return Math.floor(numberOfDaysBetween);
 }
