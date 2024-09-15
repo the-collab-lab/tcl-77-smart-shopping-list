@@ -277,11 +277,6 @@ export async function updateItem(listPath: string, item: ListItem) {
 		),
 	);
 
-	console.log("item date last purchased:", item.dateLastPurchased?.toDate());
-	console.log("previous estimate:", previousEstimate);
-	console.log("Original next purchase date:", item.dateNextPurchased.toDate());
-	console.log("New Next Purchase Date!", newDateNextPurchased);
-
 	const updates: Pick<
 		ListItem,
 		"totalPurchases" | "dateLastPurchased" | "dateNextPurchased"
