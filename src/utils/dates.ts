@@ -1,4 +1,4 @@
-const ONE_DAY_IN_MILLISECONDS = 86400000;
+export const ONE_DAY_IN_MILLISECONDS = 86400000;
 
 /**
  * Get a new JavaScript Date that is `offset` days in the future.
@@ -18,4 +18,15 @@ export function moreThan24HoursPassed(purchaseDate: Date): boolean {
 		currentTime.getTime() - purchaseDate.getTime();
 
 	return timeElapsedInMilliseconds >= ONE_DAY_IN_MILLISECONDS;
+}
+
+export function getDaysBetweenDates(date1: Date, date2: Date): number {
+	const numberOfDaysBetween =
+		Math.abs(date1.getTime() - date2.getTime()) / ONE_DAY_IN_MILLISECONDS;
+
+	if (numberOfDaysBetween < 1) {
+		return 0;
+	}
+
+	return Math.floor(numberOfDaysBetween);
 }

@@ -11,7 +11,8 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./config";
-import { getFutureDate } from "../utils";
+import { getFutureDate, getDaysBetweenDates } from "../utils";
+import { calculateEstimate } from "@the-collab-lab/shopping-list-utils";
 
 import * as t from "io-ts";
 import { isLeft } from "fp-ts/lib/Either";
@@ -253,9 +254,36 @@ export async function addItem(
 export async function updateItem(listPath: string, item: ListItem) {
 	const itemDocRef = doc(db, listPath, "items", item.id);
 
-	const updates: Pick<ListItem, "totalPurchases" | "dateLastPurchased"> = {
+	const lastUpdatedDate = item.dateLastPurchased
+		? item.dateLastPurchased
+		: item.dateCreated;
+
+	// Last estimated date of next purchase, or previous dateNextPurchased in whole number
+	const previousEstimate = getDaysBetweenDates(
+		lastUpdatedDate.toDate(),
+		item.dateNextPurchased.toDate(),
+	);
+
+	const daysSinceLastPurchased = getDaysBetweenDates(
+		new Date(),
+		lastUpdatedDate.toDate(),
+	);
+
+	const newDateNextPurchased = getFutureDate(
+		calculateEstimate(
+			previousEstimate,
+			daysSinceLastPurchased,
+			item.totalPurchases,
+		),
+	);
+
+	const updates: Pick<
+		ListItem,
+		"totalPurchases" | "dateLastPurchased" | "dateNextPurchased"
+	> = {
 		totalPurchases: item.totalPurchases + 1,
 		dateLastPurchased: Timestamp.fromDate(new Date()),
+		dateNextPurchased: Timestamp.fromDate(newDateNextPurchased),
 	};
 
 	try {
