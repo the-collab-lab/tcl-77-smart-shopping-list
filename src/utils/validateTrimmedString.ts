@@ -13,9 +13,11 @@ export function validateItemName(
 	}
 
 	//Remove punctuation marks and normalize input
-	const punctuationRegex = /[^a-z0-9]/g;
+	const punctuationRegex = /[^\p{L}]/gu;
 
-	const normalizedInputName = input.toLowerCase().replace(/[^a-z0-9]/g, "");
+	const normalizedInputName = trimmedInput
+		.replace(punctuationRegex, "")
+		.toLowerCase();
 
 	//Create a list of  normalized existing item names
 	const normalizedExistingItemNames = existingItems.map((existingItem) => {
