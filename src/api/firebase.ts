@@ -301,3 +301,61 @@ export async function deleteItem() {
 	 * this function must accept!
 	 */
 }
+
+export function comparePurchaseUrgency(item1: ListItem, item2: ListItem) {
+	const currentDate = new Date();
+
+	/**
+	 * getDaysBetweenDates(currentDate, item1.daySinceLastPurchase.toDate())
+	 * boolean function to check if >60 days have passed since last purchase (item){
+	 * 	if dateLastPurchase is null: return false
+	 * const daysSinceLastPurchase >= 60 return true
+	 * }
+	 *
+	 *
+	 * if(itemAinactivefor60days && !itemBinactivefor60days)
+	 * return 1
+	 * const daysSinceItemLastActivity = item1.daySinceLastPurchase ? getDaysBetweenDates(currentDate, item1.daySinceLastPurchase.toDate()) : getDaysBetweenDates(currentDate, item1.dayCreated.toDate())
+	 * if (daysSinceItemLastActivity >= 60) {
+	 * return 1
+	 * }
+	 *
+	 * if (getDaysBetweenDates(currentDate, item1.dateNextPurchase.toDate()) < getDaysBetweenDates(currentDate, item2.dateNextPurchase.toDate())) {
+	 * return -1
+	 * } else if (getDaysBetweenDates(currentDate, item1.dateNextPurchase.toDate()) > getDaysBetweenDates(currentDate, item2.dateNextPurchase.toDate())) {
+	 * return 1
+	 * } else {
+	 * 		if (item1.name.toLowerCase() < item2.name.toLowerCase()) {
+	 * 		return -1
+	 * } else {
+	 * 		return 1
+	 * }
+	 * }
+	 *
+	 * */
+	const daysSinceItemLastActivity = item1.dateLastPurchased
+		? getDaysBetweenDates(currentDate, item1.dateLastPurchased.toDate())
+		: getDaysBetweenDates(currentDate, item1.dateCreated.toDate());
+
+	if (daysSinceItemLastActivity >= 60) {
+		return 1;
+	}
+
+	if (
+		getDaysBetweenDates(currentDate, item1.dateNextPurchased.toDate()) <
+		getDaysBetweenDates(currentDate, item2.dateNextPurchased.toDate())
+	) {
+		return -1;
+	} else if (
+		getDaysBetweenDates(currentDate, item1.dateNextPurchased.toDate()) >
+		getDaysBetweenDates(currentDate, item2.dateNextPurchased.toDate())
+	) {
+		return 1;
+	} else {
+		if (item1.name.toLowerCase() < item2.name.toLowerCase()) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+}
