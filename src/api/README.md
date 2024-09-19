@@ -46,7 +46,7 @@ This function takes user-provided data and uses it to create a new item in the F
 
 #### Note
 
-**`daysUntilNextPurchase` is not added to the item directly**. It is used alomngside the `getFutureDate` utility function to create a new _JavaScript Date_ that represents when we think the user will buy the item again.
+**`daysUntilNextPurchase` is not added to the item directly**. It is used alongside the `getFutureDate` utility function to create a new _JavaScript Date_ that represents when we think the user will buy the item again.
 
 ### `updateItem`
 
@@ -55,15 +55,24 @@ This function takes user-provided data and uses it to update an exiting item in 
 | Parameter  | Type     | Description                                                     |
 | ---------- | -------- | --------------------------------------------------------------- |
 | `listPath` | `string` | The Firestore path of the list to which the item will be added. |
-| `item`     | `string` | The item object.                                                |
+| `item`     | `object` | The item object.                                                |
 
 ### `deleteItem`
 
 🚧 To be completed! 🚧
 
+### `comparePurchaseUrgency`
+
+This function compares two item objects to determine their priority order for sorting. It evaluates `daysSineLastActivity` of `item1` and uses `daysSineLastActivity`, `item1.dateNextPurchased` and `item2.dateNextPurchased` to establish the order urgency.
+
+| Parameter | Type     | Description                                       |
+| --------- | -------- | ------------------------------------------------- |
+| `item1`   | `object` | The first item being compared to the second item. |
+| `item2`   | `object` | The second item being compared to the first item. |
+
 ## The shape of the the data
 
-When we request a shopping list, it is sent to us as an array of objects with a specific shape – a specific arrangeement of properties and the kinds of data those properties can hold. This table describes the shape of the items that go into the shopping list.
+When we request a shopping list, it is sent to us as an array of objects with a specific shape – a specific arrangement of properties and the kinds of data those properties can hold. This table describes the shape of the items that go into the shopping list.
 
 | Property            | Type     | Description                                                       |
 | ------------------- | -------- | ----------------------------------------------------------------- |
