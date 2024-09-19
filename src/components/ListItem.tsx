@@ -30,13 +30,21 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				: false;
 
 	const getUrgencyStatus = (item: ListItem) => {
+		const currentDate = new Date();
 		const daysUntilNextPurchase = getDaysBetweenDates(
 			new Date(),
 			item.dateNextPurchased.toDate(),
 		);
-		console.log(`${item.name} days next purchase: ${daysUntilNextPurchase}`);
 
-		if (daysUntilNextPurchase >= 60) {
+		const daysSinceItemLastActivity = item.dateLastPurchased
+			? getDaysBetweenDates(currentDate, item.dateLastPurchased.toDate())
+			: getDaysBetweenDates(currentDate, item.dateCreated.toDate());
+
+		if (currentDate > item.dateNextPurchased.toDate()) {
+			return "overdue";
+		}
+
+		if (daysSinceItemLastActivity >= 60) {
 			return "inactive";
 		}
 
@@ -89,7 +97,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
-			<span> {getUrgencyStatus(item)}</span>
+			<span>{getUrgencyStatus(item)}</span>
 		</div>
 	);
 }
