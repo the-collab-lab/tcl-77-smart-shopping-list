@@ -2,7 +2,7 @@ import "./ListItem.css";
 import { updateItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { moreThan24HoursPassed } from "../utils";
+import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 
 interface Props {
 	item: ListItem;
@@ -28,6 +28,28 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			: item.dateLastPurchased
 				? !moreThan24HoursPassed(item.dateLastPurchased.toDate())
 				: false;
+
+	const getUrgencyStatus = (item: ListItem) => {
+		const daysUntilNextPurchase = getDaysBetweenDates(
+			new Date(),
+			item.dateNextPurchased.toDate(),
+		);
+		console.log(`${item.name} days next purchase: ${daysUntilNextPurchase}`);
+
+		if (daysUntilNextPurchase >= 60) {
+			return "inactive";
+		}
+
+		if (daysUntilNextPurchase >= 30) {
+			return "not soon";
+		}
+
+		if (daysUntilNextPurchase <= 7) {
+			return "buy soon";
+		}
+
+		return "buy kind of soon";
+	};
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedState = e.target.checked;
@@ -67,6 +89,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
+			<span> {getUrgencyStatus(item)}</span>
 		</div>
 	);
 }
