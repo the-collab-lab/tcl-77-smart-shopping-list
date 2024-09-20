@@ -52,6 +52,20 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 	};
 
+	const deleteItemHandler = () => {
+		<dialog open>
+			<p>Do you want to delete this item?</p>
+			<form method="dialog">
+				<button>YES</button>
+				<button>NO</button>
+			</form>
+		</dialog>;
+		//if (user confirms delete) {
+		//deleteItem()
+	};
+
+	return;
+
 	return (
 		<div className="ListItem">
 			<label htmlFor={`checkbox-${item.id}`}>
@@ -67,6 +81,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
+			<button onClick={deleteItemHandler}>Delete Item</button>
 		</div>
 	);
 }
