@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { addItem } from "../../api";
-import { validateTrimmedString } from "../../utils";
+import { addItem, ListItem } from "../../api";
+import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 
 interface Props {
 	listPath: string | null;
+	data: ListItem[];
 }
 
 enum PurchaseTime {
@@ -21,7 +22,7 @@ const purchaseTimelines = {
 	[PurchaseTime.notSoon]: 30,
 };
 
-export function AddItemForm({ listPath }: Props) {
+export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	const navigate = useNavigate();
 
 	const [itemName, setItemName] = useState("");
@@ -42,12 +43,16 @@ export function AddItemForm({ listPath }: Props) {
 		listPath: string,
 	) => {
 		e.preventDefault();
-		const trimmedItemName = validateTrimmedString(itemName);
 
-		if (!trimmedItemName) {
-			toast.error(
-				"Item name cannot be empty or just spaces. Please enter a valid name.",
-			);
+		// Validate the item name input
+		const validationErrorMessage = validateItemName(
+			itemName,
+			unfilteredListItems,
+		);
+
+		// If there's a validation error, show the error and return early
+		if (validationErrorMessage) {
+			toast.error(validationErrorMessage);
 			return;
 		}
 
@@ -62,13 +67,13 @@ export function AddItemForm({ listPath }: Props) {
 
 		try {
 			await toast.promise(
-				addItem(listPath, trimmedItemName, daysUntilNextPurchase),
+				addItem(listPath, itemName, daysUntilNextPurchase), // saving original input
 				{
 					loading: "Adding item to list.",
 					success: () => {
 						setItemName("");
 						setItemNextPurchaseTimeline(PurchaseTime.soon);
-						return `${itemName} successfully added to your list!`;
+						return `${itemName} successfully added to your list!`; // showing original input
 					},
 					error: () => {
 						return `${itemName} failed to add to your list. Please try again!`;
@@ -79,7 +84,6 @@ export function AddItemForm({ listPath }: Props) {
 			console.error("Failed to add item:", error);
 		}
 	};
-
 	const navigateToListPage = () => {
 		navigate("/list");
 	};
@@ -98,7 +102,6 @@ export function AddItemForm({ listPath }: Props) {
 								name="item"
 								value={itemName}
 								onChange={handleItemNameTextChange}
-								required
 								aria-label="Enter the item name"
 								aria-required
 							/>
