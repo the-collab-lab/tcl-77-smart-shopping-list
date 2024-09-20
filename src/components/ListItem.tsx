@@ -1,5 +1,5 @@
 import "./ListItem.css";
-import { updateItem, ListItem } from "../api";
+import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed } from "../utils";
