@@ -3,6 +3,7 @@ import {
 	getDoc,
 	setDoc,
 	addDoc,
+	deleteDoc,
 	collection,
 	doc,
 	onSnapshot,
@@ -266,7 +267,7 @@ export async function updateItem(listPath: string, item: ListItem) {
 	}
 }
 
-//delete an item
+//delete an item from the list
 export async function deleteItem(listPath: string, item: ListItem) {
-	const listCollectionRef = collection(db, listPath, "items");
+	const itemDocRef = doc(db, listPath, "items", item.id);
 }
