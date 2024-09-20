@@ -53,18 +53,17 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	const deleteItemHandler = () => {
-		<dialog open>
-			<p>Do you want to delete this item?</p>
-			<form method="dialog">
-				<button>YES</button>
-				<button>NO</button>
-			</form>
-		</dialog>;
-		//if (user confirms delete) {
-		//deleteItem()
-	};
+		const isConfirmed = window.confirm("Do you want to delete this item?");
+		console.log(isConfirmed);
 
-	return;
+		if (isConfirmed) {
+			deleteItem(listPath, item);
+			alert("Item has been successfully deleted!");
+		}
+		if (!isConfirmed) {
+			return;
+		}
+	};
 
 	return (
 		<div className="ListItem">
