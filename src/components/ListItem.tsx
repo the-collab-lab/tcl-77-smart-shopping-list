@@ -55,10 +55,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	const deleteItemHandler = () => {
 		const isConfirmed = window.confirm("Do you want to delete this item?");
 		console.log(isConfirmed);
+		console.log("Item:", item);
+		console.log("List Path:", listPath);
 
 		if (isConfirmed) {
-			deleteItem(listPath, item);
-			alert("Item has been successfully deleted!");
+			deleteItem(listPath as string, item);
 		}
 		if (!isConfirmed) {
 			return;
@@ -80,7 +81,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
-			<button onClick={deleteItemHandler}>Delete Item</button>
+			<button onClick={() => deleteItemHandler()}>Delete Item</button>
 		</div>
 	);
 }
