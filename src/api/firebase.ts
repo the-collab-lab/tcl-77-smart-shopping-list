@@ -302,43 +302,60 @@ export async function deleteItem() {
 	 */
 }
 
-export function comparePurchaseUrgency(item1: ListItem, item2: ListItem) {
+export function comparePurchaseUrgency(
+	item1: ListItem,
+	item2: ListItem,
+): -1 | 0 | 1 {
 	const currentDate = new Date();
 
-	// Check for last time item had any activity
-	const daysSinceItemLastActivity = item1.dateLastPurchased
+	// Check for last time item1 had any activity
+	const daysSinceItem1LastActivity = item1.dateLastPurchased
 		? getDaysBetweenDates(currentDate, item1.dateLastPurchased.toDate())
 		: getDaysBetweenDates(currentDate, item1.dateCreated.toDate());
 
-	// Prioritize item1 if current date is past next purchase date
+	// De-prioritize an item if its had no activity for more than 60 days
+	if (daysSinceItem1LastActivity >= 60) {
+		return 1;
+	}
+
+	// Prioritize item1 if current date is past next purchase date and not inactive yet
 	if (currentDate > item1.dateNextPurchased.toDate()) {
 		return -1;
 	}
 
-	// De-prioritize an item if its had no activity for more than 60 days
-	if (daysSinceItemLastActivity >= 60) {
+	// Check for last time item2 had any activity
+	const daysSinceItem2LastActivity = item2.dateLastPurchased
+		? getDaysBetweenDates(currentDate, item2.dateLastPurchased.toDate())
+		: getDaysBetweenDates(currentDate, item2.dateCreated.toDate());
+
+	// Prioritize item2 if current date is past next purchase date and not inactive yet
+	if (
+		currentDate > item2.dateNextPurchased.toDate() &&
+		daysSinceItem2LastActivity < 60
+	) {
 		return 1;
 	}
+
+	const item1DaysUntilNextPurchased = getDaysBetweenDates(
+		currentDate,
+		item1.dateNextPurchased.toDate(),
+	);
+	const item2DaysUntilNextPurchased = getDaysBetweenDates(
+		currentDate,
+		item2.dateNextPurchased.toDate(),
+	);
+
 	//Compare days until next purchase for item1 and item2
 	//if item1 needs to be purchased sooner, prioritize item1 over item2
-	if (
-		getDaysBetweenDates(currentDate, item1.dateNextPurchased.toDate()) <
-		getDaysBetweenDates(currentDate, item2.dateNextPurchased.toDate())
-	) {
+	if (item1DaysUntilNextPurchased < item2DaysUntilNextPurchased) {
 		return -1;
-
-		//if item2 needs to be purchased sooner, prioritize item2 over item1
-	} else if (
-		getDaysBetweenDates(currentDate, item1.dateNextPurchased.toDate()) >
-		getDaysBetweenDates(currentDate, item2.dateNextPurchased.toDate())
-	) {
-		return 1;
-		//if both items have the same sort order, we sort alphabetically
-	} else {
-		if (item1.name.toLowerCase() < item2.name.toLowerCase()) {
-			return -1;
-		} else {
-			return 1;
-		}
 	}
+
+	//if item2 needs to be purchased sooner, prioritize item2 over item1
+	if (item1DaysUntilNextPurchased > item2DaysUntilNextPurchased) {
+		return 1;
+	}
+
+	//if both items have the same sort order, we sort alphabetically
+	return item1.name.toLowerCase() < item2.name.toLowerCase() ? -1 : 1;
 }
