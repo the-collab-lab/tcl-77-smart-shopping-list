@@ -31,8 +31,9 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 	const getUrgencyStatus = (item: ListItem) => {
 		const currentDate = new Date();
+
 		const daysUntilNextPurchase = getDaysBetweenDates(
-			new Date(),
+			currentDate,
 			item.dateNextPurchased.toDate(),
 		);
 
@@ -40,12 +41,12 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			? getDaysBetweenDates(currentDate, item.dateLastPurchased.toDate())
 			: getDaysBetweenDates(currentDate, item.dateCreated.toDate());
 
-		if (currentDate > item.dateNextPurchased.toDate()) {
-			return "overdue";
-		}
-
 		if (daysSinceItemLastActivity >= 60) {
 			return "inactive";
+		}
+
+		if (currentDate > item.dateNextPurchased.toDate()) {
+			return "overdue";
 		}
 
 		if (daysUntilNextPurchase >= 30) {
@@ -53,10 +54,10 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 
 		if (daysUntilNextPurchase <= 7) {
-			return "buy soon";
+			return "soon";
 		}
 
-		return "buy kind of soon";
+		return "kind of soon";
 	};
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
