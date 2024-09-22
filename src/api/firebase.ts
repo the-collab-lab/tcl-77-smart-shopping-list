@@ -303,7 +303,7 @@ export async function deleteItem(listPath: string, item: ListItem) {
 	// Let's try the deleteDoc from Firestore.
 	try {
 		await deleteDoc(itemDocRef);
-		alert("Item has been successfully deleted!");
+		alert(`${item.name} has been successfully deleted!`);
 	} catch (error) {
 		// If there's an error, log it to the console and throw it.
 		console.error("Oops! Error deleting Item!", error);
