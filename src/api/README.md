@@ -70,7 +70,7 @@ This function takes user-provided data and uses it to update an exiting item in 
 
 ### `comparePurchaseUrgency`
 
-This function compares two item objects to determine their priority order for sorting. It evaluates `daysSinceLastActivity` of `item1` and uses `daysSinceLastActivity`, `item1.dateNextPurchased` and `item2.dateNextPurchased` to establish the order urgency.
+This function compares two item objects to determine their priority order for sorting. It evaluates `item1DaysSinceLastActivity` and `item2DaysSinceLastActivity` and uses both with `item1.dateNextPurchased` and `item2.dateNextPurchased` to establish the order urgency.
 
 | Parameter                 | Type                          | Description                                                                             |
 | ------------------------- | ----------------------------- | --------------------------------------------------------------------------------------- |
