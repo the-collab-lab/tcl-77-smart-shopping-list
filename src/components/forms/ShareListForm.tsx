@@ -5,7 +5,7 @@ import { getUser } from "../ProtectedRoute";
 import toast from "react-hot-toast";
 
 interface Props {
-	listPath: string | null;
+	listPath: string;
 }
 
 const ShareListForm = ({ listPath }: Props) => {
@@ -19,13 +19,9 @@ const ShareListForm = ({ listPath }: Props) => {
 
 	const handleInvite = async (
 		e: FormEvent<HTMLFormElement>,
-		listPath: string | null,
+		listPath: string,
 	) => {
 		e.preventDefault();
-
-		if (!listPath) {
-			return;
-		}
 
 		try {
 			await toast.promise(shareList(listPath, currentUser, emailName), {
