@@ -1,8 +1,8 @@
 import "./ListItem.css";
-import { updateItem, ListItem } from "../api";
+import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { moreThan24HoursPassed } from "../utils";
+import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 
 interface Props {
 	item: ListItem;
@@ -29,6 +29,37 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				? !moreThan24HoursPassed(item.dateLastPurchased.toDate())
 				: false;
 
+	const getUrgencyStatus = (item: ListItem) => {
+		const currentDate = new Date();
+
+		const daysUntilNextPurchase = getDaysBetweenDates(
+			currentDate,
+			item.dateNextPurchased.toDate(),
+		);
+
+		const daysSinceItemLastActivity = item.dateLastPurchased
+			? getDaysBetweenDates(currentDate, item.dateLastPurchased.toDate())
+			: getDaysBetweenDates(currentDate, item.dateCreated.toDate());
+
+		if (daysSinceItemLastActivity >= 60) {
+			return "inactive";
+		}
+
+		if (currentDate > item.dateNextPurchased.toDate()) {
+			return "overdue";
+		}
+
+		if (daysUntilNextPurchase >= 30) {
+			return "not soon";
+		}
+
+		if (daysUntilNextPurchase <= 7) {
+			return "soon";
+		}
+
+		return "kind of soon";
+	};
+
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedState = e.target.checked;
 
@@ -47,6 +78,23 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 	};
 
+	const deleteItemHandler = () => {
+		const isConfirmed = window.confirm("Do you want to delete this item?");
+
+		if (isConfirmed) {
+			try {
+				deleteItem(listPath as string, item);
+			} catch (error) {
+				console.error(`Error deleting ${item.name}`, error);
+				alert("Error deleting item!");
+			}
+		}
+
+		if (!isConfirmed) {
+			return;
+		}
+	};
+
 	return (
 		<div className="ListItem">
 			<label htmlFor={`checkbox-${item.id}`}>
@@ -62,6 +110,12 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
+
+			<span>
+				{getUrgencyStatus(item)}
+
+				<button onClick={() => deleteItemHandler()}>Delete Item</button>
+			</span>
 		</div>
 	);
 }
