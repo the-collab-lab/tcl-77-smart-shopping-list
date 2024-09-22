@@ -297,7 +297,7 @@ export async function updateItem(listPath: string, item: ListItem) {
 
 //delete an item from the list
 export async function deleteItem(listPath: string, item: ListItem) {
-	const itemDocRef = doc(db, listPath, "items", item.id);
+	const itemDocRef = doc(db, listPath, "items", item.id) || null;
 	// Delete the item from the list in Firestore.
 	// Should be a simple try-catch block. Try === deletes the item. Catch === logs the error.
 	// Let's try the deleteDoc from Firestore.
