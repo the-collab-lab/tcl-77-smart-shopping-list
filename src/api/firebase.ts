@@ -297,7 +297,9 @@ export async function updateItem(listPath: string, item: ListItem) {
 
 //delete an item from the list
 export async function deleteItem(listPath: string, item: ListItem) {
+	//reference the item document
 	const itemDocRef = doc(db, listPath, "items", item.id);
+	//get the document from firebase
 	const docSnap = await getDoc(itemDocRef);
 
 	// Delete the item from the list in Firestore.

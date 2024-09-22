@@ -54,15 +54,12 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 	const deleteItemHandler = () => {
 		const isConfirmed = window.confirm("Do you want to delete this item?");
-		console.log(isConfirmed);
-		console.log("Item:", item);
-		console.log("List Path:", listPath);
 
 		if (isConfirmed) {
 			try {
 				deleteItem(listPath as string, item);
 			} catch (error) {
-				console.error("Error deleting item", error);
+				console.error(`Error deleting ${item.name}`, error);
 				alert("Error deleting item!");
 			}
 		}
