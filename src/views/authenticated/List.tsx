@@ -44,12 +44,22 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		);
 	}
 
-	// Main content when list is not empty
-	return (
-		<>
+	const Header = () => {
+		return (
 			<p>
 				Hello from the <code>/list</code> page!
 			</p>
+		);
+	};
+
+	if (!listPath) {
+		return <Header />;
+	}
+
+	// Main content when list is not empty
+	return (
+		<>
+			<Header />
 
 			<div>
 				<section>
