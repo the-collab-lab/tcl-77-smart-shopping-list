@@ -1,5 +1,5 @@
 import "./ListItem.css";
-import { updateItem, ListItem } from "../api";
+import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
@@ -83,6 +83,23 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 	};
 
+	const deleteItemHandler = () => {
+		const isConfirmed = window.confirm("Do you want to delete this item?");
+
+		if (isConfirmed) {
+			try {
+				deleteItem(listPath as string, item);
+			} catch (error) {
+				console.error(`Error deleting ${item.name}`, error);
+				alert("Error deleting item!");
+			}
+		}
+
+		if (!isConfirmed) {
+			return;
+		}
+	};
+
 	return (
 		<div className="ListItem">
 			<label htmlFor={`checkbox-${item.id}`}>
@@ -98,7 +115,12 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
-			<span>{getUrgencyStatus(item)}</span>
+
+			<span>
+				{getUrgencyStatus(item)}
+
+				<button onClick={() => deleteItemHandler()}>Delete Item</button>
+			</span>
 		</div>
 	);
 }
