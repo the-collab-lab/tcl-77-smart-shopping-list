@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
-import { ListItem } from "../../api";
+import { ListItem, comparePurchaseUrgency } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -14,9 +14,11 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const filteredListItems = useMemo(() => {
-		return unfilteredListItems.filter((item) =>
-			item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-		);
+		return unfilteredListItems
+			.filter((item) =>
+				item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+			)
+			.sort(comparePurchaseUrgency);
 	}, [searchTerm, unfilteredListItems]);
 
 	// Early return if the list is empty

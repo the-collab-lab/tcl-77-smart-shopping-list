@@ -2,7 +2,7 @@ import "./ListItem.css";
 import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { moreThan24HoursPassed } from "../utils";
+import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 
 interface Props {
 	item: ListItem;
@@ -28,6 +28,37 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			: item.dateLastPurchased
 				? !moreThan24HoursPassed(item.dateLastPurchased.toDate())
 				: false;
+
+	const getUrgencyStatus = (item: ListItem) => {
+		const currentDate = new Date();
+
+		const daysUntilNextPurchase = getDaysBetweenDates(
+			currentDate,
+			item.dateNextPurchased.toDate(),
+		);
+
+		const daysSinceItemLastActivity = item.dateLastPurchased
+			? getDaysBetweenDates(currentDate, item.dateLastPurchased.toDate())
+			: getDaysBetweenDates(currentDate, item.dateCreated.toDate());
+
+		if (daysSinceItemLastActivity >= 60) {
+			return "inactive";
+		}
+
+		if (currentDate > item.dateNextPurchased.toDate()) {
+			return "overdue";
+		}
+
+		if (daysUntilNextPurchase >= 30) {
+			return "not soon";
+		}
+
+		if (daysUntilNextPurchase <= 7) {
+			return "soon";
+		}
+
+		return "kind of soon";
+	};
 
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedState = e.target.checked;
@@ -84,7 +115,12 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				/>
 				{item.name}
 			</label>
-			<button onClick={() => deleteItemHandler()}>Delete Item</button>
+
+			<span>
+				{getUrgencyStatus(item)}
+
+				<button onClick={() => deleteItemHandler()}>Delete Item</button>
+			</span>
 		</div>
 	);
 }
