@@ -63,9 +63,10 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				deleteItem(listPath as string, item);
 			} catch (error) {
 				console.error("Error deleting item", error);
-				throw error;
+				alert("Error deleting item!");
 			}
 		}
+
 		if (!isConfirmed) {
 			return;
 		}
