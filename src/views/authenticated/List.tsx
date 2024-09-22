@@ -21,13 +21,23 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 			.sort(comparePurchaseUrgency);
 	}, [searchTerm, unfilteredListItems]);
 
+	const Header = () => {
+		return (
+			<p>
+				Hello from the <code>/list</code> page!
+			</p>
+		);
+	};
+
+	if (!listPath) {
+		return <Header />;
+	}
+
 	// Early return if the list is empty
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
-				<p>
-					Hello from the <code>/list</code> page!
-				</p>
+				<Header />
 				<section>
 					<h2>Your list is ready!</h2>
 					<h3>
@@ -44,18 +54,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</section>
 			</>
 		);
-	}
-
-	const Header = () => {
-		return (
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
-		);
-	};
-
-	if (!listPath) {
-		return <Header />;
 	}
 
 	// Main content when list is not empty
