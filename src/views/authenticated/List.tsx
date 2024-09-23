@@ -39,7 +39,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 			<>
 				<Header />
 				<section>
-					<h2>Your list is ready!</h2>
 					<h3>
 						You haven’t added any items yet.
 						<br />
@@ -60,7 +59,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	return (
 		<>
 			<Header />
-
 			<div>
 				<section>
 					{unfilteredListItems.length > 0 && (
