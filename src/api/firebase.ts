@@ -95,6 +95,7 @@ export function useShoppingLists(user: User | null) {
 const ListItemModel = t.type({
 	id: t.string,
 	name: t.string,
+	itemQuantity: t.number,
 	dateLastPurchased: t.union([FirebaseTimestamp, t.null]),
 	dateNextPurchased: FirebaseTimestamp,
 	totalPurchases: t.number,
