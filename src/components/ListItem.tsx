@@ -3,6 +3,7 @@ import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
+import { Button } from "react-bootstrap";
 
 interface Props {
 	item: ListItem;
@@ -114,7 +115,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			<span>
 				{getUrgencyStatus(item)}
 
-				<button onClick={() => deleteItemHandler()}>Delete Item</button>
+				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
 			</span>
 		</div>
 	);

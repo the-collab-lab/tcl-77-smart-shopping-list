@@ -3,6 +3,7 @@ import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 interface Props {
 	data: ListItem[];
@@ -44,12 +45,12 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 						<br />
 						Let’s get started by adding your first item!
 					</h3>
-					<button
+					<Button
 						onClick={() => navigate("/manage-list")}
 						aria-label="Start adding items to your list"
 					>
 						{"Get started!"}
-					</button>
+					</Button>
 				</section>
 			</>
 		);
@@ -68,12 +69,12 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 						/>
 					)}
 					<h3>Want to add more items to your list?</h3>
-					<button
+					<Button
 						onClick={() => navigate("/manage-list")}
 						aria-label="Navigate to add more items to your list"
 					>
 						{"Add items"}
-					</button>
+					</Button>
 				</section>
 				{filteredListItems.map((item) => (
 					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />

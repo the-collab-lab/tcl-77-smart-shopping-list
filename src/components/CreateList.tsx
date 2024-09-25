@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { createList, User } from "../api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Button } from "react-bootstrap";
 
 interface Props {
 	user: User;
@@ -58,7 +59,7 @@ export function CreateList({ user, setListPath }: Props) {
 						aria-required="true" // Indicates that this field is required
 					/>
 					<br />
-					<button aria-label="Create new shopping list">Create List</button>
+					<Button aria-label="Create new shopping list">Create List</Button>
 				</form>
 			</li>
 		</>
