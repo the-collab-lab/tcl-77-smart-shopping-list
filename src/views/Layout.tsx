@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { User } from "../api";
-import { AuthenticatedNavBar } from "../components";
+import { AuthenticatedNavBar, UnauthenticatedNavBar } from "../components";
 
 import "./Layout.css";
 
@@ -28,7 +28,7 @@ export function Layout({ user }: Props) {
 					)}
 					<Outlet />
 				</main>
-				{user && <AuthenticatedNavBar />}
+				{user ? <AuthenticatedNavBar /> : <UnauthenticatedNavBar />}
 			</div>
 		</>
 	);
