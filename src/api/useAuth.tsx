@@ -3,7 +3,7 @@ import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
 import toast from "react-hot-toast";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 /**
  * A button that signs the user in using Google OAuth. When clicked,

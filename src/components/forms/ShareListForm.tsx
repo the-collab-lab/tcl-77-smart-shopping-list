@@ -1,7 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { shareList } from "../../api";
 import { getUser } from "../ProtectedRoute";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { InputGroup } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 

@@ -2,7 +2,9 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { createList, User } from "../api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 
 interface Props {
 	user: User;
