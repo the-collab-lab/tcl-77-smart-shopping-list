@@ -2,14 +2,7 @@ import React from "react";
 
 import { Routes, Route } from "react-router-dom";
 
-import {
-	Home,
-	Layout,
-	List,
-	ManageList,
-	PageNotFound,
-	SampleList,
-} from "./views";
+import { Home, Layout, List, ManageList, PageNotFound, About } from "./views";
 
 import { useFindUser, useShoppingListData, useShoppingLists } from "./api";
 
@@ -81,7 +74,7 @@ export function App() {
 						/>
 					</Route>
 
-					<Route path="/sample-list" element={<SampleList />}></Route>
+					<Route path="/about" element={<About />}></Route>
 
 					{/* a catch all route for if someone tries to manually navigate to something not created yet */}
 					<Route path="*" element={<PageNotFound />} />

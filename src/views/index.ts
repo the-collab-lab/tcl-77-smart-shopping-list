@@ -3,4 +3,4 @@ export * from "./Home";
 export * from "./Layout";
 export * from "./authenticated/List";
 export * from "./unauthenticated/PageNotFound";
-export * from "./unauthenticated/SampleList";
+export * from "./unauthenticated/About";
