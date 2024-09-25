@@ -66,9 +66,7 @@ export function App() {
 					<Route element={<ProtectRoute user={user} redirectPath="/" />}>
 						<Route
 							path="/list"
-							element={
-								<List data={data} listPath={listPath} listName={inputValue} />
-							}
+							element={<List data={data} listPath={listPath} />}
 						/>
 						<Route
 							path="/manage-list"

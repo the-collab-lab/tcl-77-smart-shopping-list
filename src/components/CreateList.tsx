@@ -1,19 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { createList, ListItem, User } from "../api";
+import { createList, User } from "../api";
 import { useNavigate } from "react-router-dom";
-import { List } from "../views";
 import toast from "react-hot-toast";
 
 interface Props {
 	user: User;
 	setListPath: (path: string) => void;
-	listPath: string;
-	data: ListItem;
 }
 
 export function CreateList({ user, setListPath }: Props) {
 	const [inputValue, setInputValue] = useState("");
-	const [listCreated, setListCreated] = useState(false);
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -31,7 +27,6 @@ export function CreateList({ user, setListPath }: Props) {
 			setListPath(path);
 			setInputValue("");
 			toast.success("Success: Your New List is Created!");
-			setListCreated(true);
 			// Delay for toast notification before redirecting
 			setTimeout(() => {
 				navigate("/list");
@@ -66,10 +61,6 @@ export function CreateList({ user, setListPath }: Props) {
 					<button aria-label="Create new shopping list">Create List</button>
 				</form>
 			</li>
-			›
-			{listCreated && (
-				<List listName={inputValue} listPath={listPath} data={data} />
-			)}
 		</>
 	);
 }
