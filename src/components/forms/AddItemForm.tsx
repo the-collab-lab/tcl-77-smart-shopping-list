@@ -30,6 +30,8 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		PurchaseTime.soon,
 	);
 
+	const [itemQuantity, setItemQuantity] = useState(1);
+
 	const handleItemNameTextChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setItemName(e.target.value);
 	};
@@ -67,19 +69,21 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 
 		try {
 			await toast.promise(
-				addItem(listPath, itemName, daysUntilNextPurchase), // saving original input
+				addItem(listPath, itemName, daysUntilNextPurchase, itemQuantity), // saving original input
 				{
 					loading: "Adding item to list.",
 					success: () => {
 						setItemName("");
 						setItemNextPurchaseTimeline(PurchaseTime.soon);
-						return `${itemName} successfully added to your list!`; // showing original input
+						setItemQuantity(1);
+						return `${itemQuantity} ${itemName} successfully added to your list!`; // showing original input
 					},
 					error: () => {
-						return `${itemName} failed to add to your list. Please try again!`;
+						return `${itemQuantity} ${itemName} failed to add to your list. Please try again!`;
 					},
 				},
 			);
+			console.log("Item quantity:", itemQuantity);
 		} catch (error) {
 			console.error("Failed to add item:", error);
 		}
