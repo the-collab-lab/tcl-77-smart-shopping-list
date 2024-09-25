@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
-import { Button } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
@@ -93,78 +93,76 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		<section>
 			{listPath && (
 				<>
-					<form onSubmit={(e) => handleSubmit(e, listPath)}>
+					<Form onSubmit={(e) => handleSubmit(e, listPath)}>
 						<h3>First, add your item!</h3>
-						<label htmlFor="item-name">
-							Item:
-							<input
-								id="item-name"
-								type="text"
-								name="item"
-								value={itemName}
-								onChange={handleItemNameTextChange}
-								aria-label="Enter the item name"
-								aria-required
-							/>
-						</label>
+						<Form.Label htmlFor="item-name">Item:</Form.Label>
+						<Form.Control
+							id="item-name"
+							type="text"
+							name="item"
+							value={itemName}
+							onChange={handleItemNameTextChange}
+							aria-label="Enter the item name"
+							aria-required
+						/>
 						<br />
 						<h3>Next, pick when you plan on buying this item again!</h3>
-						<fieldset>
-							<legend>When to buy:</legend>
-							<label htmlFor={PurchaseTime.soon}>
-								<input
-									type="radio"
-									id={PurchaseTime.soon}
-									name="when-to-buy"
-									value={PurchaseTime.soon}
-									required
-									onChange={() => handleNextPurchaseChange(PurchaseTime.soon)}
-									checked={itemNextPurchaseTimeline === PurchaseTime.soon}
-									aria-label={`Set buy to soon, within ${purchaseTimelines[PurchaseTime.soon]} days`}
-								/>
-								Soon -- Within {purchaseTimelines[PurchaseTime.soon]} days!
-							</label>
-							<br />
-							<label htmlFor={PurchaseTime.kindOfSoon}>
-								<input
-									type="radio"
-									id={PurchaseTime.kindOfSoon}
-									name="when-to-buy"
-									value={PurchaseTime.kindOfSoon}
-									required
-									onChange={() =>
-										handleNextPurchaseChange(PurchaseTime.kindOfSoon)
-									}
-									checked={itemNextPurchaseTimeline === PurchaseTime.kindOfSoon}
-									aria-label={`Set buy to kind of soon, within ${purchaseTimelines[PurchaseTime.kindOfSoon]} days`}
-								/>
-								Kind of soon -- Within{" "}
-								{purchaseTimelines[PurchaseTime.kindOfSoon]} days!
-							</label>
-							<br />
-							<label htmlFor={PurchaseTime.notSoon}>
-								<input
-									type="radio"
-									id={PurchaseTime.notSoon}
-									name="when-to-buy"
-									value={PurchaseTime.notSoon}
-									required
-									onChange={() =>
-										handleNextPurchaseChange(PurchaseTime.notSoon)
-									}
-									checked={itemNextPurchaseTimeline === PurchaseTime.notSoon}
-									aria-label={`Set buy to not soon, within ${purchaseTimelines[PurchaseTime.notSoon]} days`}
-								/>
-								Not soon -- Within {purchaseTimelines[PurchaseTime.notSoon]}{" "}
-								days!
-							</label>
+						<fieldset className="border border-2 rounded-1 p-2 mb-4">
+							<legend className="fs-2 float-none w-auto p-2">
+								When to buy:
+							</legend>
+							<Form.Check
+								type="radio"
+								className="mb-3 ms-3"
+								id={PurchaseTime.soon}
+								name="when-to-buy"
+								value={PurchaseTime.soon}
+								required
+								onChange={() => handleNextPurchaseChange(PurchaseTime.soon)}
+								checked={itemNextPurchaseTimeline === PurchaseTime.soon}
+								aria-label={`Set buy to soon, within ${purchaseTimelines[PurchaseTime.soon]} days`}
+								label={`Soon -- Within ${purchaseTimelines[PurchaseTime.soon]} days!`}
+							/>
+							<Form.Check
+								type="radio"
+								className="mb-3 ms-3"
+								id={PurchaseTime.kindOfSoon}
+								name="when-to-buy"
+								value={PurchaseTime.kindOfSoon}
+								required
+								onChange={() =>
+									handleNextPurchaseChange(PurchaseTime.kindOfSoon)
+								}
+								checked={itemNextPurchaseTimeline === PurchaseTime.kindOfSoon}
+								aria-label={`Set buy to kind of soon, within ${purchaseTimelines[PurchaseTime.kindOfSoon]} days`}
+								label={`Kind of soon -- Within
+											${purchaseTimelines[PurchaseTime.kindOfSoon]} days!`}
+							/>
+							<Form.Check
+								type="radio"
+								className="mb-3 ms-3"
+								id={PurchaseTime.notSoon}
+								name="when-to-buy"
+								value={PurchaseTime.notSoon}
+								required
+								onChange={() => handleNextPurchaseChange(PurchaseTime.notSoon)}
+								checked={itemNextPurchaseTimeline === PurchaseTime.notSoon}
+								aria-label={`Set buy to not soon, within ${purchaseTimelines[PurchaseTime.notSoon]} days`}
+								label={`Not soon -- Within ${purchaseTimelines[PurchaseTime.notSoon]} days!`}
+							/>
 						</fieldset>
-						<Button type="submit" aria-label="Add item to shopping list">
+						<Button
+							type="submit"
+							aria-label="Add item to shopping list"
+							className="mb-3"
+						>
 							Submit Item
 						</Button>
-					</form>
+					</Form>
 					<h4>Let&apos;s go look at your list!</h4>
-					<Button onClick={navigateToListPage}>{"View List"}</Button>
+					<Button onClick={navigateToListPage} className="my-3">
+						{"View List"}
+					</Button>
 				</>
 			)}
 		</section>
