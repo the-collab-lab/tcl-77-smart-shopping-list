@@ -7,7 +7,7 @@ export function NewUserHomeInfo() {
 
 	return (
 		<>
-			<h1>Welcome to APPLICATION NAME</h1>
+			<h1>Welcome to Smart shopping list</h1>
 			<p>
 				The next best thing to having someone else do the shopping for you!
 				Create and manage smart lists learn your habits to let you know exactly
@@ -15,7 +15,7 @@ export function NewUserHomeInfo() {
 			</p>
 
 			<article>
-				<p>New to APPLICATION NAME?</p>
+				<p>New to Smart shopping list?</p>
 				<button
 					onClick={() => navigate("/about")}
 					aria-label="Navigate to the about application page."
