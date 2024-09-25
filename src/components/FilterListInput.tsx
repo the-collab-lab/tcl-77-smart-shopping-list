@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent } from "react";
+import { Button, Form, InputGroup } from "react-bootstrap";
 
 interface FilterListProps {
 	searchTerm: string;
@@ -17,19 +18,24 @@ export function FilterListInput({
 		e.preventDefault();
 	};
 
+	const handleClear = () => {
+		setSearchTerm("");
+	};
+
 	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor="filterList">
-				Filter List:
-				<input
-					type="search"
+		<Form onSubmit={handleSubmit}>
+			<InputGroup>
+				<Form.Label htmlFor="filterList">Filter List:</Form.Label>
+				<Form.Control
+					type="text"
 					onChange={handleChange}
 					value={searchTerm}
 					id="filterList"
 					aria-label="Filter items in the list"
 					placeholder="Search items..."
 				/>
-			</label>
-		</form>
+				<Button onClick={handleClear}>x</Button>
+			</InputGroup>
+		</Form>
 	);
 }
