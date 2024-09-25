@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { shareList } from "../../api";
 import { getUser } from "../ProtectedRoute";
-import { Button } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
@@ -45,10 +45,10 @@ const ShareListForm = ({ listPath }: Props) => {
 	};
 
 	return (
-		<form onSubmit={(e) => handleInvite(e, listPath)}>
-			<label htmlFor="recipient-email">
-				Recipient Email:
-				<input
+		<Form onSubmit={(e) => handleInvite(e, listPath)}>
+			<Form.Label htmlFor="recipient-email">Recipient Email:</Form.Label>
+			<InputGroup>
+				<Form.Control
 					id="recipient-email"
 					type="email"
 					name="recipient-email"
@@ -59,12 +59,11 @@ const ShareListForm = ({ listPath }: Props) => {
 					aria-label="Enter the user email address to share list"
 					aria-required
 				/>
-			</label>
-			<br />
-			<Button type="submit" aria-label="submits form to share shopping list">
-				Invite User
-			</Button>
-		</form>
+				<Button type="submit" aria-label="submits form to share shopping list">
+					Invite User
+				</Button>
+			</InputGroup>
+		</Form>
 	);
 };
 
