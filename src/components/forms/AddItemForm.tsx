@@ -4,6 +4,7 @@ import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
+import ItemQuantityForm from "./ItemQuantityForm";
 
 interface Props {
 	listPath: string | null;
@@ -40,9 +41,9 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		setItemNextPurchaseTimeline(changed);
 	};
 
-	const handleItemQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setItemQuantity(parseInt(e.target.value));
-		console.log("Item quantity entered:", itemQuantity);
+	const handleItemQuantityChange = (quantity: number) => {
+		setItemQuantity(quantity);
+		console.log("Item quantity entered:", quantity);
 	};
 
 	const handleSubmit = async (
@@ -108,15 +109,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 				<>
 					<form onSubmit={(e) => handleSubmit(e, listPath)}>
 						<h3>First, add your item!</h3>
-						<label htmlFor="item-quantity">How many:</label>{" "}
-						<input
-							id="item-quantity"
-							type="number"
-							name="item-quantity"
-							max="100"
-							value={itemQuantity}
-							onChange={handleItemQuantityChange}
-						/>
+						<ItemQuantityForm saveItemQuantity={handleItemQuantityChange} />
 						<label htmlFor="item-name">
 							Item:
 							<input
