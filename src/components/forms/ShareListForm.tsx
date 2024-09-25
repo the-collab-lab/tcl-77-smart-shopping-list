@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { shareList } from "../../api";
 import { getUser } from "../ProtectedRoute";
+import { Button } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
@@ -60,9 +61,9 @@ const ShareListForm = ({ listPath }: Props) => {
 				/>
 			</label>
 			<br />
-			<button type="submit" aria-label="submits form to share shopping list">
+			<Button type="submit" aria-label="submits form to share shopping list">
 				Invite User
-			</button>
+			</Button>
 		</form>
 	);
 };

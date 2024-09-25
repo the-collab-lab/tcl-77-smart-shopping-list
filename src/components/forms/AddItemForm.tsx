@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
+import { Button } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
@@ -158,12 +159,12 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 								days!
 							</label>
 						</fieldset>
-						<button type="submit" aria-label="Add item to shopping list">
+						<Button type="submit" aria-label="Add item to shopping list">
 							Submit Item
-						</button>
+						</Button>
 					</form>
 					<h4>Let&apos;s go look at your list!</h4>
-					<button onClick={navigateToListPage}>{"View List"}</button>
+					<Button onClick={navigateToListPage}>{"View List"}</Button>
 				</>
 			)}
 		</section>
