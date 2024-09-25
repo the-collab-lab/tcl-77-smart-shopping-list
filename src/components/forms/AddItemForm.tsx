@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
