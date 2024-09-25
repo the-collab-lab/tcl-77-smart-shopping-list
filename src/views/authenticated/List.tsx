@@ -3,7 +3,7 @@ import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 interface Props {
 	data: ListItem[];

@@ -1,5 +1,7 @@
 import { ChangeEvent, FormEvent } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 
 interface FilterListProps {
 	searchTerm: string;
