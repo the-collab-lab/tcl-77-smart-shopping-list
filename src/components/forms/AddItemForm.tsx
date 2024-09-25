@@ -40,6 +40,11 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		setItemNextPurchaseTimeline(changed);
 	};
 
+	const handleItemQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setItemQuantity(parseInt(e.target.value));
+		console.log("Item quantity entered:", itemQuantity);
+	};
+
 	const handleSubmit = async (
 		e: FormEvent<HTMLFormElement>,
 		listPath: string,
@@ -65,6 +70,11 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 			return;
 		}
 
+		if (itemQuantity < 1) {
+			toast.error("Oops! Item quantity must be more than 0!");
+			return;
+		}
+
 		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
 
 		try {
@@ -83,7 +93,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 					},
 				},
 			);
-			console.log("Item quantity:", itemQuantity);
+			console.log("Item quantity added:", itemQuantity);
 		} catch (error) {
 			console.error("Failed to add item:", error);
 		}
@@ -98,6 +108,15 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 				<>
 					<form onSubmit={(e) => handleSubmit(e, listPath)}>
 						<h3>First, add your item!</h3>
+						<label htmlFor="item-quantity">How many:</label>{" "}
+						<input
+							id="item-quantity"
+							type="number"
+							name="item-quantity"
+							max="100"
+							value={itemQuantity}
+							onChange={handleItemQuantityChange}
+						/>
 						<label htmlFor="item-name">
 							Item:
 							<input
