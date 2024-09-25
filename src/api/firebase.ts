@@ -233,6 +233,7 @@ export async function addItem(
 	listPath: string,
 	name: string,
 	daysUntilNextPurchase: number,
+	itemQuantity: number,
 ) {
 	const listCollectionRef = collection(db, listPath, "items");
 
@@ -244,6 +245,7 @@ export async function addItem(
 			dateLastPurchased: null,
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 			name,
+			itemQuantity,
 			totalPurchases: 0,
 		});
 	} catch (error) {
