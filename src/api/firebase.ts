@@ -248,6 +248,7 @@ export async function addItem(
 			itemQuantity,
 			totalPurchases: 0,
 		});
+		console.log("Item added successfully!", name, itemQuantity);
 	} catch (error) {
 		console.error("Error adding an item", error);
 		throw error;
