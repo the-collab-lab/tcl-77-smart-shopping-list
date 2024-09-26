@@ -300,9 +300,20 @@ export async function updateItem(listPath: string, item: ListItem) {
 }
 
 export async function updateItemQuantity(listPath: string, item: ListItem) {
+	const itemDocRef = doc(db, listPath, "items", item.id);
 	const oldItemQuantity = item.itemQuantity;
-
 	console.log("Old item quantity from Firebase:", oldItemQuantity);
+
+	const updates = {
+		itemQuantity: item.itemQuantity,
+	};
+
+	try {
+		await updateDoc(itemDocRef, updates);
+	} catch (error) {
+		console.error("Error updating quantity", error);
+		throw error;
+	}
 }
 
 //delete an item from the list
