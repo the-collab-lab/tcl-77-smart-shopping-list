@@ -1,5 +1,5 @@
 import "./ListItem.css";
-import { updateItem, deleteItem, ListItem } from "../api";
+import { updateItem, deleteItem, ListItem, updateItemQuantity } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
@@ -86,6 +86,22 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 	const editItemQuantity = async (quantity: number) => {
 		console.log("Item quantity edited:", quantity);
+
+		if (!listPath) {
+			toast.error("Error: listPath is missing or invalid.");
+			return;
+		}
+
+		try {
+			await toast.promise(updateItemQuantity(listPath, item), {
+				loading: `Updating ${item.name} quantity!`,
+				success: `${item.name} quantity is now updated!`,
+				error: `Failed to update ${item.name} quantity. Please try again!`,
+			});
+		} catch (error) {
+			console.error(`Error updating ${item.name} quantity`, error);
+			alert("Error updating item quantity!");
+		}
 	};
 
 	const deleteItemHandler = () => {

@@ -299,6 +299,12 @@ export async function updateItem(listPath: string, item: ListItem) {
 	}
 }
 
+export async function updateItemQuantity(listPath: string, item: ListItem) {
+	const oldItemQuantity = item.itemQuantity;
+
+	console.log("Old item quantity from Firebase:", oldItemQuantity);
+}
+
 //delete an item from the list
 export async function deleteItem(listPath: string, item: ListItem) {
 	//reference the item document
