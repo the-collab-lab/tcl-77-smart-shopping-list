@@ -310,6 +310,7 @@ export async function updateItemQuantity(listPath: string, item: ListItem) {
 
 	try {
 		await updateDoc(itemDocRef, updates);
+		console.log("Item quantity updated successfully!", item.itemQuantity);
 	} catch (error) {
 		console.error("Error updating quantity", error);
 		throw error;
