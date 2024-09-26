@@ -3,6 +3,7 @@ import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
+import ItemQuantityForm from "./forms/ItemQuantityForm";
 
 interface Props {
 	item: ListItem;
@@ -83,6 +84,10 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 	};
 
+	const editItemQuantity = async (quantity: number) => {
+		console.log("Item quantity edited:", quantity);
+	};
+
 	const deleteItemHandler = () => {
 		const isConfirmed = window.confirm("Do you want to delete this item?");
 
@@ -113,7 +118,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					aria-checked={isChecked}
 					disabled={isChecked}
 				/>
-				{item.itemQuantity} x {item.name}
+				<ItemQuantityForm saveItemQuantity={editItemQuantity} /> x {item.name}
 			</label>
 
 			<span>
