@@ -17,6 +17,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Mentors
 
 - [Alex D'Antonio](https://github.com/alex-andria) 👽
+- [Tanner Gill](https://github.com/tannaurus)
 
 ## Code of Conduct Contacts
 
