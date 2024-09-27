@@ -85,7 +85,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		}
 	};
 	const navigateToListPage = () => {
-		navigate("/list");
+		navigate("/list/");
 	};
 
 	return (
