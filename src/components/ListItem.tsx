@@ -93,7 +93,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 
 		try {
-			await toast.promise(updateItemQuantity(listPath, item), {
+			await toast.promise(updateItemQuantity(listPath, item, quantity), {
 				loading: `Updating ${item.name} quantity!`,
 				success: `${item.name} quantity is now updated!`,
 				error: `Failed to update ${item.name} quantity. Please try again!`,

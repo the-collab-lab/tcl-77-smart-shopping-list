@@ -299,18 +299,22 @@ export async function updateItem(listPath: string, item: ListItem) {
 	}
 }
 
-export async function updateItemQuantity(listPath: string, item: ListItem) {
+export async function updateItemQuantity(
+	listPath: string,
+	item: ListItem,
+	newQuantity: number,
+) {
 	const itemDocRef = doc(db, listPath, "items", item.id);
 	const oldItemQuantity = item.itemQuantity;
 	console.log("Old item quantity from Firebase:", oldItemQuantity);
 
 	const updates = {
-		itemQuantity: item.itemQuantity,
+		itemQuantity: newQuantity,
 	};
 
 	try {
 		await updateDoc(itemDocRef, updates);
-		console.log("Item quantity updated to", item.itemQuantity);
+		console.log("Item quantity updated to", newQuantity);
 	} catch (error) {
 		console.error("Error updating quantity", error);
 		throw error;
