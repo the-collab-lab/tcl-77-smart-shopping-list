@@ -26,7 +26,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
-				<p>{listName}</p>
+				<h1>{listName}</h1>
 				<section>
 					<h2>Your list is ready!</h2>
 					<h3>
@@ -48,7 +48,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<>
-			<p>{listName}</p>
+			<h1>{listName}</h1>
 
 			<div>
 				<section>
