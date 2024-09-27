@@ -92,10 +92,14 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			return;
 		}
 
+		if (quantity === 0) {
+			deleteItemHandler();
+		}
+
 		try {
 			await toast.promise(updateItemQuantity(listPath, item, quantity), {
 				loading: `Updating ${item.name} quantity!`,
-				success: `${item.name} quantity is now updated!`,
+				success: `${item.name} quantity updated!`,
 				error: `Failed to update ${item.name} quantity. Please try again!`,
 			});
 		} catch (error) {
