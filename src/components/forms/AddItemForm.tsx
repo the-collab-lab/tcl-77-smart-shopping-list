@@ -9,6 +9,7 @@ import ItemQuantityForm from "./ItemQuantityForm";
 interface Props {
 	listPath: string | null;
 	data: ListItem[];
+	item: ListItem;
 }
 
 enum PurchaseTime {
@@ -23,7 +24,11 @@ const purchaseTimelines = {
 	[PurchaseTime.notSoon]: 30,
 };
 
-export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
+export function AddItemForm({
+	listPath,
+	data: unfilteredListItems,
+	item,
+}: Props) {
 	const navigate = useNavigate();
 
 	const [itemName, setItemName] = useState("");
@@ -109,7 +114,10 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 				<>
 					<form onSubmit={(e) => handleSubmit(e, listPath)}>
 						<h3>First, add your item!</h3>
-						<ItemQuantityForm saveItemQuantity={handleItemQuantityChange} />
+						<ItemQuantityForm
+							saveItemQuantity={handleItemQuantityChange}
+							item={item}
+						/>
 						<label htmlFor="item-name">
 							Item:
 							<input
