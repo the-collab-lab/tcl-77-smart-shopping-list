@@ -11,7 +11,7 @@ const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
 	item,
 }) => {
 	// A state variable to store the item quantity.
-	const [itemQuantity, setItemQuantity] = useState<number>(item.itemQuantity);
+	const [itemQuantity, setItemQuantity] = useState<number>(item?.itemQuantity);
 
 	// A state variable to store the edit mode.
 	const [edit, setEdit] = useState<boolean>(false);
