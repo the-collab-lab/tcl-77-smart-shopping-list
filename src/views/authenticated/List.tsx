@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
@@ -11,6 +12,7 @@ interface Props {
 
 export function List({ data: unfilteredListItems, listPath }: Props) {
 	const navigate = useNavigate();
+	const { listName } = useParams<{ listName: string }>();
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const filteredListItems = useMemo(() => {
@@ -25,7 +27,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
-				<p>Name of List Here</p>
+				<p>{listName}</p>
 				<section>
 					<h2>Your list is ready!</h2>
 					<h3>
@@ -47,7 +49,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<>
-			<p>Name of List Here</p>
+			<p>{listName}</p>
 
 			<div>
 				<section>
