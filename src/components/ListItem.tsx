@@ -134,7 +134,8 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					aria-checked={isChecked}
 					disabled={isChecked}
 				/>
-				<ItemQuantityForm saveItemQuantity={editItemQuantity} /> x {item.name}
+				<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} /> x{" "}
+				{item.name}
 			</label>
 
 			<span>

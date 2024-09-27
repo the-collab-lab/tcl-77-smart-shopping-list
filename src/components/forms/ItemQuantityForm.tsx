@@ -1,14 +1,17 @@
 import { FormEvent, useState } from "react";
+import { ListItem } from "../../api";
 
 interface ItemQuantityFormProps {
 	saveItemQuantity: (quantity: number) => void;
+	item: ListItem;
 }
 
 const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
 	saveItemQuantity,
+	item,
 }) => {
 	// A state variable to store the item quantity.
-	const [itemQuantity, setItemQuantity] = useState<number>(1);
+	const [itemQuantity, setItemQuantity] = useState<number>(item.itemQuantity);
 
 	// A state variable to store the edit mode.
 	const [edit, setEdit] = useState<boolean>(false);
