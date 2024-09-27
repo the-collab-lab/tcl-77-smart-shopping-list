@@ -26,6 +26,7 @@ export function Home({ data, setListPath, user }: Props) {
 								setListPath={setListPath}
 							/>
 						))}
+
 						<CreateList user={user} setListPath={setListPath} />
 					</ul>
 				)}

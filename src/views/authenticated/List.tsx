@@ -25,9 +25,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
-				<p>
-					Hello from the <code>/list</code> page!
-				</p>
+				<p>Name of List Here</p>
 				<section>
 					<h2>Your list is ready!</h2>
 					<h3>
@@ -49,9 +47,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
+			<p>Name of List Here</p>
 
 			<div>
 				<section>
