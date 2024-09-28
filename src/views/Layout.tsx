@@ -11,17 +11,15 @@ interface Props {
 
 export function Layout({ user }: Props) {
 	return (
-		<>
-			<div className="Layout">
-				<header className="Layout-header">
-					<h1>Smart shopping list</h1>
-				</header>
-				<main className="Layout-main vh-100">
-					<Outlet />
-					{!user && <SignInButton />}
-				</main>
-				{user && <AuthenticatedNavBar />}
-			</div>
-		</>
+		<div className="Layout vh-100">
+			<header className="Layout-header">
+				<h1>Smart shopping list</h1>
+			</header>
+			<main className="Layout-main overflow-scroll">
+				<Outlet />
+				{!user && <SignInButton />}
+			</main>
+			{user && <AuthenticatedNavBar />}
+		</div>
 	);
 }
