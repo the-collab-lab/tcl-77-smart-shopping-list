@@ -8,11 +8,21 @@ interface Props {
 }
 
 export function ManageList({ listPath, data }: Props) {
-	return (
-		<div>
+	const Header = () => {
+		return (
 			<p>
 				Hello from the <code>/manage-list</code> page!
 			</p>
+		);
+	};
+
+	if (!listPath) {
+		return <Header />;
+	}
+
+	return (
+		<div>
+			<Header />
 			<AddItemForm listPath={listPath} data={data || []} />
 			<ShareListForm listPath={listPath} />
 		</div>

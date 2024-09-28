@@ -7,7 +7,7 @@ import ItemQuantityForm from "./forms/ItemQuantityForm";
 
 interface Props {
 	item: ListItem;
-	listPath: string | null;
+	listPath: string;
 }
 interface None {
 	kind: "none";
@@ -66,11 +66,6 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 		// Temporarily store the updated check state
 		setUpdatedCheckState({ kind: "set", value: newCheckedState });
-
-		if (!listPath) {
-			toast.error("Error: listPath is missing or invalid.");
-			return;
-		}
 
 		try {
 			await toast.promise(updateItem(listPath, item), {
