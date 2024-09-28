@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { ListItem } from "../../api";
+import { toast } from "react-hot-toast";
 
 interface ItemQuantityFormProps {
 	saveItemQuantity: (quantity: number) => void;
@@ -28,6 +29,12 @@ export function ItemQuantityForm({
 	// A function that will save the item quantity.
 	const updateItemQuantity = (e: FormEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
+
+		if (itemQuantity < 1) {
+			toast.error("Oops! Quantity must be at least 1!");
+			setEdit(edit);
+			setItemQuantity(1);
+		}
 		setEdit(!edit);
 		saveItemQuantity(itemQuantity);
 		console.log("Item quantity saved:", itemQuantity);
