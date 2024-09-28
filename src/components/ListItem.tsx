@@ -82,10 +82,6 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	const editItemQuantity = async (quantity: number) => {
 		console.log("Item quantity edited:", quantity);
 
-		if (quantity === 0) {
-			deleteItemHandler();
-		}
-
 		try {
 			await toast.promise(updateItemQuantity(listPath, item, quantity), {
 				loading: `Updating ${item.name} quantity!`,
