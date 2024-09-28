@@ -32,26 +32,24 @@ const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
 	};
 
 	return (
-		<section>
-			<form>
-				<label htmlFor="item-quantity">How many:</label>{" "}
-				<input
-					id="item-quantity"
-					aria-label="Item quantity"
-					type="number"
-					name="item-quantity"
-					max="100"
-					value={itemQuantity}
-					onChange={(e) => setItemQuantity(Number(e.target.value))}
-					disabled={!edit}
-				/>
-				{edit ? (
-					<button onClick={updateItemQuantity}>Save</button>
-				) : (
-					<button onClick={toggleEdit}>Edit</button>
-				)}
-			</form>
-		</section>
+		<form>
+			<label htmlFor="item-quantity">How many:</label>{" "}
+			<input
+				id="item-quantity"
+				aria-label="Item quantity"
+				type="number"
+				name="item-quantity"
+				max="100"
+				value={itemQuantity}
+				onChange={(e) => setItemQuantity(Number(e.target.value))}
+				disabled={!edit}
+			/>
+			{edit ? (
+				<button onClick={updateItemQuantity}>Save</button>
+			) : (
+				<button onClick={toggleEdit}>Edit</button>
+			)}
+		</form>
 	);
 };
 
