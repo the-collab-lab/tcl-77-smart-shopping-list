@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-	listPath: string | null;
+	listPath: string;
 	data: ListItem[];
 }
 
