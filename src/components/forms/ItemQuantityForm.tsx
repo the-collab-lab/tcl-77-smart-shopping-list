@@ -45,13 +45,11 @@ const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
 					onChange={(e) => setItemQuantity(Number(e.target.value))}
 					disabled={!edit}
 				/>
-				<div>
-					{edit ? (
-						<button onClick={updateItemQuantity}>Save</button>
-					) : (
-						<button onClick={toggleEdit}>Edit</button>
-					)}
-				</div>
+				{edit ? (
+					<button onClick={updateItemQuantity}>Save</button>
+				) : (
+					<button onClick={toggleEdit}>Edit</button>
+				)}
 			</form>
 		</section>
 	);
