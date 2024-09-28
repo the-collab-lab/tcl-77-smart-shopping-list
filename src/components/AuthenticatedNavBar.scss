@@ -9,27 +9,27 @@
 	place-content: center;
 	position: fixed;
 	width: 100%;
-}
 
-.Nav-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	width: min(72ch, 100%);
-}
+	&__container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		width: min(72ch, 100%);
+	}
 
-.Nav-link {
-	--color-text: var(--color-accent);
-	color: var(--color-text);
-	font-size: 1.4em;
-	flex: 0 1 auto;
-	line-height: 1;
-	padding: 0.8rem;
-	text-align: center;
-	text-underline-offset: 0.1em;
-}
+	&__link {
+		--color-text: var(--color-accent);
+		color: var(--color-text);
+		font-size: 1.4em;
+		flex: 0 1 auto;
+		line-height: 1;
+		padding: 0.8rem;
+		text-align: center;
+		text-underline-offset: 0.1em;
 
-.Nav-link.active {
-	text-decoration-thickness: 0.22em;
-	text-underline-offset: 0.1em;
+		&.active {
+			text-decoration-thickness: 0.22em;
+			text-underline-offset: 0.1em;
+		}
+	}
 }
