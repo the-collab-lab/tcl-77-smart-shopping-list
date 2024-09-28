@@ -1,4 +1,4 @@
-import "./SingleList.css";
+import "./SingleList.scss";
 import * as api from "../api/firebase";
 import Button from "react-bootstrap/Button";
 

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { SignInButton, User } from "../api";
 import { AuthenticatedNavBar } from "../components";
 
-import "./Layout.css";
+import "./Layout.scss";
 
 interface Props {
 	user: User | null;

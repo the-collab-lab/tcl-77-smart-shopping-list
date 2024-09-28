@@ -4,7 +4,7 @@ import { SignOutButton } from "../api";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 
-import "./AuthenticatedNavBar.css";
+import "./AuthenticatedNavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (
