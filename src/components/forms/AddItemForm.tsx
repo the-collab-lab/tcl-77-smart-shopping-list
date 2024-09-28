@@ -79,6 +79,7 @@ export function AddItemForm({
 		if (itemQuantity < 1) {
 			toast.error("Oops! Item quantity must be more than 0!");
 			setItemQuantity(1);
+
 			return;
 		}
 

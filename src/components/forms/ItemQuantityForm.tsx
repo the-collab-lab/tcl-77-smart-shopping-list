@@ -41,6 +41,7 @@ export function ItemQuantityForm({
 				aria-label="Item quantity"
 				type="number"
 				name="item-quantity"
+				min="1"
 				max="100"
 				value={itemQuantity}
 				onChange={(e) => setItemQuantity(Number(e.target.value))}
