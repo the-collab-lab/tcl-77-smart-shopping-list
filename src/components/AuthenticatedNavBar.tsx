@@ -9,8 +9,8 @@ import "./AuthenticatedNavBar.css";
 
 export function AuthenticatedNavBar() {
 	return (
-		<Navbar expand="lg">
-			<Container className="d-flex justify-content-around">
+		<Navbar expand="lg" fixed="bottom" className="Nav">
+			<Container className="d-flex justify-content-around Nav-container">
 				<SignOutButton />
 				<Nav.Link as={NavLink} to="/" className="Nav-link" aria-label="Home">
 					Home
