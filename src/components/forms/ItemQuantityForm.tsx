@@ -6,10 +6,10 @@ interface ItemQuantityFormProps {
 	item: ListItem;
 }
 
-const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
+export function ItemQuantityForm({
 	saveItemQuantity,
 	item,
-}) => {
+}: ItemQuantityFormProps) {
 	// A state variable to store the item quantity.
 	const [itemQuantity, setItemQuantity] = useState<number>(item?.itemQuantity);
 
@@ -51,6 +51,4 @@ const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
 			)}
 		</form>
 	);
-};
-
-export default ItemQuantityForm;
+}
