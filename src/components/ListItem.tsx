@@ -82,6 +82,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	const editItemQuantity = async (quantity: number) => {
 		console.log("Item quantity edited:", quantity);
 
+		if (quantity < 1) {
+			toast.error("Oops! Quantity must be at least 1!");
+			return;
+		}
+
 		try {
 			await toast.promise(updateItemQuantity(listPath, item, quantity), {
 				loading: `Updating ${item.name} quantity!`,
