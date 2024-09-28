@@ -82,11 +82,6 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	const editItemQuantity = async (quantity: number) => {
 		console.log("Item quantity edited:", quantity);
 
-		if (!listPath) {
-			toast.error("Error: listPath is missing or invalid.");
-			return;
-		}
-
 		if (quantity === 0) {
 			deleteItemHandler();
 		}
