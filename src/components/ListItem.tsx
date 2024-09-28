@@ -3,7 +3,7 @@ import { updateItem, deleteItem, ListItem, updateItemQuantity } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
-import ItemQuantityForm from "./forms/ItemQuantityForm";
+import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 
 interface Props {
 	item: ListItem;

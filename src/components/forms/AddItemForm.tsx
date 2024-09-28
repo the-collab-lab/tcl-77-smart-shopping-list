@@ -4,7 +4,7 @@ import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
-import ItemQuantityForm from "./ItemQuantityForm";
+import { ItemQuantityForm } from "./ItemQuantityForm";
 
 interface Props {
 	listPath: string;
