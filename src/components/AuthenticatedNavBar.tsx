@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { SignOutButton } from "../api";
 
-import "./AuthenticatedNavBar.css";
+import "./AuthenticatedNavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (

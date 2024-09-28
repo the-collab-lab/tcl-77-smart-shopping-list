@@ -1,7 +1,8 @@
-import './SingleList.css';
-import * as api from '../api/firebase';
+import "./SingleList.scss";
+import * as api from "../api/firebase";
+import Button from "react-bootstrap/Button";
 
-interface Props extends Pick<api.List, 'name' | 'path'> {
+interface Props extends Pick<api.List, "name" | "path"> {
 	setListPath: (path: string) => void;
 }
 
