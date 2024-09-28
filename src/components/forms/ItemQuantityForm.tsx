@@ -32,7 +32,7 @@ export function ItemQuantityForm({
 
 		if (itemQuantity < 1) {
 			toast.error("Oops! Quantity must be at least 1!");
-			setEdit(edit);
+			setEdit(true);
 			setItemQuantity(1);
 		}
 		setEdit(!edit);
