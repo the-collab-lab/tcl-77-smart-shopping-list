@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 import { ItemQuantityForm } from "./ItemQuantityForm";
+import { set } from "fp-ts";
 
 interface Props {
 	listPath: string;
@@ -78,6 +79,7 @@ export function AddItemForm({
 
 		if (itemQuantity < 1) {
 			toast.error("Oops! Item quantity must be more than 0!");
+			setItemQuantity(1);
 			return;
 		}
 
