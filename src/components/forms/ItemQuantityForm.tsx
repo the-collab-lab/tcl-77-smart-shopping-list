@@ -33,7 +33,7 @@ export function ItemQuantityForm({
 
 	return (
 		<form>
-			<label htmlFor="quantity">How many:</label>{" "}
+			<label htmlFor="quantity">How many?</label>{" "}
 			<input
 				id="item-quantity"
 				aria-label="Item quantity"
