@@ -33,7 +33,7 @@ const ItemQuantityForm: React.FC<ItemQuantityFormProps> = ({
 
 	return (
 		<form>
-			<label htmlFor="item-quantity">How many:</label>{" "}
+			<label htmlFor="quantity">How many:</label>{" "}
 			<input
 				id="item-quantity"
 				aria-label="Item quantity"
