@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 import { ItemQuantityForm } from "./ItemQuantityForm";
-import { set } from "fp-ts";
 
 interface Props {
 	listPath: string;
@@ -97,7 +96,7 @@ export function AddItemForm({
 						return `${itemQuantity} ${itemName} successfully added to your list!`; // showing original input
 					},
 					error: () => {
-						return `${itemQuantity} ${itemName} failed to add to your list. Please try again!`;
+						return `Failed to add ${itemQuantity} ${itemName} to your list. Please try again!`;
 					},
 				},
 			);
