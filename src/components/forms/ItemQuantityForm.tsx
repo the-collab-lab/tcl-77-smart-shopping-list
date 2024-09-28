@@ -11,7 +11,9 @@ export function ItemQuantityForm({
 	item,
 }: ItemQuantityFormProps) {
 	// A state variable to store the item quantity.
-	const [itemQuantity, setItemQuantity] = useState<number>(item?.itemQuantity);
+	const [itemQuantity, setItemQuantity] = useState<number>(
+		item ? item.itemQuantity : 1,
+	);
 
 	// A state variable to store the edit mode.
 	const [edit, setEdit] = useState<boolean>(false);
