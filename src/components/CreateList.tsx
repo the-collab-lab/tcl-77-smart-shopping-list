@@ -29,7 +29,10 @@ export function CreateList({ user, setListPath }: Props) {
 			toast.success("Success: Your New List is Created!");
 			// Delay for toast notification before redirecting
 			setTimeout(() => {
-				navigate("/list");
+				console.log(path);
+
+				const listName = path.split("/").pop();
+				navigate(`/list/${listName}`);
 			}, 1500); // 1.5 seconds delay
 		} catch (error) {
 			console.error("Error creating list:", error);
