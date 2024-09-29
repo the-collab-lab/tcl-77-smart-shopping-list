@@ -3,6 +3,7 @@ import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
 import toast from "react-hot-toast";
+import Button from "react-bootstrap/Button";
 
 /**
  * A button that signs the user in using Google OAuth. When clicked,
@@ -16,12 +17,12 @@ type SignInButtonProps = {
 
 export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
 	return (
-		<button
+		<Button
 			type="button"
 			onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
 		>
 			{isSignIn ? "Sign In" : "Sign Up"}
-		</button>
+		</Button>
 	);
 };
 
@@ -30,7 +31,7 @@ export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
  */
 export const SignOutButton = () => {
 	return (
-		<button
+		<Button
 			type="button"
 			onClick={() => {
 				auth.signOut().catch((error) => {
@@ -40,7 +41,7 @@ export const SignOutButton = () => {
 			}}
 		>
 			Sign Out
-		</button>
+		</Button>
 	);
 };
 

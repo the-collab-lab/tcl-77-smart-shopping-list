@@ -13,11 +13,11 @@ export function Layout({ user }: Props) {
 	const navigate = useNavigate();
 	return (
 		<>
-			<div className="Layout">
+			<div className="Layout  vh-100">
 				<header className="Layout-header">
-					<h1>GrocerEase</h1>
+					<h1>Smart shopping list</h1>
 				</header>
-				<main className="Layout-main">
+				<main className="Layout-main overflow-scroll">
 					{user && (
 						<button
 							onClick={() => navigate("/about")}
