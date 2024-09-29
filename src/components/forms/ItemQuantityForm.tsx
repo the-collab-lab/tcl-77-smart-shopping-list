@@ -41,7 +41,7 @@ export function ItemQuantityForm({
 	};
 
 	return (
-		<form>
+		<>
 			<label htmlFor="quantity">How many?</label>{" "}
 			<input
 				id="item-quantity"
@@ -59,6 +59,6 @@ export function ItemQuantityForm({
 			) : (
 				<button onClick={toggleEdit}>Edit</button>
 			)}
-		</form>
+		</>
 	);
 }
