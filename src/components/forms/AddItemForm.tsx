@@ -48,7 +48,7 @@ export function AddItemForm({
 
 	const handleItemQuantityChange = (quantity: number) => {
 		setItemQuantity(quantity);
-		console.log("Item quantity entered:", quantity);
+		console.log("Quantity entered in form input:", quantity);
 	};
 
 	const handleSubmit = async (
@@ -100,11 +100,12 @@ export function AddItemForm({
 					},
 				},
 			);
-			console.log("Item quantity added:", itemQuantity);
+			console.log("Quantity added from Add Item form:", itemQuantity);
 		} catch (error) {
 			console.error("Failed to add item:", error);
 		}
 	};
+
 	const navigateToListPage = () => {
 		navigate("/list");
 	};

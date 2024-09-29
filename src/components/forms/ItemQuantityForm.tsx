@@ -37,7 +37,7 @@ export function ItemQuantityForm({
 		}
 		setEdit(!edit);
 		saveItemQuantity(itemQuantity);
-		console.log("Item quantity saved:", itemQuantity);
+		console.log("Item quantity updated in Item Quantity Form:", itemQuantity);
 	};
 
 	return (

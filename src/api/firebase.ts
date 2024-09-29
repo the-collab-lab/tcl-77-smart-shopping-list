@@ -299,7 +299,7 @@ export async function updateItem(listPath: string, item: ListItem) {
 	}
 }
 
-export async function updateItemQuantity(
+export async function storeItemQuantity(
 	listPath: string,
 	item: ListItem,
 	newQuantity: number,
@@ -314,7 +314,7 @@ export async function updateItemQuantity(
 
 	try {
 		await updateDoc(itemDocRef, updates);
-		console.log("Item quantity updated to", newQuantity);
+		console.log("Item quantity updated in Firebase:", newQuantity);
 	} catch (error) {
 		console.error("Error updating quantity", error);
 		throw error;

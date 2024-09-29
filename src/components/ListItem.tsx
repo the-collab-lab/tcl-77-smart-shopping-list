@@ -1,5 +1,5 @@
 import "./ListItem.css";
-import { updateItem, deleteItem, ListItem, updateItemQuantity } from "../api";
+import { updateItem, deleteItem, ListItem, storeItemQuantity } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
@@ -80,7 +80,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	const editItemQuantity = async (quantity: number) => {
-		console.log("Item quantity edited:", quantity);
+		console.log("Quantity edited in list:", quantity);
 
 		if (quantity < 1) {
 			toast.error("Oops! Quantity must be at least 1!");
@@ -88,7 +88,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 
 		try {
-			await toast.promise(updateItemQuantity(listPath, item, quantity), {
+			await toast.promise(storeItemQuantity(listPath, item, quantity), {
 				loading: `Updating ${item.name} quantity!`,
 				success: `${item.name} quantity updated!`,
 				error: `Failed to update ${item.name} quantity. Please try again!`,
