@@ -15,17 +15,19 @@ export function AuthenticatedHome({ data, setListPath, user }: Props) {
 				Hello from the home (<code>/</code>) page!
 			</p>
 			{user && (
-				<ul>
-					{data.map((list, index) => (
-						<SingleList
-							key={index}
-							name={list.name}
-							path={list.path}
-							setListPath={setListPath}
-						/>
-					))}
+				<>
+					<ul>
+						{data.map((list, index) => (
+							<SingleList
+								key={index}
+								name={list.name}
+								path={list.path}
+								setListPath={setListPath}
+							/>
+						))}
+					</ul>
 					<CreateList user={user} setListPath={setListPath} />
-				</ul>
+				</>
 			)}
 		</div>
 	);
