@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 interface Props {
 	listPath: string;
 	data: ListItem[];
-	item: ListItem;
 }
 
 enum PurchaseTime {
@@ -23,11 +22,7 @@ const purchaseTimelines = {
 	[PurchaseTime.notSoon]: 30,
 };
 
-export function AddItemForm({
-	listPath,
-	data: unfilteredListItems,
-	item,
-}: Props) {
+export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	const navigate = useNavigate();
 
 	const [itemName, setItemName] = useState("");
