@@ -16,13 +16,14 @@ export function UnauthenticatedHome() {
 			</p>
 
 			<article>
-				<p>New to Smart shopping list?</p>
+				<p>New to GrocerEase:</p>
 				<button
 					onClick={() => navigate("/about")}
 					aria-label="Navigate to the about application page."
 				>
 					Learn More
 				</button>
+				<SignInButton isSignIn={false} />
 			</article>
 
 			<article>

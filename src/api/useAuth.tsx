@@ -9,14 +9,21 @@ import toast from "react-hot-toast";
  * the button redirects the user to the Google OAuth sign-in page.
  * After the user signs in, they are redirected back to the app.
  */
-export const SignInButton = () => (
-	<button
-		type="button"
-		onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
-	>
-		Sign In
-	</button>
-);
+
+type SignInButtonProps = {
+	isSignIn?: boolean;
+};
+
+export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
+	return (
+		<button
+			type="button"
+			onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
+		>
+			{isSignIn ? "Sign In" : "Sign Up"}
+		</button>
+	);
+};
 
 /**
  * A button that signs the user out of the app using Firebase Auth.

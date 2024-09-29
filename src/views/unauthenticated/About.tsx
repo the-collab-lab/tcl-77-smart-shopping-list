@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LinkedInLogo from "../../icons/LinkedInLogo.svg?react";
 import GithubLogo from "../../icons/GithubLogo.svg?react";
+import { SignInButton } from "../../api";
 
 export function About() {
 	return (
 		<div>
 			<section>
 				<h2>How it works</h2>
+				<SignInButton isSignIn={false} />
 				<ul>
 					<li>
 						Create a list for different stores or different grouping of items.
