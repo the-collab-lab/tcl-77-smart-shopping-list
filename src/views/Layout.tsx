@@ -15,7 +15,7 @@ export function Layout({ user }: Props) {
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<h1>Smart shopping list</h1>
+					<h1>GrocerEase</h1>
 				</header>
 				<main className="Layout-main">
 					{user && (

@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 export function About() {
 	return (
 		<div>
-			<h1>ABOUT Smart shopping list</h1>
 			<section>
-				<h2>How works</h2>
+				<h2>How it works</h2>
 				<ul>
 					<li>
 						Create a list for different stores or different grouping of items.

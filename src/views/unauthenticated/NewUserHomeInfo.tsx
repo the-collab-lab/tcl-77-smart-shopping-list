@@ -7,11 +7,12 @@ export function NewUserHomeInfo() {
 
 	return (
 		<>
-			<h1>Welcome to Smart shopping list</h1>
+			<h2>Welcome to GrocerEase</h2>
 			<p>
 				The next best thing to having someone else do the shopping for you!
-				Create and manage smart lists learn your habits to let you know exactly
-				when you will need t
+				Create and manage smart lists, while it learns your shopping habits to
+				let you know exactly when you will need to buy that next batch of toilet
+				paper!
 			</p>
 
 			<article>
