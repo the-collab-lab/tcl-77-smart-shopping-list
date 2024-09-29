@@ -11,7 +11,9 @@ export function SingleList({ name, path, setListPath }: Props) {
 
 	function handleClick() {
 		setListPath(path);
-		navigate(`/list/${name}`);
+		setTimeout(() => {
+			navigate(`/list/${name}`);
+		}, 200);
 	}
 
 	return (
