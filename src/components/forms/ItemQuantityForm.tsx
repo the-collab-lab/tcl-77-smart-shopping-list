@@ -42,7 +42,6 @@ export function ItemQuantityForm({
 
 	return (
 		<>
-			<label htmlFor="quantity">How many?</label>{" "}
 			<input
 				id="item-quantity"
 				aria-label="Item quantity"
