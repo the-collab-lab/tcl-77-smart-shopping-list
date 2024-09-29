@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { SignInButton } from "../../api";
 
-export function NewUserHomeInfo() {
+export function UnauthenticatedHome() {
 	const navigate = useNavigate();
 
 	return (
-		<>
+		<div className="Home">
 			<h2>Welcome to GrocerEase</h2>
 			<p>
 				The next best thing to having someone else do the shopping for you!
@@ -29,6 +29,6 @@ export function NewUserHomeInfo() {
 				<p>Welcome Back:</p>
 				<SignInButton />
 			</article>
-		</>
+		</div>
 	);
 }
