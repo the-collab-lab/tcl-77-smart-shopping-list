@@ -20,6 +20,7 @@ export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
 		<Button
 			type="button"
 			onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
+			className="m-2"
 		>
 			{isSignIn ? "Sign In" : "Sign Up"}
 		</Button>
@@ -39,6 +40,7 @@ export const SignOutButton = () => {
 					toast.error("An error occurred while signing out. Please try again.");
 				});
 			}}
+			className="m-2"
 		>
 			Sign Out
 		</Button>

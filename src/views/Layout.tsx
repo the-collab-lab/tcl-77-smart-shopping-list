@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { User } from "../api";
 import { AuthenticatedNavBar, UnauthenticatedNavBar } from "../components";
+import Button from "react-bootstrap/Button";
 
 import "./Layout.css";
 
@@ -19,12 +20,12 @@ export function Layout({ user }: Props) {
 				</header>
 				<main className="Layout-main overflow-scroll">
 					{user && (
-						<button
+						<Button
 							onClick={() => navigate("/about")}
 							aria-label="Navigate to the about application page."
 						>
 							about
-						</button>
+						</Button>
 					)}
 					<Outlet />
 				</main>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { SignInButton } from "../../api";
+import Button from "react-bootstrap/Button";
 
 export function UnauthenticatedHome() {
 	const navigate = useNavigate();
@@ -17,12 +18,13 @@ export function UnauthenticatedHome() {
 
 			<article>
 				<p>New to GrocerEase:</p>
-				<button
+				<Button
 					onClick={() => navigate("/about")}
 					aria-label="Navigate to the about application page."
+					className="m-2"
 				>
 					Learn More
-				</button>
+				</Button>
 				<SignInButton isSignIn={false} />
 			</article>
 
