@@ -1,3 +1,5 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
