@@ -54,9 +54,12 @@ export function ItemQuantityForm({
 				disabled={!edit}
 			/>
 			{edit ? (
-				<button onClick={updateItemQuantity}>Save</button>
+				<span>
+					<button onClick={updateItemQuantity}>Save!</button>{" "}
+					<button onClick={toggleEdit}>Cancel!</button>
+				</span>
 			) : (
-				<button onClick={toggleEdit}>Edit</button>
+				<button onClick={toggleEdit}>Edit!</button>
 			)}
 		</>
 	);
