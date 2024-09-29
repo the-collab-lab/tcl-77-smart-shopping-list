@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
 import toast from "react-hot-toast";
 import Button from "react-bootstrap/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 /**
  * A button that signs the user in using Google OAuth. When clicked,
@@ -16,10 +17,26 @@ type SignInButtonProps = {
 };
 
 export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
 	return (
 		<Button
 			type="button"
-			onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
+			onClick={() => {
+				signInWithPopup(auth, new GoogleAuthProvider())
+					.then(() => {
+						if (location.pathname === "/about") {
+							navigate("/");
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+						toast.error(
+							"An error occurred while signing in. Please try again.",
+						);
+					});
+			}}
 			className="m-2"
 		>
 			{isSignIn ? "Sign In" : "Sign Up"}
@@ -31,14 +48,26 @@ export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
  * A button that signs the user out of the app using Firebase Auth.
  */
 export const SignOutButton = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
 	return (
 		<Button
 			type="button"
 			onClick={() => {
-				auth.signOut().catch((error) => {
-					console.error(error);
-					toast.error("An error occurred while signing out. Please try again.");
-				});
+				auth
+					.signOut()
+					.then(() => {
+						if (location.pathname === "/about") {
+							navigate("/");
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+						toast.error(
+							"An error occurred while signing out. Please try again.",
+						);
+					});
 			}}
 			className="m-2"
 		>
