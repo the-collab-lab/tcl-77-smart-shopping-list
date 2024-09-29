@@ -1,0 +1,214 @@
+diff --git a/src/App.tsx b/src/App.tsx
+index 2b4f35f..6ef7f04 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -48,7 +48,7 @@ export function App() {
+ 	 * This custom hook takes our token and fetches the data for our list.
+ 	 * Check ./api/firestore.js for its implementation.
+ 	 */
+-	const data = useShoppingListData(listPath);
++	const listState = useShoppingListData(listPath);
+ 
+ 	return (
+ 		<>
+@@ -66,11 +66,13 @@ export function App() {
+ 					<Route element={<ProtectRoute user={user} redirectPath="/" />}>
+ 						<Route
+ 							path="/list"
+-							element={<List data={data} listPath={listPath} />}
++							element={<List listState={listState} listPath={listPath} />}
+ 						/>
+ 						<Route
+ 							path="/manage-list"
+-							element={<ManageList listPath={listPath} data={data || []} />}
++							element={
++								<ManageList listPath={listPath} listState={listState || []} />
++							}
+ 						/>
+ 					</Route>
+ 
+diff --git a/src/api/firebase.ts b/src/api/firebase.ts
+index 8d7a524..4f2ce8e 100644
+--- a/src/api/firebase.ts
++++ b/src/api/firebase.ts
+@@ -103,6 +103,17 @@ const ListItemModel = t.type({
+ 
+ export type ListItem = t.TypeOf<typeof ListItemModel>;
+ 
++export interface ListDataLoading {
++	type: "loading";
++}
++
++export interface ListData {
++	type: "data";
++	items: ListItem[];
++}
++
++export type ListState = ListDataLoading | ListData;
++
+ /**
+  * A custom hook that subscribes to a shopping list in our Firestore database
+  * and returns new data whenever the list changes.
+@@ -111,10 +122,19 @@ export type ListItem = t.TypeOf<typeof ListItemModel>;
+ export function useShoppingListData(listPath: string | null) {
+ 	// Start with an empty array for our data.
+ 	/** @type {import('firebase/firestore').DocumentData[]} */
+-	const [data, setData] = useState<ListItem[]>([]);
++	const [state, setState] = useState<ListDataLoading | ListData>({
++		type: "loading",
++	});
+ 
+ 	useEffect(() => {
+-		if (!listPath) return;
++		if (!listPath) {
++			// If we don't have a listPath, there's inherently no data: no need to switch to a loading state.
++			setState({ type: "data", items: [] });
++			return;
++		}
++
++		// If the listPath has changed, anticipating some loading.
++		setState({ type: "loading" });
+ 
+ 		// When we get a listPath, we use it to subscribe to real-time updates
+ 		// from Firestore.
+@@ -131,6 +151,8 @@ export function useShoppingListData(listPath: string | null) {
+ 
+ 				const decoded = ListItemModel.decode(item);
+ 				if (isLeft(decoded)) {
++					// If we failed to decode the data, we don't want to leave the app in a loading state that will never resolve.
++					setState({ type: "data", items: [] });
+ 					throw Error(
+ 						`Could not validate data: ${PathReporter.report(decoded).join("\n")}`,
+ 					);
+@@ -139,13 +161,16 @@ export function useShoppingListData(listPath: string | null) {
+ 				return decoded.right;
+ 			});
+ 
+-			// Update our React state with the new data.
+-			setData(nextData);
++			// Once we've received and deserialize the data, we can update our state.
++			setState({
++				type: "data",
++				items: nextData,
++			});
+ 		});
+ 	}, [listPath]);
+ 
+ 	// Return the data so it can be used by our React components.
+-	return data;
++	return state;
+ }
+ 
+ // Designed to replace Firestore's User type in most contexts.
+diff --git a/src/views/authenticated/List.tsx b/src/views/authenticated/List.tsx
+index b48a442..64e2c31 100644
+--- a/src/views/authenticated/List.tsx
++++ b/src/views/authenticated/List.tsx
+@@ -1,25 +1,28 @@
+ import { useState, useMemo } from "react";
+ import { ListItemCheckBox } from "../../components/ListItem";
+ import { FilterListInput } from "../../components/FilterListInput";
+-import { ListItem, comparePurchaseUrgency } from "../../api";
++import { ListState, comparePurchaseUrgency } from "../../api";
+ import { useNavigate } from "react-router-dom";
+ 
+ interface Props {
+-	data: ListItem[];
++	listState: ListState;
+ 	listPath: string | null;
+ }
+ 
+-export function List({ data: unfilteredListItems, listPath }: Props) {
++export function List({ listState, listPath }: Props) {
+ 	const navigate = useNavigate();
+ 	const [searchTerm, setSearchTerm] = useState<string>("");
+ 
+ 	const filteredListItems = useMemo(() => {
+-		return unfilteredListItems
++		if (listState.type === "loading") {
++			return [];
++		}
++		return listState.items
+ 			.filter((item) =>
+ 				item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+ 			)
+ 			.sort(comparePurchaseUrgency);
+-	}, [searchTerm, unfilteredListItems]);
++	}, [searchTerm, listState]);
+ 
+ 	const Header = () => {
+ 		return (
+@@ -33,8 +36,19 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
+ 		return <Header />;
+ 	}
+ 
++	if (listState.type === "loading") {
++		return (
++			<>
++				<Header />
++				<section>
++					<h3>Loading your list...</h3>
++				</section>
++			</>
++		);
++	}
++
+ 	// Early return if the list is empty
+-	if (unfilteredListItems.length === 0) {
++	if (listState.items.length === 0) {
+ 		return (
+ 			<>
+ 				<Header />
+@@ -61,7 +75,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
+ 			<Header />
+ 			<div>
+ 				<section>
+-					{unfilteredListItems.length > 0 && (
++					{listState.items.length > 0 && (
+ 						<FilterListInput
+ 							searchTerm={searchTerm}
+ 							setSearchTerm={setSearchTerm}
+diff --git a/src/views/authenticated/ManageList.tsx b/src/views/authenticated/ManageList.tsx
+index 9cdd3cf..0aeefc8 100644
+--- a/src/views/authenticated/ManageList.tsx
++++ b/src/views/authenticated/ManageList.tsx
+@@ -1,13 +1,13 @@
+ import { AddItemForm } from "../../components/forms/AddItemForm";
+ import ShareListForm from "../../components/forms/ShareListForm";
+-import { ListItem } from "../../api";
++import { ListState } from "../../api";
+ 
+ interface Props {
+-	data: ListItem[];
++	listState: ListState;
+ 	listPath: string | null;
+ }
+ 
+-export function ManageList({ listPath, data }: Props) {
++export function ManageList({ listPath, listState }: Props) {
+ 	const Header = () => {
+ 		return (
+ 			<p>
+@@ -20,10 +20,21 @@ export function ManageList({ listPath, data }: Props) {
+ 		return <Header />;
+ 	}
+ 
++	if (listState.type === "loading") {
++		return (
++			<>
++				<Header />
++				<section>
++					<h3>Loading your list...</h3>
++				</section>
++			</>
++		);
++	}
++
+ 	return (
+ 		<div>
+ 			<Header />
+-			<AddItemForm listPath={listPath} data={data || []} />
++			<AddItemForm listPath={listPath} data={listState.items} />
+ 			<ShareListForm listPath={listPath} />
+ 		</div>
+ 	);

@@ -1,25 +1,28 @@
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
-import { ListItem, comparePurchaseUrgency } from "../../api";
+import { ListState, comparePurchaseUrgency } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-	data: ListItem[];
+	listState: ListState;
 	listPath: string | null;
 }
 
-export function List({ data: unfilteredListItems, listPath }: Props) {
+export function List({ listState, listPath }: Props) {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const filteredListItems = useMemo(() => {
-		return unfilteredListItems
+		if (listState.type === "loading") {
+			return [];
+		}
+		return listState.items
 			.filter((item) =>
 				item.name.toLowerCase().includes(searchTerm.toLowerCase()),
 			)
 			.sort(comparePurchaseUrgency);
-	}, [searchTerm, unfilteredListItems]);
+	}, [searchTerm, listState]);
 
 	const Header = () => {
 		return (
@@ -33,8 +36,19 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		return <Header />;
 	}
 
+	if (listState.type === "loading") {
+		return (
+			<>
+				<Header />
+				<section>
+					<h3>Loading your list...</h3>
+				</section>
+			</>
+		);
+	}
+
 	// Early return if the list is empty
-	if (unfilteredListItems.length === 0) {
+	if (listState.items.length === 0) {
 		return (
 			<>
 				<Header />
@@ -61,7 +75,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 			<Header />
 			<div>
 				<section>
-					{unfilteredListItems.length > 0 && (
+					{listState.items.length > 0 && (
 						<FilterListInput
 							searchTerm={searchTerm}
 							setSearchTerm={setSearchTerm}

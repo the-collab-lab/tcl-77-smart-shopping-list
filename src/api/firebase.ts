@@ -103,6 +103,17 @@ const ListItemModel = t.type({
 
 export type ListItem = t.TypeOf<typeof ListItemModel>;
 
+export interface ListDataLoading {
+	type: "loading";
+}
+
+export interface ListData {
+	type: "data";
+	items: ListItem[];
+}
+
+export type ListState = ListDataLoading | ListData;
+
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
  * and returns new data whenever the list changes.
@@ -111,10 +122,19 @@ export type ListItem = t.TypeOf<typeof ListItemModel>;
 export function useShoppingListData(listPath: string | null) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */
-	const [data, setData] = useState<ListItem[]>([]);
+	const [state, setState] = useState<ListDataLoading | ListData>({
+		type: "loading",
+	});
 
 	useEffect(() => {
-		if (!listPath) return;
+		if (!listPath) {
+			// If we don't have a listPath, there's inherently no data: no need to switch to a loading state.
+			setState({ type: "data", items: [] });
+			return;
+		}
+
+		// If the listPath has changed, anticipating some loading.
+		setState({ type: "loading" });
 
 		// When we get a listPath, we use it to subscribe to real-time updates
 		// from Firestore.
@@ -131,6 +151,8 @@ export function useShoppingListData(listPath: string | null) {
 
 				const decoded = ListItemModel.decode(item);
 				if (isLeft(decoded)) {
+					// If we failed to decode the data, we don't want to leave the app in a loading state that will never resolve.
+					setState({ type: "data", items: [] });
 					throw Error(
 						`Could not validate data: ${PathReporter.report(decoded).join("\n")}`,
 					);
@@ -139,13 +161,16 @@ export function useShoppingListData(listPath: string | null) {
 				return decoded.right;
 			});
 
-			// Update our React state with the new data.
-			setData(nextData);
+			// Once we've received and deserialize the data, we can update our state.
+			setState({
+				type: "data",
+				items: nextData,
+			});
 		});
 	}, [listPath]);
 
 	// Return the data so it can be used by our React components.
-	return data;
+	return state;
 }
 
 // Designed to replace Firestore's User type in most contexts.

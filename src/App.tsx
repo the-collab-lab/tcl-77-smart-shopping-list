@@ -48,7 +48,7 @@ export function App() {
 	 * This custom hook takes our token and fetches the data for our list.
 	 * Check ./api/firestore.js for its implementation.
 	 */
-	const data = useShoppingListData(listPath);
+	const listState = useShoppingListData(listPath);
 
 	return (
 		<>
@@ -66,11 +66,13 @@ export function App() {
 					<Route element={<ProtectRoute user={user} redirectPath="/" />}>
 						<Route
 							path="/list"
-							element={<List data={data} listPath={listPath} />}
+							element={<List listState={listState} listPath={listPath} />}
 						/>
 						<Route
 							path="/manage-list"
-							element={<ManageList listPath={listPath} data={data || []} />}
+							element={
+								<ManageList listPath={listPath} listState={listState || []} />
+							}
 						/>
 					</Route>
 
