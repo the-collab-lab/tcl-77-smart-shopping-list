@@ -48,7 +48,7 @@ export function AddItemForm({
 
 	const handleItemQuantityChange = (quantity: number) => {
 		setItemQuantity(quantity);
-		console.log("Quantity entered in form input:", quantity);
+		console.log("Quantity captured in Add Item input:", quantity);
 	};
 
 	const handleSubmit = async (
@@ -92,7 +92,6 @@ export function AddItemForm({
 					success: () => {
 						setItemName("");
 						setItemNextPurchaseTimeline(PurchaseTime.soon);
-						setItemQuantity(1);
 						return `${itemQuantity} ${itemName} successfully added to your list!`; // showing original input
 					},
 					error: () => {
