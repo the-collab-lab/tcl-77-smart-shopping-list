@@ -12,9 +12,7 @@ export function AuthenticatedNavBar() {
 				<NavLink to="/" className="Nav-link" aria-label="Home">
 					Home
 				</NavLink>
-				<NavLink to="/list" className="Nav-link" aria-label="List">
-					List
-				</NavLink>
+
 				<NavLink
 					to="/manage-list"
 					className="Nav-link"
