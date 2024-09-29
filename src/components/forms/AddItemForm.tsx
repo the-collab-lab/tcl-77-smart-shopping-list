@@ -70,11 +70,6 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 			return;
 		}
 
-		if (addedQuantity < 1) {
-			toast.error("Oops! Item quantity must be more than 0!");
-			return;
-		}
-
 		const daysUntilNextPurchase = purchaseTimelines[itemNextPurchaseTimeline];
 
 		try {
