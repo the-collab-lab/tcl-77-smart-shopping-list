@@ -4,7 +4,6 @@ import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
-import { ItemQuantityForm } from "./ItemQuantityForm";
 
 interface Props {
 	listPath: string;
@@ -36,7 +35,7 @@ export function AddItemForm({
 		PurchaseTime.soon,
 	);
 
-	const [itemQuantity, setItemQuantity] = useState(1);
+	const [addedQuantity, setAddedQuantity] = useState(1);
 
 	const handleItemNameTextChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setItemName(e.target.value);
@@ -46,9 +45,9 @@ export function AddItemForm({
 		setItemNextPurchaseTimeline(changed);
 	};
 
-	const handleItemQuantityChange = (quantity: number) => {
-		setItemQuantity(quantity);
-		console.log("Quantity captured in Add Item input:", quantity);
+	const handleItemQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setAddedQuantity(Number(e.target.value));
+		console.log("Quantity captured in Add Item input:", addedQuantity);
 	};
 
 	const handleSubmit = async (
@@ -76,9 +75,8 @@ export function AddItemForm({
 			return;
 		}
 
-		if (itemQuantity < 1) {
+		if (addedQuantity < 1) {
 			toast.error("Oops! Item quantity must be more than 0!");
-
 			return;
 		}
 
@@ -86,20 +84,21 @@ export function AddItemForm({
 
 		try {
 			await toast.promise(
-				addItem(listPath, itemName, daysUntilNextPurchase, itemQuantity), // saving original input
+				addItem(listPath, itemName, daysUntilNextPurchase, addedQuantity), // saving original input
 				{
 					loading: "Adding item to list.",
 					success: () => {
 						setItemName("");
 						setItemNextPurchaseTimeline(PurchaseTime.soon);
-						return `${itemQuantity} ${itemName} successfully added to your list!`; // showing original input
+						setAddedQuantity(1);
+						return `${addedQuantity} ${itemName} successfully added to your list!`; // showing original input
 					},
 					error: () => {
-						return `Failed to add ${itemQuantity} ${itemName} to your list. Please try again!`;
+						return `Failed to add ${addedQuantity} ${itemName} to your list. Please try again!`;
 					},
 				},
 			);
-			console.log("Quantity added from Add Item form:", itemQuantity);
+			console.log("Quantity added from Add Item form:", addedQuantity);
 		} catch (error) {
 			console.error("Failed to add item:", error);
 		}
@@ -124,11 +123,20 @@ export function AddItemForm({
 						aria-label="Enter the item name"
 						aria-required
 					/>
+				</label>{" "}
+				<label htmlFor="quantity">
+					How many?
+					<input
+						id="item-quantity"
+						aria-label="Item quantity"
+						type="number"
+						name="item-quantity"
+						min="1"
+						max="100"
+						value={addedQuantity}
+						onChange={handleItemQuantityChange}
+					/>
 				</label>
-				<ItemQuantityForm
-					saveItemQuantity={handleItemQuantityChange}
-					item={item}
-				/>
 				<br />
 				<h3>Next, pick when you plan on buying this item again!</h3>
 				<fieldset>
