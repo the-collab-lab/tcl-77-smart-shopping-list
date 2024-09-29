@@ -41,52 +41,82 @@ export function About() {
 			<section>
 				<h2>Creators</h2>
 				<div>
-					<p>Maha Ahmed</p>
+					<span>Maha Ahmed</span>
 					<Link to="https://www.linkedin.com/in/maha-ahmed3/" target="_blank">
-						<LinkedInLogo width="30" height="30" />
+						<LinkedInLogo width="25" height="25" />
 					</Link>
 					<Link to="https://github.com/eternalmaha" target="_blank">
-						<GithubLogo width="30" height="30" />
+						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
 				<div>
-					<p>Brianna Bland</p>
+					<span>Brianna Bland</span>
 					<Link to="https://www.linkedin.com/in/bbland1/" target="_blank">
-						<LinkedInLogo width="30" height="30" />
+						<LinkedInLogo width="25" height="25" />
 					</Link>
 					<Link to="https://github.com/bbland1" target="_blank">
-						<GithubLogo width="30" height="30" />
+						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
 				<div>
-					<p>Falak Zahra</p>
+					<span>Falak Zahra</span>
 					<Link to="https://www.linkedin.com/in/falak-zahra/" target="_blank">
-						<LinkedInLogo width="30" height="30" />
+						<LinkedInLogo width="25" height="25" />
 					</Link>
 					<Link to="https://github.com/zahrafalak" target="_blank">
-						<GithubLogo width="30" height="30" />
+						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
 				<div>
-					<p>Ross Clettenberg</p>
+					<span>Ross Clettenberg</span>
 					<Link
 						to="https://www.linkedin.com/in/ross-clettenberg/"
 						target="_blank"
 					>
-						<LinkedInLogo width="30" height="30" />
+						<LinkedInLogo width="25" height="25" />
 					</Link>
 					<Link to="https://github.com/RossaMania" target="_blank">
-						<GithubLogo width="30" height="30" />
+						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
 			</section>
 			<section>
 				<h2>Thank you</h2>
 				<p>Mentors:</p>
-				<p>Alex</p>
-				<p>Aditya</p>
-				<p>Tanner</p>
-				<p>The entire The Collab Lab.</p>
+				<div>
+					<span>Alex D.</span>
+					<Link to="https://www.linkedin.com/in/dantonioa/" target="_blank">
+						<LinkedInLogo width="25" height="25" />
+					</Link>
+					<Link to="https://github.com/alex-andria" target="_blank">
+						<GithubLogo width="25" height="25" />
+					</Link>
+				</div>
+				<div>
+					<span>Aditya Dalal</span>
+					<Link to="https://www.linkedin.com/in/adityadalal/" target="_blank">
+						<LinkedInLogo width="25" height="25" />
+					</Link>
+					<Link to="https://github.com/adidalal" target="_blank">
+						<GithubLogo width="25" height="25" />
+					</Link>
+				</div>
+				<div>
+					<span>Tanner Gill</span>
+					<Link to="https://www.linkedin.com/in/tanner-gill/" target="_blank">
+						<LinkedInLogo width="25" height="25" />
+					</Link>
+					<Link to="https://github.com/tannaurus" target="_blank">
+						<GithubLogo width="25" height="25" />
+					</Link>
+				</div>
+				<p>
+					The entire{" "}
+					<a href="https://the-collab-lab.codes/developers/" target="_blank">
+						The Collab Lab
+					</a>
+					.
+				</p>
 			</section>
 		</div>
 	);
