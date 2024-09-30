@@ -4,7 +4,7 @@ import { User } from "../api";
 import { AuthenticatedNavBar, UnauthenticatedNavBar } from "../components";
 import Button from "react-bootstrap/Button";
 
-import "./Layout.css";
+import "./Layout.scss";
 
 interface Props {
 	user: User | null;

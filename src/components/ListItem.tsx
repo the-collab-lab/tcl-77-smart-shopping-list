@@ -1,4 +1,4 @@
-import "./ListItem.css";
+import "./ListItem.scss";
 import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
