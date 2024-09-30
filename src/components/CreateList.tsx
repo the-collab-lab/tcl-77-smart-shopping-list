@@ -45,23 +45,25 @@ export function CreateList({ user, setListPath }: Props) {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<h3>Create New Shopping List</h3>
-			<Form.Label htmlFor="newListName">Name Your List</Form.Label>
-			<InputGroup>
-				<br />
-				<Form.Control
-					type="text"
-					value={inputValue}
-					onChange={handleChange}
-					name="newListName"
-					id="newListName"
-					aria-label="Shopping List Name"
-					aria-required="true" // Indicates that this field is required
-				/>
-				<br />
-				<Button aria-label="Create new shopping list">Create List</Button>
-			</InputGroup>
-		</Form>
+		<>
+			<Form onSubmit={handleSubmit}>
+				<h3>Create New Shopping List</h3>
+				<Form.Label htmlFor="newListName">Name Your List</Form.Label>
+				<InputGroup>
+					<br />
+					<Form.Control
+						type="text"
+						value={inputValue}
+						onChange={handleChange}
+						name="newListName"
+						id="newListName"
+						aria-label="Shopping List Name"
+						aria-required="true" // Indicates that this field is required
+					/>
+					<br />
+					<Button aria-label="Create new shopping list">Create List</Button>
+				</InputGroup>
+			</Form>
+		</>
 	);
 }
