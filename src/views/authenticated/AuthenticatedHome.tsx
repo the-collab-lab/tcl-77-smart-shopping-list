@@ -10,7 +10,7 @@ interface Props {
 
 export function AuthenticatedHome({ data, setListPath, user }: Props) {
 	return (
-		<div className="Home">
+		<>
 			<p>
 				Hello from the home (<code>/</code>) page!
 			</p>
@@ -29,6 +29,6 @@ export function AuthenticatedHome({ data, setListPath, user }: Props) {
 					<CreateList user={user} setListPath={setListPath} />
 				</>
 			)}
-		</div>
+		</>
 	);
 }

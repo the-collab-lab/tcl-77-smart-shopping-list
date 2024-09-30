@@ -18,7 +18,7 @@ export function Layout({ user }: Props) {
 				<header className="Layout-header">
 					<h1>GrocerEase</h1>
 				</header>
-				<main className="Layout-main overflow-scroll">
+				<main className="Layout-main overflow-auto">
 					{user && (
 						<Button
 							onClick={() => navigate("/about")}
