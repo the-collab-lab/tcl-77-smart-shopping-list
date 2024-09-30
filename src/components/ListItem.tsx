@@ -3,6 +3,8 @@ import { updateItem, deleteItem, ListItem } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 interface Props {
 	item: ListItem;
@@ -97,24 +99,22 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 
 	return (
 		<div className="ListItem">
-			<label htmlFor={`checkbox-${item.id}`}>
-				<input
-					type="checkbox"
-					id={`checkbox-${item.id}`}
-					aria-label={`Mark ${item.name} as purchased.`}
-					value={item.id}
-					checked={isChecked}
-					onChange={handleCheckChange}
-					aria-checked={isChecked}
-					disabled={isChecked}
-				/>
-				{item.name}
-			</label>
+			<Form.Check
+				type="checkbox"
+				id={`checkbox-${item.id}`}
+				aria-label={`Mark ${item.name} as purchased.`}
+				value={item.id}
+				checked={isChecked}
+				onChange={handleCheckChange}
+				aria-checked={isChecked}
+				disabled={isChecked}
+				label={item.name}
+			/>
 
 			<span>
 				{getUrgencyStatus(item)}
 
-				<button onClick={() => deleteItemHandler()}>Delete Item</button>
+				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
 			</span>
 		</div>
 	);
