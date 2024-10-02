@@ -1,4 +1,6 @@
 import "./SingleList.css";
+import Button from "react-bootstrap/Button";
+import "./SingleList.scss";
 import { useNavigate } from "react-router-dom";
 
 export function SingleList({ name }: { name: string }) {
@@ -12,7 +14,7 @@ export function SingleList({ name }: { name: string }) {
 
 	return (
 		<li className="SingleList">
-			<button onClick={handleClick}>{name}</button>
+			<Button onClick={handleClick}>{name}</Button>
 		</li>
 	);
 }

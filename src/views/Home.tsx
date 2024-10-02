@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import { SingleList, CreateList } from "../components";
 import { List, User } from "../api/firebase";
+import { AuthenticatedHome, UnauthenticatedHome } from "../views";
 
 interface Props {
 	data: List[];
@@ -19,18 +20,18 @@ export function Home({ data, setListPath, user }: Props) {
 				{user && (
 					<ul>
 						{data.map((list, index) => (
-							<SingleList
-								key={index}
-								name={list.name}
-								path={list.path}
-								setListPath={setListPath}
-							/>
+							<SingleList key={index} name={list.name} />
 						))}
 
 						<CreateList user={user} setListPath={setListPath} />
 					</ul>
 				)}
 			</div>
+			{user ? (
+				<AuthenticatedHome data={data} setListPath={setListPath} user={user} />
+			) : (
+				<UnauthenticatedHome />
+			)}
 		</>
 	);
 }
