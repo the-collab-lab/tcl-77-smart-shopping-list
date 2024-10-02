@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
 import { ListItem } from "../../api";
 import { toast } from "react-hot-toast";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 interface ItemQuantityFormProps {
 	saveItemQuantity: (quantity: number) => void;
@@ -42,7 +44,7 @@ export function ItemQuantityForm({
 
 	return (
 		<>
-			<input
+			<Form.Control
 				id="item-quantity"
 				aria-label="Item quantity"
 				type="number"
@@ -55,11 +57,11 @@ export function ItemQuantityForm({
 			/>
 			{edit ? (
 				<span>
-					<button onClick={updateItemQuantity}>Save!</button>{" "}
-					<button onClick={toggleEdit}>Cancel!</button>
+					<Button onClick={updateItemQuantity}>Save!</Button>{" "}
+					<Button onClick={toggleEdit}>Cancel!</Button>
 				</span>
 			) : (
-				<button onClick={toggleEdit}>Edit!</button>
+				<Button onClick={toggleEdit}>Edit!</Button>
 			)}
 		</>
 	);

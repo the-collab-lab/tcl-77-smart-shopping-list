@@ -3,37 +3,76 @@ import { auth } from "./config.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { addUserToDatabase, User } from "./firebase";
 import toast from "react-hot-toast";
+import Button from "react-bootstrap/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 /**
  * A button that signs the user in using Google OAuth. When clicked,
  * the button redirects the user to the Google OAuth sign-in page.
  * After the user signs in, they are redirected back to the app.
  */
-export const SignInButton = () => (
-	<button
-		type="button"
-		onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
-	>
-		Sign In
-	</button>
-);
+
+type SignInButtonProps = {
+	isSignIn?: boolean;
+};
+
+export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	return (
+		<Button
+			type="button"
+			onClick={() => {
+				signInWithPopup(auth, new GoogleAuthProvider())
+					.then(() => {
+						if (location.pathname === "/about") {
+							navigate("/");
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+						toast.error(
+							"An error occurred while signing in. Please try again.",
+						);
+					});
+			}}
+			className="m-2"
+		>
+			{isSignIn ? "Sign In" : "Sign Up"}
+		</Button>
+	);
+};
 
 /**
  * A button that signs the user out of the app using Firebase Auth.
  */
 export const SignOutButton = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
 	return (
-		<button
+		<Button
 			type="button"
 			onClick={() => {
-				auth.signOut().catch((error) => {
-					console.error(error);
-					toast.error("An error occurred while signing out. Please try again.");
-				});
+				auth
+					.signOut()
+					.then(() => {
+						if (location.pathname === "/about") {
+							navigate("/");
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+						toast.error(
+							"An error occurred while signing out. Please try again.",
+						);
+					});
 			}}
+			className="m-2"
 		>
 			Sign Out
-		</button>
+		</Button>
 	);
 };
 

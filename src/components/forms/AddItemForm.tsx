@@ -2,6 +2,8 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import { useNavigate } from "react-router-dom";
 
@@ -100,11 +102,11 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 
 	return (
 		<section>
-			<form onSubmit={(e) => handleSubmit(e, listPath)}>
+			<Form onSubmit={(e) => handleSubmit(e, listPath)}>
 				<h3>First, add your item!</h3>
-				<label htmlFor="item-name">
+				<Form.Label htmlFor="item-name">
 					Item:
-					<input
+					<Form.Control
 						id="item-name"
 						type="text"
 						name="item"
@@ -113,26 +115,25 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						aria-label="Enter the item name"
 						aria-required
 					/>
-				</label>{" "}
-				<label htmlFor="quantity">
-					How many?
-					<input
+				</Form.Label>
+				<label htmlFor="item-quantity">
+					Quantity:
+					<Form.Control
 						id="item-quantity"
-						aria-label="Item quantity"
 						type="number"
-						name="item-quantity"
-						min="1"
-						max="100"
+						name="quantity"
 						value={addedQuantity}
 						onChange={handleItemQuantityChange}
+						aria-label="Enter the item quantity"
+						aria-required
 					/>
 				</label>
 				<br />
 				<h3>Next, pick when you plan on buying this item again!</h3>
 				<fieldset>
 					<legend>When to buy:</legend>
-					<label htmlFor={PurchaseTime.soon}>
-						<input
+					<Form.Label htmlFor={PurchaseTime.soon}>
+						<Form.Check
 							type="radio"
 							id={PurchaseTime.soon}
 							name="when-to-buy"
@@ -143,10 +144,10 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 							aria-label={`Set buy to soon, within ${purchaseTimelines[PurchaseTime.soon]} days`}
 						/>
 						Soon -- Within {purchaseTimelines[PurchaseTime.soon]} days!
-					</label>
+					</Form.Label>
 					<br />
-					<label htmlFor={PurchaseTime.kindOfSoon}>
-						<input
+					<Form.Label htmlFor={PurchaseTime.kindOfSoon}>
+						<Form.Check
 							type="radio"
 							id={PurchaseTime.kindOfSoon}
 							name="when-to-buy"
@@ -158,10 +159,10 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						/>
 						Kind of soon -- Within {purchaseTimelines[PurchaseTime.kindOfSoon]}{" "}
 						days!
-					</label>
+					</Form.Label>
 					<br />
 					<label htmlFor={PurchaseTime.notSoon}>
-						<input
+						<Form.Check
 							type="radio"
 							id={PurchaseTime.notSoon}
 							name="when-to-buy"
@@ -174,12 +175,12 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						Not soon -- Within {purchaseTimelines[PurchaseTime.notSoon]} days!
 					</label>
 				</fieldset>
-				<button type="submit" aria-label="Add item to shopping list">
+				<Button type="submit" aria-label="Add item to shopping list">
 					Submit Item
-				</button>
-			</form>
+				</Button>
+			</Form>
 			<h4>Let&apos;s go look at your list!</h4>
-			<button onClick={navigateToListPage}>{"View List"}</button>
+			<Button onClick={navigateToListPage}>{"View List"}</Button>
 		</section>
 	);
 }

@@ -2,22 +2,22 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { SignOutButton } from "../api";
 
-import "./AuthenticatedNavBar.css";
+import "./AuthenticatedNavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (
 		<nav className="Nav">
-			<div className="Nav-container">
+			<div className="Nav__container">
 				<SignOutButton />
-				<NavLink to="/" className="Nav-link" aria-label="Home">
+				<NavLink to="/" className="Nav__link" aria-label="Home">
 					Home
 				</NavLink>
-				<NavLink to="/list" className="Nav-link" aria-label="List">
+				<NavLink to="/list" className="Nav__link" aria-label="List">
 					List
 				</NavLink>
 				<NavLink
 					to="/manage-list"
-					className="Nav-link"
+					className="Nav__link"
 					aria-label="Manage List"
 				>
 					Manage List
