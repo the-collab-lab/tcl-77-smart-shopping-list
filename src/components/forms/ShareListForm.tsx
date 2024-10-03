@@ -1,11 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { shareList } from "../../api";
 import { getUser } from "../ProtectedRoute";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { InputGroup } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
 interface Props {
-	listPath: string | null;
+	listPath: string;
 }
 
 const ShareListForm = ({ listPath }: Props) => {
@@ -19,13 +22,9 @@ const ShareListForm = ({ listPath }: Props) => {
 
 	const handleInvite = async (
 		e: FormEvent<HTMLFormElement>,
-		listPath: string | null,
+		listPath: string,
 	) => {
 		e.preventDefault();
-
-		if (!listPath) {
-			return;
-		}
 
 		try {
 			await toast.promise(shareList(listPath, currentUser, emailName), {
@@ -44,10 +43,10 @@ const ShareListForm = ({ listPath }: Props) => {
 	};
 
 	return (
-		<form onSubmit={(e) => handleInvite(e, listPath)}>
-			<label htmlFor="recipient-email">
-				Recipient Email:
-				<input
+		<Form onSubmit={(e) => handleInvite(e, listPath)}>
+			<Form.Label htmlFor="recipient-email">Recipient Email:</Form.Label>
+			<InputGroup>
+				<Form.Control
 					id="recipient-email"
 					type="email"
 					name="recipient-email"
@@ -58,12 +57,11 @@ const ShareListForm = ({ listPath }: Props) => {
 					aria-label="Enter the user email address to share list"
 					aria-required
 				/>
-			</label>
-			<br />
-			<button type="submit" aria-label="submits form to share shopping list">
-				Invite User
-			</button>
-		</form>
+				<Button type="submit" aria-label="submits form to share shopping list">
+					Invite User
+				</Button>
+			</InputGroup>
+		</Form>
 	);
 };
 

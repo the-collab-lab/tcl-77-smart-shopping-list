@@ -59,7 +59,10 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		mode === "development" && eslint(),
 		react(),
-		svgr({ exportAsDefault: true }),
+		svgr({
+			exportAsDefault: true,
+			dimensions: false,
+		}),
 		VitePWA(PWAConfig),
 	],
 	server: { open: true, port: 3000 },

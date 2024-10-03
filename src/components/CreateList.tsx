@@ -2,6 +2,9 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { createList, User } from "../api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 
 interface Props {
 	user: User;
@@ -44,12 +47,12 @@ export function CreateList({ user, setListPath }: Props) {
 
 	return (
 		<>
-			<li>
-				<form onSubmit={handleSubmit}>
-					<h3>Create New Shopping List</h3>
-					<label htmlFor="newListName">Name Your List</label>
+			<Form onSubmit={handleSubmit}>
+				<h3>Create New Shopping List</h3>
+				<Form.Label htmlFor="newListName">Name Your List</Form.Label>
+				<InputGroup>
 					<br />
-					<input
+					<Form.Control
 						type="text"
 						value={inputValue}
 						onChange={handleChange}
@@ -59,9 +62,9 @@ export function CreateList({ user, setListPath }: Props) {
 						aria-required="true" // Indicates that this field is required
 					/>
 					<br />
-					<button aria-label="Create new shopping list">Create List</button>
-				</form>
-			</li>
+					<Button aria-label="Create new shopping list">Create List</Button>
+				</InputGroup>
+			</Form>
 		</>
 	);
 }

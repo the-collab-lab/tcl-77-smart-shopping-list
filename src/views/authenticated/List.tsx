@@ -39,7 +39,9 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
+
 				<h1>{listName}</h1>
+
 				<Header />
 				<section>
 					<h3>
@@ -61,7 +63,9 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<>
+
 			<h1>{listName}</h1>
+
 			<Header />
 
 			<section className="sticky-top bg-dark">
