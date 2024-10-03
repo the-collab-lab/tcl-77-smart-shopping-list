@@ -71,10 +71,6 @@ export function App() {
 							element={<List data={data} listPath={listPath} />}
 						/>
 						<Route
-							path="/list/:listName"
-							element={<List data={data} listPath={listPath} />}
-						/>
-						<Route
 							path="/manage-list"
 							element={<ManageList listPath={listPath} data={data || []} />}
 						/>
