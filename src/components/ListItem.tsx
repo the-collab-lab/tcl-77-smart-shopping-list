@@ -129,13 +129,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				onChange={handleCheckChange}
 				aria-checked={isChecked}
 				disabled={isChecked}
-				label={item.name}
 			/>
 			<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} /> x{" "}
-			{item.name}
+			{item.name}{" "}
 			<span>
 				{getUrgencyStatus(item)}
-
 				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
 			</span>
 		</div>
