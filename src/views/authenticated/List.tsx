@@ -1,8 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
 
 export function List({ data: unfilteredListItems, listPath }: Props) {
 	const navigate = useNavigate();
-	const { listName } = useParams<{ listName: string }>();
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const filteredListItems = useMemo(() => {
@@ -39,9 +38,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
-
-				<h1>{listName}</h1>
-
 				<Header />
 				<section>
 					<h3>
@@ -63,9 +59,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<>
-
-			<h1>{listName}</h1>
-
 			<Header />
 
 			<section className="sticky-top bg-dark">
@@ -83,7 +76,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					{"Add items"}
 				</Button>
 			</section>
-
 			<section>
 				{filteredListItems.map((item) => (
 					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
