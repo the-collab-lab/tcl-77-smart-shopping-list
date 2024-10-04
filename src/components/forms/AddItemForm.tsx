@@ -86,8 +86,12 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 			console.error("Failed to add item:", error);
 		}
 	};
+
 	const navigateToListPage = () => {
-		navigate("/list");
+		if (listPath) {
+			const listName = listPath.split("/").pop();
+			navigate(`/list/${listName}`);
+		}
 	};
 
 	return (
