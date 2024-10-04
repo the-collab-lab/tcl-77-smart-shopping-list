@@ -95,6 +95,7 @@ export function useShoppingLists(user: User | null) {
 const ListItemModel = t.type({
 	id: t.string,
 	name: t.string,
+	itemQuantity: t.number,
 	dateLastPurchased: t.union([FirebaseTimestamp, t.null]),
 	dateNextPurchased: FirebaseTimestamp,
 	totalPurchases: t.number,
@@ -233,6 +234,7 @@ export async function addItem(
 	listPath: string,
 	name: string,
 	daysUntilNextPurchase: number,
+	itemQuantity: number,
 ) {
 	const listCollectionRef = collection(db, listPath, "items");
 
@@ -244,8 +246,10 @@ export async function addItem(
 			dateLastPurchased: null,
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 			name,
+			itemQuantity,
 			totalPurchases: 0,
 		});
+		console.log("Item added successfully!", name, itemQuantity);
 	} catch (error) {
 		console.error("Error adding an item", error);
 		throw error;
@@ -291,6 +295,28 @@ export async function updateItem(listPath: string, item: ListItem) {
 		await updateDoc(itemDocRef, updates);
 	} catch (error) {
 		console.error("Error updating document", error);
+		throw error;
+	}
+}
+
+export async function storeItemQuantity(
+	listPath: string,
+	item: ListItem,
+	newQuantity: number,
+) {
+	const itemDocRef = doc(db, listPath, "items", item.id);
+	const oldItemQuantity = item.itemQuantity;
+	console.log("Old item quantity from Firebase:", oldItemQuantity);
+
+	const updates = {
+		itemQuantity: newQuantity,
+	};
+
+	try {
+		await updateDoc(itemDocRef, updates);
+		console.log("Item quantity updated in Firebase:", newQuantity);
+	} catch (error) {
+		console.error("Error updating quantity", error);
 		throw error;
 	}
 }
