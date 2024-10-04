@@ -45,12 +45,18 @@ export default defineConfig(({ mode }) => ({
 			output: {
 				manualChunks: (id) => {
 					if (id.includes("node_modules")) {
+						if (id.includes("react-bootstrap") || id.includes("@restart")) {
+							return "vendor__react-bootstrap";
+						}
+
 						if (id.includes("react")) {
 							return "vendor__react";
 						}
+
 						if (id.includes("firebase")) {
 							return "vendor__firebase";
 						}
+
 						return "vendor";
 					}
 				},
@@ -70,6 +76,13 @@ export default defineConfig(({ mode }) => ({
 	resolve: {
 		alias: {
 			"~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
+		},
+	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: "modern-compiler",
+			},
 		},
 	},
 	server: { open: true, port: 3000 },
