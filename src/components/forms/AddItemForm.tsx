@@ -122,6 +122,8 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						id="item-quantity"
 						type="number"
 						name="quantity"
+						min="1"
+						max="100"
 						value={addedQuantity}
 						onChange={handleItemQuantityChange}
 						aria-label="Enter the item quantity"
