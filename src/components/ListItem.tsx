@@ -1,8 +1,9 @@
 import "./ListItem.scss";
-import { updateItem, deleteItem, ListItem } from "../api";
+import { updateItem, deleteItem, ListItem, storeItemQuantity } from "../api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
+import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -80,6 +81,26 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		}
 	};
 
+	const editItemQuantity = async (quantity: number) => {
+		console.log("Quantity edited in list:", quantity);
+
+		if (quantity < 1) {
+			toast.error("Oops! Quantity must be at least 1!");
+			return;
+		}
+
+		try {
+			await toast.promise(storeItemQuantity(listPath, item, quantity), {
+				loading: `Updating ${item.name} quantity!`,
+				success: `${item.name} quantity updated!`,
+				error: `Failed to update ${item.name} quantity. Please try again!`,
+			});
+		} catch (error) {
+			console.error(`Error updating ${item.name} quantity`, error);
+			alert("Error updating item quantity!");
+		}
+	};
+
 	const deleteItemHandler = () => {
 		const isConfirmed = window.confirm("Do you want to delete this item?");
 
@@ -108,12 +129,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 				onChange={handleCheckChange}
 				aria-checked={isChecked}
 				disabled={isChecked}
-				label={item.name}
 			/>
-
+			<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} /> x{" "}
+			{item.name}{" "}
 			<span>
 				{getUrgencyStatus(item)}
-
 				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
 			</span>
 		</div>
