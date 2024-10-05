@@ -95,7 +95,7 @@ export function useShoppingLists(user: User | null) {
 const ListItemModel = t.type({
 	id: t.string,
 	name: t.string,
-	itemQuantity: t.number,
+	//itemQuantity: t.number,
 	dateLastPurchased: t.union([FirebaseTimestamp, t.null]),
 	dateNextPurchased: FirebaseTimestamp,
 	totalPurchases: t.number,
@@ -125,6 +125,7 @@ export function useShoppingListData(listPath: string | null) {
 			const nextData = snapshot.docs.map((docSnapshot) => {
 				// Extract the document's data from the snapshot.
 				const item = docSnapshot.data();
+				console.log("Fetched item:", item);
 
 				// The document's id is not in the data,
 				// but it is very useful, so we add it to the data ourselves.
@@ -132,6 +133,7 @@ export function useShoppingListData(listPath: string | null) {
 
 				const decoded = ListItemModel.decode(item);
 				if (isLeft(decoded)) {
+					console.error("Validation failed for item:", item);
 					throw Error(
 						`Could not validate data: ${PathReporter.report(decoded).join("\n")}`,
 					);
