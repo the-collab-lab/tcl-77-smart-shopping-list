@@ -10,23 +10,16 @@ import "../NavBar.scss";
 export function AuthenticatedNavBar() {
 	return (
 		<Navbar expand="lg" fixed="bottom" className="Nav">
-			<Container className="d-flex justify-content-around Nav-container">
+			<Container className="d-flex justify-content-around Nav_container">
 				<SignOutButton />
-				<Nav.Link as={NavLink} to="/" className="Nav-link" aria-label="Home">
+				<Nav.Link as={NavLink} to="/" className="Nav__link" aria-label="Home">
 					Home
 				</Nav.Link>
-				<Nav.Link
-					as={NavLink}
-					to="/list"
-					className="Nav-link"
-					aria-label="List"
-				>
-					List
-				</Nav.Link>
+
 				<Nav.Link
 					as={NavLink}
 					to="/manage-list"
-					className="Nav-link"
+					className="Nav__link"
 					aria-label="Manage List"
 				>
 					Manage List

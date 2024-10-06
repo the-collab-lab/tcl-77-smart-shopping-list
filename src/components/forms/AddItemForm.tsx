@@ -97,7 +97,10 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	};
 
 	const navigateToListPage = () => {
-		navigate("/list");
+		if (listPath) {
+			const listName = listPath.split("/").pop();
+			navigate(`/list/${listName}`);
+		}
 	};
 
 	return (

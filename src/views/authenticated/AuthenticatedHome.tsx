@@ -14,6 +14,7 @@ export function AuthenticatedHome({ data, setListPath, user }: Props) {
 			<p>
 				Hello from the home (<code>/</code>) page!
 			</p>
+
 			{user && (
 				<>
 					<ul>
