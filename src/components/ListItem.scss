@@ -1,9 +1,13 @@
+@import "../styles/_variables";
+
 .ListItem {
 	align-items: baseline;
 	display: flex;
 	flex-direction: row;
 	font-size: 1.2em;
 	justify-content: space-between;
+	background-color: $primary-blue;
+	color: $primary-beige;
 }
 
 .ListItem-checkbox {

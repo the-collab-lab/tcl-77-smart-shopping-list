@@ -1,3 +1,4 @@
+import "./List.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
@@ -39,7 +40,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	if (unfilteredListItems.length === 0) {
 		return (
 			<>
-				<h2>{listName}</h2>
+				<h2 className="ListName">{listName}</h2>
 				<Header />
 				<section>
 					<h3>
@@ -61,7 +62,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<>
-			<h2>{listName}</h2>
+			<h2 className="ListName">{listName}</h2>
 
 			<Header />
 
