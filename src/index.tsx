@@ -6,6 +6,7 @@ import { App } from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.scss";
 
+
 const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
 	<StrictMode>
