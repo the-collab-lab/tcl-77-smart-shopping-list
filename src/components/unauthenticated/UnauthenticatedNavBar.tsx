@@ -8,15 +8,18 @@ import "../NavBar.scss";
 
 export function UnauthenticatedNavBar() {
 	return (
-		<Navbar expand="lg" fixed="bottom" className="Nav">
-			<Container className="d-flex justify-content-around Nav-container">
-				<Nav.Link as={NavLink} to="/" className="Nav-link" aria-label="Home">
+		<Navbar className="Nav">
+			<Container className="Nav__container">
+				<Navbar.Brand as={NavLink} to="/">
+					GrocerEase
+				</Navbar.Brand>
+				<Nav.Link as={NavLink} to="/" className="Nav__link" aria-label="Home">
 					Home
 				</Nav.Link>
 				<Nav.Link
 					as={NavLink}
 					to="/about"
-					className="Nav-link"
+					className="Nav__link"
 					aria-label="About"
 				>
 					About

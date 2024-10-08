@@ -9,21 +9,24 @@ import "../NavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (
-		<Navbar expand="lg" fixed="bottom" className="Nav">
-			<Container className="d-flex justify-content-around Nav_container">
-				<SignOutButton />
-				<Nav.Link as={NavLink} to="/" className="Nav__link" aria-label="Home">
+		<Navbar className="Nav">
+			<Container className="Nav-container">
+				<Navbar.Brand as={NavLink} to="/">
+					GrocerEase
+				</Navbar.Brand>
+				<Nav.Link as={NavLink} to="/" className="Nav-link" aria-label="Home">
 					Home
 				</Nav.Link>
 
 				<Nav.Link
 					as={NavLink}
 					to="/manage-list"
-					className="Nav__link"
+					className="Nav-link"
 					aria-label="Manage List"
 				>
 					Manage List
 				</Nav.Link>
+				<SignOutButton />
 			</Container>
 		</Navbar>
 	);
