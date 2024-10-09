@@ -9,18 +9,21 @@ import "../NavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (
-		<Navbar expand="md">
+		<Navbar collapseOnSelect expand="md">
 			<Container>
-				<Navbar.Brand as={NavLink} to="/">
-					GrocerEase
-				</Navbar.Brand>
+				<Navbar.Brand>GrocerEase</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse>
 					<Nav className="flex-grow-1 justify-content-evenly align-items-center">
-						<Nav.Link as={NavLink} to="/" aria-label="Home">
+						<Nav.Link as={NavLink} to="/" aria-label="Home" eventKey={"1"}>
 							Home
 						</Nav.Link>
-						<Nav.Link as={NavLink} to="/manage-list" aria-label="Manage List">
+						<Nav.Link
+							as={NavLink}
+							to="/manage-list"
+							aria-label="Manage List"
+							eventKey={"2"}
+						>
 							Manage List
 						</Nav.Link>
 						<SignOutButton />
