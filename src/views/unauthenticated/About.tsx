@@ -6,8 +6,8 @@ import { SignInButton } from "../../api";
 
 export function About() {
 	return (
-		<div className="d-flex flex-wrap m-2 align-items-center justify-content-evenly">
-			<section className="border border-solid rounded-2 border-secondary-emphasis border-3 shadow">
+		<div className="d-flex flex-wrap m-2 align-items-center justify-content-evenly text-info">
+			<section className="border border-solid rounded-2 border-dark border-3 shadow">
 				<h2>How it works</h2>
 				<ul>
 					<li>
@@ -38,84 +38,84 @@ export function About() {
 				</ul>
 				<SignInButton isSignIn={false} />
 			</section>
-			<section className="border border-solid rounded-2 border-secondary-emphasis border-3 shadow flex-grow">
+			<section className="border border-solid rounded-2 border-dark border-3 shadow flex-grow flex-fill p-2 my-2">
 				<h2>Creators</h2>
-				<div className="">
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
+					<Link to="https://github.com/eternalmaha" target="_blank">
+						<GithubLogo width="25" height="25" />
+					</Link>
 					<span>Maha Ahmed</span>
 					<Link to="https://www.linkedin.com/in/maha-ahmed3/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
 					</Link>
-					<Link to="https://github.com/eternalmaha" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
 				</div>
-				<div>
-					<span>Brianna Bland</span>
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
 					<Link to="https://www.linkedin.com/in/bbland1/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
 					</Link>
+					<span>Brianna Bland</span>
 					<Link to="https://github.com/bbland1" target="_blank">
 						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
-				<div>
-					<span>Falak Zahra</span>
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
 					<Link to="https://www.linkedin.com/in/falak-zahra/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
 					</Link>
+					<span>Falak Zahra</span>
 					<Link to="https://github.com/zahrafalak" target="_blank">
 						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
-				<div>
-					<span>Ross Clettenberg</span>
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
 					<Link
 						to="https://www.linkedin.com/in/ross-clettenberg/"
 						target="_blank"
 					>
 						<LinkedInLogo width="25" height="25" />
 					</Link>
+					<span>Ross Clettenberg</span>
 					<Link to="https://github.com/RossaMania" target="_blank">
 						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
 			</section>
-			<section className="border border-solid rounded-2 border-secondary-emphasis border-3 shadow">
+			<section className="border border-solid rounded-2 border-dark border-3 shadow flex-grow flex-fill p-2 my-2">
 				<h2>Thank you</h2>
-				<p>Mentors:</p>
-				<div>
-					<span>Alex D.</span>
+				<p className="text-center">To our amazing mentors:</p>
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
 					<Link to="https://www.linkedin.com/in/dantonioa/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
 					</Link>
+					<span>Alex D.</span>
 					<Link to="https://github.com/alex-andria" target="_blank">
 						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
-				<div>
-					<span>Aditya Dalal</span>
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
 					<Link to="https://www.linkedin.com/in/adityadalal/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
 					</Link>
+					<span>Aditya Dalal</span>
 					<Link to="https://github.com/adidalal" target="_blank">
 						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
-				<div>
-					<span>Tanner Gill</span>
+				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
 					<Link to="https://www.linkedin.com/in/tanner-gill/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
 					</Link>
+					<span>Tanner Gill</span>
 					<Link to="https://github.com/tannaurus" target="_blank">
 						<GithubLogo width="25" height="25" />
 					</Link>
 				</div>
-				<p>
+				<p className="text-center">
 					The entire{" "}
 					<a href="https://the-collab-lab.codes/developers/" target="_blank">
 						The Collab Lab
 					</a>
-					.
+					for the opportunity!
 				</p>
 			</section>
 		</div>

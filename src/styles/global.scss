@@ -2,10 +2,17 @@
 
 $theme-colors: (
 	"primary": $primary-beige,
-	"primary-emphasis": $primary-blue,
-	"secondary": $tertiary-blue,
-	"secondary-emphasis": $secondary-blue,
+	"secondary": $primary-blue,
+	"info": $tertiary-blue,
+	"dark": $secondary-blue,
 );
+
+// $theme-colors-text: (
+// 	"primary": $primary-beige,
+// 	"primary-emphasis": $primary-blue,
+// 	"secondary": $tertiary-blue,
+// 	"secondary-emphasis": $secondary-blue,
+// );
 
 $font-size-root: null;
 $font-size-base: 1.13rem; // Assumes the browser default, typically `16px`
