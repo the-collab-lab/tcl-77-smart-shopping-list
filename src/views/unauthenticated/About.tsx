@@ -6,10 +6,9 @@ import { SignInButton } from "../../api";
 
 export function About() {
 	return (
-		<div>
-			<section>
+		<div className="d-flex flex-wrap m-2 align-items-center justify-content-evenly">
+			<section className="border border-solid rounded-2 border-secondary-emphasis border-3 shadow">
 				<h2>How it works</h2>
-				<SignInButton isSignIn={false} />
 				<ul>
 					<li>
 						Create a list for different stores or different grouping of items.
@@ -37,10 +36,11 @@ export function About() {
 						can see and mark items as purchased too!
 					</li>
 				</ul>
+				<SignInButton isSignIn={false} />
 			</section>
-			<section>
+			<section className="border border-solid rounded-2 border-secondary-emphasis border-3 shadow flex-grow">
 				<h2>Creators</h2>
-				<div>
+				<div className="">
 					<span>Maha Ahmed</span>
 					<Link to="https://www.linkedin.com/in/maha-ahmed3/" target="_blank">
 						<LinkedInLogo width="25" height="25" />
@@ -80,7 +80,7 @@ export function About() {
 					</Link>
 				</div>
 			</section>
-			<section>
+			<section className="border border-solid rounded-2 border-secondary-emphasis border-3 shadow">
 				<h2>Thank you</h2>
 				<p>Mentors:</p>
 				<div>
