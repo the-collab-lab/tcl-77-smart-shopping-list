@@ -16,7 +16,7 @@ export function AuthenticatedNavBar() {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse>
-					<Nav className="me-auto flex-grow-1 justify-content-evenly align-items-center">
+					<Nav className="flex-grow-1 justify-content-evenly align-items-center">
 						<Nav.Link as={NavLink} to="/" aria-label="Home">
 							Home
 						</Nav.Link>

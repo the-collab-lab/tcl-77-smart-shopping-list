@@ -13,19 +13,17 @@ export function UnauthenticatedNavBar() {
 				<Navbar.Brand as={NavLink} to="/">
 					GrocerEase
 				</Navbar.Brand>
-				<Container>
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto flex-grow-1 justify-content-evenly align-items-center">
-							<Nav.Link as={NavLink} to="/" aria-label="Home">
-								Home
-							</Nav.Link>
-							<Nav.Link as={NavLink} to="/about" aria-label="About">
-								About
-							</Nav.Link>
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav">
+					<Nav className="flex-grow-1 justify-content-evenly align-items-center">
+						<Nav.Link as={NavLink} to="/" aria-label="Home">
+							Home
+						</Nav.Link>
+						<Nav.Link as={NavLink} to="/about" aria-label="About">
+							About
+						</Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
 			</Container>
 		</Navbar>
 	);
