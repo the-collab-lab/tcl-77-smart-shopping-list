@@ -24,6 +24,9 @@
 	@media (max-width: 376px) {
 		font-size: 3rem !important;
 	}
+	@media (max-width: 391px) {
+		font-size: 3rem !important;
+	}
 }
 
 .navbar .nav-link {
@@ -59,4 +62,8 @@
 		font-weight: bolder;
 		border-color: $secondary-blue;
 	}
+}
+
+.navbar .navbar-toggler {
+	background-color: $primary-beige;
 }
