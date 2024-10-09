@@ -16,15 +16,11 @@
 		padding-inline: min(5dvw, 3.2rem);
 	}
 
-	&-header {
-		// text-align: center;
-	}
-
 	&-main {
-		margin: 1rem auto;
+		margin: 0 auto;
 		padding-block: 0;
 		padding-block-end: 6.26rem;
-		width: auto;
+		width: 100vw;
 		height: 100dvh;
 	}
 }

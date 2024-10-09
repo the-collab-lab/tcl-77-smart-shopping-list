@@ -19,10 +19,11 @@
 
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .navbar .nav-link {
 	color: $primary-beige;
 	font-weight: bolder;
-	font-size: 1.4em;
+	font-size: 1.5em;
 	flex: 0 1 auto;
 	line-height: 1;
 	padding: 0.8rem;
@@ -36,5 +37,20 @@
 
 	&:hover {
 		color: $secondary-blue;
+	}
+}
+
+.navbar button {
+	background-color: $secondary-blue;
+	color: $primary-beige;
+	font-weight: bolder;
+	border-color: $secondary-blue;
+	font-size: 1.3em;
+
+	&:hover {
+		background-color: $primary-beige;
+		color: $secondary-blue;
+		font-weight: bolder;
+		border-color: $secondary-blue;
 	}
 }

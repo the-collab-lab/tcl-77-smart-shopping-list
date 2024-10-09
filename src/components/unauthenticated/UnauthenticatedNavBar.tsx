@@ -8,7 +8,7 @@ import "../NavBar.scss";
 
 export function UnauthenticatedNavBar() {
 	return (
-		<Navbar expand="lg">
+		<Navbar expand="md">
 			<Container>
 				<Navbar.Brand as={NavLink} to="/">
 					GrocerEase
@@ -16,7 +16,7 @@ export function UnauthenticatedNavBar() {
 				<Container>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
+						<Nav className="me-auto flex-grow-1 justify-content-evenly align-items-center">
 							<Nav.Link as={NavLink} to="/" aria-label="Home">
 								Home
 							</Nav.Link>

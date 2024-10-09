@@ -9,14 +9,14 @@ import "../NavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (
-		<Navbar expand="lg">
+		<Navbar expand="md">
 			<Container>
 				<Navbar.Brand as={NavLink} to="/">
 					GrocerEase
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse>
-					<Nav>
+					<Nav className="me-auto flex-grow-1 justify-content-evenly align-items-center">
 						<Nav.Link as={NavLink} to="/" aria-label="Home">
 							Home
 						</Nav.Link>
