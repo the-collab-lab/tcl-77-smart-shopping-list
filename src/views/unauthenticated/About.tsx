@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import LinkedInLogo from "../../icons/LinkedInLogo.svg?react";
 import GithubLogo from "../../icons/GithubLogo.svg?react";
 import { SignInButton } from "../../api";
-import { Card, Container } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 
 export function About() {
 	return (
-		<div className="d-flex flex-wrap m-2 align-items-center justify-content-center gap-2">
+		<div className="d-flex flex-wrap mx-lg-5 my-3 align-items-center justify-content-center gap-2">
 			<Card className="border border-solid rounded-2 border-dark border-3 bg-primary text-info shadow">
 				<h2>How it works</h2>
 				<ul>
@@ -41,8 +41,8 @@ export function About() {
 			</Card>
 			<section className="d-flex flex-wrap align-items-center justify-content-center gap-2 w-100">
 				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1  p-2 my-2 bg-primary text-info">
-					<h2>Creators</h2>
-					<Container>
+					<Card.Body>
+						<Card.Title>Creators</Card.Title>
 						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2 align-items-center">
 							<Link
 								to="https://www.linkedin.com/in/maha-ahmed3/"
@@ -88,12 +88,14 @@ export function About() {
 								<GithubLogo width="25" height="25" />
 							</Link>
 						</div>
-					</Container>
+					</Card.Body>
 				</Card>
 				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1 p-2 my-2 bg-primary text-info">
-					<Card.Title>Thank you</Card.Title>
-					<Container>
-						<p className="text-center">To our amazing mentors:</p>
+					<Card.Body>
+						<Card.Title>Thank you</Card.Title>
+						<Card.Text className="text-center">
+							To our amazing mentors:
+						</Card.Text>
 						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
 							<Link to="https://www.linkedin.com/in/dantonioa/" target="_blank">
 								<LinkedInLogo width="25" height="25" />
@@ -137,7 +139,7 @@ export function About() {
 							</a>
 							for the opportunity!
 						</p>
-					</Container>
+					</Card.Body>
 				</Card>
 			</section>
 		</div>
