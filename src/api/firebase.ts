@@ -345,7 +345,12 @@ export async function deleteItem(listPath: string, item: ListItem) {
 	}
 }
 
-export async function deleteList(listPath: string, user: User) {}
+export async function deleteList(listPath: string, user: User) {
+	// reference the list document
+	const listDocumentRef = doc(db, listPath);
+	//get the document from firebase
+	const docSnap = await getDoc(listDocumentRef);
+}
 
 export function comparePurchaseUrgency(
 	item1: ListItem,
