@@ -119,23 +119,31 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<div className="ListItem">
-			<Form.Check
-				type="checkbox"
-				id={`checkbox-${item.id}`}
-				aria-label={`Mark ${item.name} as purchased.`}
-				value={item.id}
-				checked={isChecked}
-				onChange={handleCheckChange}
-				aria-checked={isChecked}
-				disabled={isChecked}
-			/>
-			<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} /> x{" "}
-			{item.name}{" "}
-			<span>
-				{getUrgencyStatus(item)}
-				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
-			</span>
-		</div>
+		<>
+			<span>{getUrgencyStatus(item)}</span>
+			<div className="ListItem col-12 p-3 mb-3">
+				<Form.Check
+					className="me-3"
+					type="checkbox"
+					id={`checkbox-${item.id}`}
+					aria-label={`Mark ${item.name} as purchased.`}
+					value={item.id}
+					checked={isChecked}
+					onChange={handleCheckChange}
+					aria-checked={isChecked}
+					disabled={isChecked}
+				/>
+				<h4 className="me-3 mb-0"> {item.name} </h4>
+				<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
+
+				<Button
+					className="me-3"
+					variant="danger"
+					onClick={() => deleteItemHandler()}
+				>
+					Delete Item
+				</Button>
+			</div>
+		</>
 	);
 }

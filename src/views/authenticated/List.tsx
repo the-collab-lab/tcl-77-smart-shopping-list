@@ -66,7 +66,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 			<Header />
 
-			<section className="sticky-top bg-dark">
+			<section className="sticky-top">
 				{unfilteredListItems.length > 0 && (
 					<FilterListInput
 						searchTerm={searchTerm}
