@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import LinkedInLogo from "../../icons/LinkedInLogo.svg?react";
 import GithubLogo from "../../icons/GithubLogo.svg?react";
 import { SignInButton } from "../../api";
+import { Card, Container } from "react-bootstrap";
 
 export function About() {
 	return (
-		<div className="d-flex flex-wrap m-2 align-items-center justify-content-evenly text-info">
-			<section className="border border-solid rounded-2 border-dark border-3 shadow">
+		<div className="d-flex flex-wrap m-2 align-items-center justify-content-center gap-2">
+			<Card className="border border-solid rounded-2 border-dark border-3 bg-primary text-info shadow">
 				<h2>How it works</h2>
 				<ul>
 					<li>
@@ -37,86 +38,107 @@ export function About() {
 					</li>
 				</ul>
 				<SignInButton isSignIn={false} />
-			</section>
-			<section className="border border-solid rounded-2 border-dark border-3 shadow flex-grow flex-fill p-2 my-2">
-				<h2>Creators</h2>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link to="https://github.com/eternalmaha" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-					<span>Maha Ahmed</span>
-					<Link to="https://www.linkedin.com/in/maha-ahmed3/" target="_blank">
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-				</div>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link to="https://www.linkedin.com/in/bbland1/" target="_blank">
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-					<span>Brianna Bland</span>
-					<Link to="https://github.com/bbland1" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-				</div>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link to="https://www.linkedin.com/in/falak-zahra/" target="_blank">
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-					<span>Falak Zahra</span>
-					<Link to="https://github.com/zahrafalak" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-				</div>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link
-						to="https://www.linkedin.com/in/ross-clettenberg/"
-						target="_blank"
-					>
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-					<span>Ross Clettenberg</span>
-					<Link to="https://github.com/RossaMania" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-				</div>
-			</section>
-			<section className="border border-solid rounded-2 border-dark border-3 shadow flex-grow flex-fill p-2 my-2">
-				<h2>Thank you</h2>
-				<p className="text-center">To our amazing mentors:</p>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link to="https://www.linkedin.com/in/dantonioa/" target="_blank">
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-					<span>Alex D.</span>
-					<Link to="https://github.com/alex-andria" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-				</div>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link to="https://www.linkedin.com/in/adityadalal/" target="_blank">
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-					<span>Aditya Dalal</span>
-					<Link to="https://github.com/adidalal" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-				</div>
-				<div className="text-primary bg-info d-flex flex-row justify-content-around rounded-1 m-2">
-					<Link to="https://www.linkedin.com/in/tanner-gill/" target="_blank">
-						<LinkedInLogo width="25" height="25" />
-					</Link>
-					<span>Tanner Gill</span>
-					<Link to="https://github.com/tannaurus" target="_blank">
-						<GithubLogo width="25" height="25" />
-					</Link>
-				</div>
-				<p className="text-center">
-					The entire{" "}
-					<a href="https://the-collab-lab.codes/developers/" target="_blank">
-						The Collab Lab
-					</a>
-					for the opportunity!
-				</p>
+			</Card>
+			<section className="d-flex flex-wrap align-items-center justify-content-center gap-2 w-100">
+				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1  p-2 my-2 bg-primary text-info">
+					<h2>Creators</h2>
+					<Container>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2 align-items-center">
+							<Link
+								to="https://www.linkedin.com/in/maha-ahmed3/"
+								target="_blank"
+							>
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Maha Ahmed</span>
+							<Link to="https://github.com/eternalmaha" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+							<Link to="https://www.linkedin.com/in/bbland1/" target="_blank">
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Brianna Bland</span>
+							<Link to="https://github.com/bbland1" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+							<Link
+								to="https://www.linkedin.com/in/falak-zahra/"
+								target="_blank"
+							>
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Falak Zahra</span>
+							<Link to="https://github.com/zahrafalak" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+							<Link
+								to="https://www.linkedin.com/in/ross-clettenberg/"
+								target="_blank"
+							>
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Ross Clettenberg</span>
+							<Link to="https://github.com/RossaMania" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+					</Container>
+				</Card>
+				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1 p-2 my-2 bg-primary text-info">
+					<Card.Title>Thank you</Card.Title>
+					<Container>
+						<p className="text-center">To our amazing mentors:</p>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+							<Link to="https://www.linkedin.com/in/dantonioa/" target="_blank">
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Alex D.</span>
+							<Link to="https://github.com/alex-andria" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+							<Link
+								to="https://www.linkedin.com/in/adityadalal/"
+								target="_blank"
+							>
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Aditya Dalal</span>
+							<Link to="https://github.com/adidalal" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+							<Link
+								to="https://www.linkedin.com/in/tanner-gill/"
+								target="_blank"
+							>
+								<LinkedInLogo width="25" height="25" />
+							</Link>
+							<span>Tanner Gill</span>
+							<Link to="https://github.com/tannaurus" target="_blank">
+								<GithubLogo width="25" height="25" />
+							</Link>
+						</div>
+						<p className="text-center">
+							The entire{" "}
+							<a
+								href="https://the-collab-lab.codes/developers/"
+								target="_blank"
+							>
+								The Collab Lab
+							</a>
+							for the opportunity!
+						</p>
+					</Container>
+				</Card>
 			</section>
 		</div>
 	);
