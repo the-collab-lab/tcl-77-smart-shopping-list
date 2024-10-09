@@ -345,6 +345,8 @@ export async function deleteItem(listPath: string, item: ListItem) {
 	}
 }
 
+export async function deleteList(listPath: string, user: User) {}
+
 export function comparePurchaseUrgency(
 	item1: ListItem,
 	item2: ListItem,
