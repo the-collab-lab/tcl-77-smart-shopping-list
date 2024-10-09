@@ -350,6 +350,17 @@ export async function deleteList(listPath: string, user: User) {
 	const listDocumentRef = doc(db, listPath);
 	//get the document from firebase
 	const docSnap = await getDoc(listDocumentRef);
+	// Delete the list in Firestore.
+	if (docSnap.exists()) {
+		try {
+			await deleteDoc(listDocumentRef);
+			alert(`${listPath} has been successfully deleted!`);
+		} catch (error) {
+			// If there's an error, log it to the console and throw it.
+			console.error(`Oops! Error deleting ${listPath}`, error);
+			throw error;
+		}
+	}
 }
 
 export function comparePurchaseUrgency(
