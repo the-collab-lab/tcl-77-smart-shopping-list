@@ -8,19 +8,31 @@ import "../NavBar.scss";
 
 export function UnauthenticatedNavBar() {
 	return (
-		<Navbar expand="lg" fixed="bottom" className="Nav">
-			<Container className="d-flex justify-content-around Nav-container">
-				<Nav.Link as={NavLink} to="/" className="Nav-link" aria-label="Home">
-					Home
-				</Nav.Link>
-				<Nav.Link
-					as={NavLink}
-					to="/about"
-					className="Nav-link"
-					aria-label="About"
-				>
-					About
-				</Nav.Link>
+		<Navbar
+			collapseOnSelect
+			expand="md"
+			className="bg-secondary rounded-bottom-3 pt-0"
+		>
+			<Container>
+				<Navbar.Brand className="bg-primary rounded-bottom-3 text-center mb-3 px-3 text-dark fw-bolder shadow">
+					GrocerEase
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav">
+					<Nav className="flex-grow-1 justify-content-evenly align-items-center fw-bolder p-1 text-center">
+						<Nav.Link as={NavLink} to="/" aria-label="Home" eventKey={"1"}>
+							Home
+						</Nav.Link>
+						<Nav.Link
+							as={NavLink}
+							to="/about"
+							aria-label="About"
+							eventKey={"2"}
+						>
+							About
+						</Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
 			</Container>
 		</Navbar>
 	);

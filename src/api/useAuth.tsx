@@ -22,6 +22,7 @@ export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
 
 	return (
 		<Button
+			className="custom-button"
 			type="button"
 			onClick={() => {
 				signInWithPopup(auth, new GoogleAuthProvider())
@@ -37,7 +38,6 @@ export const SignInButton = ({ isSignIn = true }: SignInButtonProps) => {
 						);
 					});
 			}}
-			className="m-2"
 		>
 			{isSignIn ? "Sign In" : "Sign Up"}
 		</Button>
@@ -69,7 +69,6 @@ export const SignOutButton = () => {
 						);
 					});
 			}}
-			className="m-2"
 		>
 			Sign Out
 		</Button>
