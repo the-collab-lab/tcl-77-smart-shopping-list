@@ -1,8 +1,11 @@
+@import "../views/unauthenticated/UnauthenticatedHome.scss";
+
 .SingleList {
+	@extend .custom-button-wrapper;
+	// @extend .button;
 	align-items: baseline;
-	display: flex;
-	flex-direction: row;
 	font-size: 1.2em;
+	width: 120px;
 }
 
 .SingleList-label {

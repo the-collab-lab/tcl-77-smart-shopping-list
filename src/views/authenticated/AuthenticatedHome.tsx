@@ -1,6 +1,7 @@
 import React from "react";
 import { SingleList, CreateList } from "../../components";
 import { List, User } from "../../api";
+import "./AuthenticatedHome.scss";
 
 interface Props {
 	data: List[];
@@ -10,14 +11,11 @@ interface Props {
 
 export function AuthenticatedHome({ data, setListPath, user }: Props) {
 	return (
-		<>
-			<p>
-				Hello from the home (<code>/</code>) page!
-			</p>
-
+		<div className="home">
 			{user && (
 				<>
-					<ul>
+					<CreateList user={user} setListPath={setListPath} />
+					<ul className="lists">
 						{data.map((list, index) => (
 							<SingleList
 								key={index}
@@ -27,9 +25,8 @@ export function AuthenticatedHome({ data, setListPath, user }: Props) {
 							/>
 						))}
 					</ul>
-					<CreateList user={user} setListPath={setListPath} />
 				</>
 			)}
-		</>
+		</div>
 	);
 }
