@@ -6,10 +6,10 @@
 
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 
-		@media (max-width: 391px) {
+		@media (max-width: 430px) {
 			font-size: 3rem !important;
 		}
-		@media (max-width: 345px) {
+		@media (max-width: 375px) {
 			font-size: 2.5rem !important;
 		}
 	}
@@ -40,15 +40,21 @@
 	color: $primary-beige;
 	font-weight: bold;
 	border: none;
-	font-size: 1.5rem;
-	text-align: center;
-	border: none;
-	padding: 0.5rem;
-	width: 11rem;
 
 	&:hover {
 		background-color: $primary-beige;
 		color: $secondary-blue;
-		font-weight: bolder;
+	}
+
+	@media (min-width: 431px) {
+		font-size: 1.5rem;
+		text-align: center;
+		border: none;
+		padding: 0.5rem;
+		width: 11rem;
+	}
+
+	@media (max-width: 430px) {
+		background-color: $primary-beige;
 	}
 }
