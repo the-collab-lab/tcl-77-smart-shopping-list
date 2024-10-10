@@ -20,9 +20,9 @@ export function Layout({ user }: Props) {
 			<main className="Layout-main overflow-auto">
 				{user && (
 					<Button
+						className="custom-button m-2"
 						onClick={() => navigate("/about")}
 						aria-label="Navigate to the about application page."
-						className="m-2"
 					>
 						about
 					</Button>

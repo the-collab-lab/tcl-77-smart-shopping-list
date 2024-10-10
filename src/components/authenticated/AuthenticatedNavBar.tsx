@@ -9,12 +9,18 @@ import "../NavBar.scss";
 
 export function AuthenticatedNavBar() {
 	return (
-		<Navbar collapseOnSelect expand="md">
+		<Navbar
+			collapseOnSelect
+			expand="md"
+			className="bg-secondary rounded-bottom-3 pt-0"
+		>
 			<Container>
-				<Navbar.Brand>GrocerEase</Navbar.Brand>
+				<Navbar.Brand className="bg-primary rounded-bottom-3 text-center mb-3 px-3 text-dark fw-bolder shadow">
+					GrocerEase
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse>
-					<Nav className="flex-grow-1 justify-content-evenly align-items-center">
+					<Nav className="flex-grow-1 justify-content-evenly align-items-center fw-bolder p-1 text-center">
 						<Nav.Link as={NavLink} to="/" aria-label="Home" eventKey={"1"}>
 							Home
 						</Nav.Link>
@@ -26,8 +32,8 @@ export function AuthenticatedNavBar() {
 						>
 							Manage List
 						</Nav.Link>
-						<SignOutButton />
 					</Nav>
+					<SignOutButton />
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

@@ -6,6 +6,7 @@ import { SignInButton } from "../../api";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
 import SampleImage from "../../assets/images/sample.png";
 
 export function About() {
@@ -18,69 +19,80 @@ export function About() {
 	return (
 		<div className="d-flex flex-wrap mx-lg-5 my-3 align-items-center justify-content-center gap-2">
 			<Card className="border border-solid rounded-2 border-dark border-3 bg-primary text-info shadow">
-				<Card.Title>How it works</Card.Title>
-				<Carousel activeIndex={stepIndex} onSelect={handleStepIndexChoice}>
-					<Carousel.Item>
-						<Image src={SampleImage} fluid />
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>
-								Create a list for different stores or different grouping of
-								items.
-							</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<Image src={SampleImage} fluid />
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>Select a list that you&apos;d like to add items on.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<Image src={SampleImage} fluid />
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>
-								Open the list manager, to start adding items and choosing when
-								you will need to restock next.
-							</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<Image src={SampleImage} fluid />
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>
-								Now that your new list has items you can start checking off
-								items as you shop!
-							</p>
-							<p>
-								Each time an item is marked purchase the application evaluates
-								your shopping habits! Supporting you by adjusting your next
-								purchase predictions base on when your previous shopping
-								history!
-							</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<Image src={SampleImage} fluid />
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>
-								If someone else needs to be let into to the shopping time you
-								can easily share specific lists with with in the list manager so
-								they can see and mark items as purchased too!
-							</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-				</Carousel>
-				<SignInButton isSignIn={false} />
+				<Card.Body>
+					<Card.Title className="fs-3">How it works</Card.Title>
+					<Carousel
+						activeIndex={stepIndex}
+						onSelect={handleStepIndexChoice}
+						touch
+					>
+						<Carousel.Item>
+							<Container className="w-50">
+								<Image src={SampleImage} fluid />
+							</Container>
+							<Carousel.Caption>
+								<p>
+									Create a list for different stores or different grouping of
+									items.
+								</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Container className="w-50">
+								<Image src={SampleImage} fluid />
+							</Container>
+							<Carousel.Caption>
+								<p>Select a list that you&apos;d like to add items on.</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Container className="w-50">
+								<Image src={SampleImage} fluid />
+							</Container>
+							<Carousel.Caption>
+								<p>
+									Open the list manager, to start adding items and choosing when
+									you will need to restock next.
+								</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Container className="w-50">
+								<Image src={SampleImage} fluid />
+							</Container>
+							<Carousel.Caption>
+								<p>
+									Now that your new list has items you can start checking off
+									items as you shop!
+								</p>
+								<p>
+									Each time an item is marked purchase the application evaluates
+									your shopping habits! Supporting you by adjusting your next
+									purchase predictions base on when your previous shopping
+									history!
+								</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Container className="w-50">
+								<Image src={SampleImage} fluid />
+							</Container>
+							<Carousel.Caption>
+								<p>
+									If someone else needs to be let into to the shopping time you
+									can easily share specific lists with with in the list manager
+									so they can see and mark items as purchased too!
+								</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+					</Carousel>
+					<SignInButton isSignIn={false} />
+				</Card.Body>
 			</Card>
 			<section className="d-flex flex-wrap align-items-center justify-content-center gap-2 w-100">
 				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1  p-2 my-2 bg-primary text-info">
 					<Card.Body>
-						<Card.Title>Creators</Card.Title>
+						<Card.Title className="fs-3">Creators</Card.Title>
 						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2 align-items-center">
 							<Link
 								to="https://www.linkedin.com/in/maha-ahmed3/"
@@ -130,7 +142,7 @@ export function About() {
 				</Card>
 				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1 p-2 my-2 bg-primary text-info">
 					<Card.Body>
-						<Card.Title>Thank you</Card.Title>
+						<Card.Title className="fs-3">Thank you</Card.Title>
 						<Card.Text className="text-center">
 							To our amazing mentors:
 						</Card.Text>

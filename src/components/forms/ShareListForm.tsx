@@ -57,7 +57,11 @@ const ShareListForm = ({ listPath }: Props) => {
 					aria-label="Enter the user email address to share list"
 					aria-required
 				/>
-				<Button type="submit" aria-label="submits form to share shopping list">
+				<Button
+					className="custom-button"
+					type="submit"
+					aria-label="submits form to share shopping list"
+				>
 					Invite User
 				</Button>
 			</InputGroup>

@@ -20,11 +20,16 @@ body {
 	background-color: $primary-beige;
 }
 
-button {
+.custom-button {
+	background-color: $primary-blue;
+	color: $primary-beige;
+	text-align: center;
 	border: none;
-	background-color: $primary-blue !important;
-	color: $primary-beige !important;
-	padding: 10px 20px;
-	font-size: 18px;
-	cursor: pointer;
+	padding: 0.5rem;
+	width: 13rem;
+
+	&:hover {
+		background-color: $secondary-blue;
+		color: $primary-beige;
+	}
 }

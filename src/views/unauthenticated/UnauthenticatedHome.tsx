@@ -19,9 +19,9 @@ export function UnauthenticatedHome() {
 			<article>
 				<p>New to GrocerEase:</p>
 				<Button
+					className="custom-button"
 					onClick={() => navigate("/about")}
 					aria-label="Navigate to the about application page."
-					className="m-2"
 				>
 					Learn More
 				</Button>

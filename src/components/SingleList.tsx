@@ -19,7 +19,9 @@ export function SingleList({ name, path, setListPath }: Props) {
 
 	return (
 		<li className="SingleList">
-			<Button onClick={handleClick}>{name}</Button>
+			<Button className="custom-button" onClick={handleClick}>
+				{name}
+			</Button>
 		</li>
 	);
 }
