@@ -89,108 +89,113 @@ export function About() {
 					<SignInButton isSignIn={false} />
 				</Card.Body>
 			</Card>
-			<section className="d-flex flex-wrap align-items-center justify-content-center gap-2 w-100">
-				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1  p-2 my-2 bg-primary text-info">
-					<Card.Body>
-						<Card.Title className="fs-3">Creators</Card.Title>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2 align-items-center">
-							<Link
-								to="https://www.linkedin.com/in/maha-ahmed3/"
-								target="_blank"
-							>
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Maha Ahmed</span>
-							<Link to="https://github.com/eternalmaha" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
-							<Link to="https://www.linkedin.com/in/bbland1/" target="_blank">
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Brianna Bland</span>
-							<Link to="https://github.com/bbland1" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
-							<Link
-								to="https://www.linkedin.com/in/falak-zahra/"
-								target="_blank"
-							>
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Falak Zahra</span>
-							<Link to="https://github.com/zahrafalak" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
-							<Link
-								to="https://www.linkedin.com/in/ross-clettenberg/"
-								target="_blank"
-							>
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Ross Clettenberg</span>
-							<Link to="https://github.com/RossaMania" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-					</Card.Body>
-				</Card>
-				<Card className="border border-solid rounded-2 border-dark border-3 shadow flex-grow-1 p-2 my-2 bg-primary text-info">
-					<Card.Body>
-						<Card.Title className="fs-3">Thank you</Card.Title>
-						<Card.Text className="text-center">
-							To our amazing mentors:
-						</Card.Text>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
-							<Link to="https://www.linkedin.com/in/dantonioa/" target="_blank">
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Alex D.</span>
-							<Link to="https://github.com/alex-andria" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
-							<Link
-								to="https://www.linkedin.com/in/adityadalal/"
-								target="_blank"
-							>
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Aditya Dalal</span>
-							<Link to="https://github.com/adidalal" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-						<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
-							<Link
-								to="https://www.linkedin.com/in/tanner-gill/"
-								target="_blank"
-							>
-								<LinkedInLogo width="25" height="25" />
-							</Link>
-							<span>Tanner Gill</span>
-							<Link to="https://github.com/tannaurus" target="_blank">
-								<GithubLogo width="25" height="25" />
-							</Link>
-						</div>
-						<p className="text-center">
-							The entire{" "}
-							<a
-								href="https://the-collab-lab.codes/developers/"
-								target="_blank"
-							>
-								The Collab Lab
-							</a>
-							for the opportunity!
-						</p>
-					</Card.Body>
-				</Card>
+			<section className="container align-items-center justify-content-center w-100">
+				<div className="row gap-3">
+					<Card className="col-lg-6 border border-solid rounded-2 border-dark border-3 shadow  p-2 my-2 bg-primary text-info">
+						<Card.Body>
+							<Card.Title className="fs-3">Creators</Card.Title>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2 align-items-center">
+								<Link
+									to="https://www.linkedin.com/in/maha-ahmed3/"
+									target="_blank"
+								>
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Maha Ahmed</span>
+								<Link to="https://github.com/eternalmaha" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+								<Link to="https://www.linkedin.com/in/bbland1/" target="_blank">
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Brianna Bland</span>
+								<Link to="https://github.com/bbland1" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+								<Link
+									to="https://www.linkedin.com/in/falak-zahra/"
+									target="_blank"
+								>
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Falak Zahra</span>
+								<Link to="https://github.com/zahrafalak" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+								<Link
+									to="https://www.linkedin.com/in/ross-clettenberg/"
+									target="_blank"
+								>
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Ross Clettenberg</span>
+								<Link to="https://github.com/RossaMania" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+						</Card.Body>
+					</Card>
+					<Card className="col border border-solid rounded-2 border-dark border-3 shadow  p-2 my-2 bg-primary text-info">
+						<Card.Body>
+							<Card.Title className="fs-3">Thank you</Card.Title>
+							<Card.Text className="text-center">
+								To our amazing mentors:
+							</Card.Text>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+								<Link
+									to="https://www.linkedin.com/in/dantonioa/"
+									target="_blank"
+								>
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Alex D.</span>
+								<Link to="https://github.com/alex-andria" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+								<Link
+									to="https://www.linkedin.com/in/adityadalal/"
+									target="_blank"
+								>
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Aditya Dalal</span>
+								<Link to="https://github.com/adidalal" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+							<div className="text-primary bg-info d-flex flex-row justify-content-between p-2 rounded-1 m-2">
+								<Link
+									to="https://www.linkedin.com/in/tanner-gill/"
+									target="_blank"
+								>
+									<LinkedInLogo width="25" height="25" />
+								</Link>
+								<span>Tanner Gill</span>
+								<Link to="https://github.com/tannaurus" target="_blank">
+									<GithubLogo width="25" height="25" />
+								</Link>
+							</div>
+							<p className="text-center">
+								The entire{" "}
+								<a
+									href="https://the-collab-lab.codes/developers/"
+									target="_blank"
+								>
+									The Collab Lab
+								</a>
+								for the opportunity!
+							</p>
+						</Card.Body>
+					</Card>
+				</div>
 			</section>
 		</div>
 	);
