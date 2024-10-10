@@ -1,4 +1,15 @@
 @import "../styles/variables.scss";
+
+$theme-colors: (
+	"primary": $primary-beige,
+	"secondary": $primary-blue,
+	"info": $tertiary-blue,
+	"dark": $secondary-blue,
+);
+
+$font-size-root: null;
+$font-size-base: 1.13rem; // Assumes the browser default, typically `16px`
+
 @import "~bootstrap/scss/bootstrap";
 
 body {
@@ -7,4 +18,13 @@ body {
 	font-weight: 400;
 	font-style: normal;
 	background-color: $primary-beige;
+}
+
+button {
+	border: none;
+	background-color: $primary-blue !important;
+	color: $primary-beige !important;
+	padding: 10px 20px;
+	font-size: 18px;
+	cursor: pointer;
 }
