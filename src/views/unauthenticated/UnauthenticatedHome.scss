@@ -1,5 +1,10 @@
 @use "../../styles/variables.scss" as *;
 
+.home {
+	background-color: rgba($primary-beige, 0.9);
+	border-radius: 5%;
+}
+
 .heading-text {
 	color: $secondary-blue;
 	text-align: center;
@@ -26,7 +31,7 @@
 
 .custom-button-wrapper {
 	display: flex;
-	justify-content: center; // Centers the button horizontally
+	justify-content: center;
 	align-items: center;
 }
 

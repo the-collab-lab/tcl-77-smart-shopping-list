@@ -8,7 +8,7 @@ export function UnauthenticatedHome() {
 	const navigate = useNavigate();
 
 	return (
-		<div className="Home">
+		<div className="home">
 			<h2 className="heading-text">Welcome to GrocerEase</h2>
 			<p className="normal-text">
 				The next best thing to having someone else do the shopping for you!{" "}
