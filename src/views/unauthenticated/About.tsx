@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LinkedInLogo from "../../icons/LinkedInLogo.svg?react";
-import GithubLogo from "../../icons/GithubLogo.svg?react";
+import LinkedInLogo from "../../assets/icons/LinkedInLogo.svg?react";
+import GithubLogo from "../../assets/icons/GithubLogo.svg?react";
 import { SignInButton } from "../../api";
 import Card from "react-bootstrap/Card";
+import Carousel from "react-bootstrap/Carousel";
+import Image from "react-bootstrap/Image";
+import SampleImage from "../../assets/images/sample.png";
 
 export function About() {
+	const [stepIndex, setStepIndex] = useState(0);
+
+	const handleStepIndexChoice = (selectedIndex: number) => {
+		setStepIndex(selectedIndex);
+	};
+
 	return (
 		<div className="d-flex flex-wrap mx-lg-5 my-3 align-items-center justify-content-center gap-2">
 			<Card className="border border-solid rounded-2 border-dark border-3 bg-primary text-info shadow">
 				<h2>How it works</h2>
 				<ul>
-					<li>
+					{/* <li>
 						Create a list for different stores or different grouping of items.
-					</li>
-					<li>Select a list that you&apos;d like to add items on.</li>
-					<li>
+					</li> */}
+					{/* <li>Select a list that you&apos;d like to add items on.</li> */}
+					{/* <li>
 						Open the list manager, to start adding items and choosing when you
 						will need to restock next.
-					</li>
-					<li>
+					</li> */}
+					{/* <li>
 						Now that your new list has items you can start checking off items as
 						you shop!
 						<ul>
@@ -30,13 +39,69 @@ export function About() {
 								history!
 							</li>
 						</ul>
-					</li>
-					<li>
+					</li> */}
+					{/* <li>
 						If someone else needs to be let into to the shopping time you can
 						easily share specific lists with with in the list manager so they
 						can see and mark items as purchased too!
-					</li>
+					</li> */}
 				</ul>
+				<Carousel activeIndex={stepIndex} onSelect={handleStepIndexChoice}>
+					<Carousel.Item>
+						<Image src={SampleImage} fluid />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>
+								Create a list for different stores or different grouping of
+								items.
+							</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item>
+						<Image src={SampleImage} fluid />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Select a list that you&apos;d like to add items on.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item>
+						<Image src={SampleImage} fluid />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>
+								Open the list manager, to start adding items and choosing when
+								you will need to restock next.
+							</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item>
+						<Image src={SampleImage} fluid />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>
+								Now that your new list has items you can start checking off
+								items as you shop!
+							</p>
+							<p>
+								Each time an item is marked purchase the application evaluates
+								your shopping habits! Supporting you by adjusting your next
+								purchase predictions base on when your previous shopping
+								history!
+							</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item>
+						<Image src={SampleImage} fluid />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>
+								If someone else needs to be let into to the shopping time you
+								can easily share specific lists with with in the list manager so
+								they can see and mark items as purchased too!
+							</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+				</Carousel>
 				<SignInButton isSignIn={false} />
 			</Card>
 			<section className="d-flex flex-wrap align-items-center justify-content-center gap-2 w-100">
