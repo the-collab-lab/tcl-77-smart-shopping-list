@@ -345,19 +345,30 @@ export async function deleteItem(listPath: string, item: ListItem) {
 	}
 }
 
-export async function deleteList(listPath: string, user: User) {
+export async function deleteList(listName: string, user: User) {
 	// reference the list document
-	const listDocumentRef = doc(db, listPath);
+	const listDocRef = doc(db, user.uid, listName);
+
 	//get the document from firebase
-	const docSnap = await getDoc(listDocumentRef);
+	const docSnap = await getDoc(listDocRef);
+
 	// Delete the list in Firestore.
 	if (docSnap.exists()) {
 		try {
-			await deleteDoc(listDocumentRef);
-			alert(`${listPath} has been successfully deleted!`);
+			await deleteDoc(listDocRef);
+
+			// Remove the list from the user's sharedLists array
+			const userDocumentRef = doc(db, "users", user.email);
+
+			updateDoc(userDocumentRef, {
+				sharedLists: arrayUnion(listDocRef),
+			});
+
+			// Notify the user that the list has been deleted.
+			alert(`${listName} has been successfully deleted!`);
 		} catch (error) {
 			// If there's an error, log it to the console and throw it.
-			console.error(`Oops! Error deleting ${listPath}`, error);
+			console.error(`Oops! Error deleting ${listName}`, error);
 			throw error;
 		}
 	}
