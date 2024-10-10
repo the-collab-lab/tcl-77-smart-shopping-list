@@ -9,8 +9,8 @@ export function UnauthenticatedHome() {
 
 	return (
 		<div className="Home">
-			<h2 className="text__heading">Welcome to GrocerEase</h2>
-			<p className="text__normal">
+			<h2 className="heading-text">Welcome to GrocerEase</h2>
+			<p className="normal-text">
 				The next best thing to having someone else do the shopping for you!{" "}
 				<br />
 				Create and manage smart lists, while it learns your shopping habits to
@@ -19,14 +19,14 @@ export function UnauthenticatedHome() {
 			</p>
 
 			<article>
-				<h3 className="text__heading">Welcome Back:</h3>
+				<h3 className="heading-text">Welcome Back:</h3>
 				<div className="custom-button-wrapper">
 					<SignInButton />
 				</div>
 			</article>
 
 			<article>
-				<h5 className="text__heading">New to GrocerEase?</h5>
+				<h5 className="heading-text">New to GrocerEase?</h5>
 				<div className="custom-button-wrapper">
 					<Button
 						onClick={() => navigate("/about")}
