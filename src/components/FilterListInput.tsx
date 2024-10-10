@@ -26,8 +26,11 @@ export function FilterListInput({
 
 	return (
 		<Form onSubmit={handleSubmit}>
-			<InputGroup>
-				<Form.Label htmlFor="filterList"> Filter List:</Form.Label>
+			<InputGroup className="d-flex align-items-center">
+				<Form.Label htmlFor="filterList" className="me-2 mb-0">
+					{" "}
+					Filter List:
+				</Form.Label>
 				<Form.Control
 					type="text"
 					onChange={handleChange}
@@ -36,7 +39,7 @@ export function FilterListInput({
 					aria-label="Filter items in the list"
 					placeholder="Search items..."
 				/>
-				<Button onClick={handleClear}>x</Button>
+				<Button onClick={handleClear}>Clear</Button>
 			</InputGroup>
 		</Form>
 	);
