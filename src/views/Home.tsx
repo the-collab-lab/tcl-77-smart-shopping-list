@@ -1,5 +1,4 @@
 import React from "react";
-import "./Home.scss";
 import { List, User } from "../api";
 import { AuthenticatedHome, UnauthenticatedHome } from "../views";
 
