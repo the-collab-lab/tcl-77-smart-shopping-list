@@ -1,0 +1,31 @@
+@use "../../styles/variables.scss" as *;
+
+.text__heading {
+	color: $secondary-blue;
+	text-align: center;
+	padding: 12px;
+}
+
+.text__normal {
+	color: $light-blue;
+	text-align: center;
+}
+
+.button {
+	background-color: $primary-blue;
+	border: none;
+	color: $primary-beige;
+	text-align: center;
+	padding: 10px 40px;
+	width: 170px;
+}
+
+.custom-button-wrapper {
+	display: flex;
+	justify-content: center; // Centers the button horizontally
+	align-items: center;
+}
+
+.custom-button-wrapper button {
+	@extend .button;
+}
