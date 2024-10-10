@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
+import { ManageList } from "./ManageList";
 import { ListItem, comparePurchaseUrgency } from "../../api";
 import Button from "react-bootstrap/Button";
 
@@ -27,7 +28,9 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	const Header = () => {
 		return (
 			<p>
-				Hello from the <code>/list</code> page!
+				Shopping has never been easier. You can now view and edit shopping list
+				items on the go. For your ease, items are sorted by their next purchase
+				dates.
 			</p>
 		);
 	};
@@ -66,21 +69,22 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 			<Header />
 
-			<section className="sticky-top">
+			<section className="d-flex sticky-top justify-content-center">
 				{unfilteredListItems.length > 0 && (
 					<FilterListInput
 						searchTerm={searchTerm}
 						setSearchTerm={setSearchTerm}
 					/>
 				)}
-				<h3>Want to add more items to your list?</h3>
 				<Button
+					className="ms-5"
 					onClick={() => navigate("/manage-list")}
 					aria-label="Navigate to add more items to your list"
 				>
 					{"Add items"}
 				</Button>
 			</section>
+
 			<section>
 				{filteredListItems.map((item) => (
 					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />

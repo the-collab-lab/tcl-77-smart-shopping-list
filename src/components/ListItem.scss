@@ -17,3 +17,11 @@
 .ListItem-label {
 	margin-left: 0.2em;
 }
+
+.UrgencyStatus {
+	display: block;
+	background-color: $secondary-blue;
+	color: $primary-beige;
+	font-size: 1.5em;
+	max-width: 50%;
+}

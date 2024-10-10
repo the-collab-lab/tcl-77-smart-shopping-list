@@ -27,7 +27,7 @@ export function FilterListInput({
 	return (
 		<Form onSubmit={handleSubmit}>
 			<InputGroup>
-				<Form.Label htmlFor="filterList">Filter List:</Form.Label>
+				<Form.Label htmlFor="filterList"> Filter List:</Form.Label>
 				<Form.Control
 					type="text"
 					onChange={handleChange}
