@@ -45,6 +45,7 @@ export function ItemQuantityForm({
 	return (
 		<>
 			<Form.Control
+				className="me-5 w-auto"
 				id="item-quantity"
 				aria-label="Item quantity"
 				type="number"
@@ -57,11 +58,11 @@ export function ItemQuantityForm({
 			/>
 			{edit ? (
 				<span>
-					<Button onClick={updateItemQuantity}>Save!</Button>{" "}
-					<Button onClick={toggleEdit}>Cancel!</Button>
+					<Button onClick={updateItemQuantity}>Save</Button>{" "}
+					<Button onClick={toggleEdit}>Cancel</Button>
 				</span>
 			) : (
-				<Button onClick={toggleEdit}>Edit!</Button>
+				<Button onClick={toggleEdit}>Edit</Button>
 			)}
 		</>
 	);
