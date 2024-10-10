@@ -356,13 +356,17 @@ export async function deleteList(listName: string, user: User) {
 	if (docSnap.exists()) {
 		try {
 			await deleteDoc(listDocRef);
+			console.log("List deleted from backend successfully!");
 
 			// Remove the list from the user's sharedLists array
 			const userDocumentRef = doc(db, "users", user.email);
+			console.log("User from backend:", userDocumentRef);
 
 			updateDoc(userDocumentRef, {
 				sharedLists: arrayUnion(listDocRef),
 			});
+
+			console.log("List deleted from user info successfully!");
 
 			// Notify the user that the list has been deleted.
 			alert(`${listName} has been successfully deleted!`);
