@@ -24,6 +24,7 @@ export function AuthenticatedHome({ data, setListPath, user }: Props) {
 								name={list.name}
 								path={list.path}
 								setListPath={setListPath}
+								User={user}
 							/>
 						))}
 					</ul>
