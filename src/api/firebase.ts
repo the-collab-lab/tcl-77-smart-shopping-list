@@ -358,11 +358,9 @@ export async function deleteList(listName: string, user: User) {
 			await deleteDoc(listDocRef);
 			console.log("List deleted from backend successfully!");
 
-			// Remove the list from the user's sharedLists array
-			const userDocumentRef = doc(db, "users", user.email);
-			console.log("User from backend:", userDocumentRef);
+			const userDocRef = doc(db, "users", user.email);
 
-			updateDoc(userDocumentRef, {
+			updateDoc(userDocRef, {
 				sharedLists: arrayUnion(listDocRef),
 			});
 
