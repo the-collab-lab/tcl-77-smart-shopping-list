@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
-import { ManageList } from "./ManageList";
 import { ListItem, comparePurchaseUrgency } from "../../api";
 import Button from "react-bootstrap/Button";
 
@@ -27,10 +26,10 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	const Header = () => {
 		return (
-			<p>
-				Shopping has never been easier. You can now view and edit shopping list
-				items on the go. For your ease, items are sorted by their next purchase
-				dates.
+			<p className="Header">
+				For your ease, items are sorted by next purchase date. View and edit
+				shopping list items on the go. Mark items as purchased. Shopping has
+				never been easier.
 			</p>
 		);
 	};
@@ -64,8 +63,8 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	// Main content when list is not empty
 	return (
-		<>
-			<h2 className="ListName">{listName}</h2>
+		<div>
+			<h2 className="ListName  ms-5 ">{listName}</h2>
 
 			<Header />
 
@@ -90,6 +89,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
 				))}
 			</section>
-		</>
+		</div>
 	);
 }

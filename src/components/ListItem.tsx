@@ -121,7 +121,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	return (
 		<div className="mt-3">
 			<span className="UrgencyStatus ms-5 px-5">{getUrgencyStatus(item)}</span>
-			<div className="ListItem col-12 p-3 m-3">
+			<div className="ListItemBox col-12 p-3 m-3">
 				<Form.Check
 					className="me-3"
 					type="checkbox"
@@ -133,7 +133,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					aria-checked={isChecked}
 					disabled={isChecked}
 				/>
-				<h4 className="me-1 mb-0"> {item.name} </h4>
+				<h4 className="Item me-1 mb-0"> {item.name} </h4>
 				<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
 
 				<Button
