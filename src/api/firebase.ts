@@ -373,6 +373,10 @@ export async function deleteList(listName: string, user: User) {
 			console.error(`Oops! Error deleting ${listName}`, error);
 			throw error;
 		}
+	} else {
+		// If the list doesn't exist, notify the user.
+		console.error("List does not exist!");
+		alert("List does not exist!");
 	}
 }
 
