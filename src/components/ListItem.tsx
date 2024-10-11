@@ -6,6 +6,7 @@ import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Row, Col, Container } from "react-bootstrap";
 
 interface Props {
 	item: ListItem;
@@ -119,31 +120,38 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<div className="mt-3">
+		<Container fluid className="mt-3">
 			<span className="UrgencyStatus ms-5 px-5">{getUrgencyStatus(item)}</span>
-			<div className="ListItemBox col-12 p-3 m-3">
-				<Form.Check
-					className="me-3"
-					type="checkbox"
-					id={`checkbox-${item.id}`}
-					aria-label={`Mark ${item.name} as purchased.`}
-					value={item.id}
-					checked={isChecked}
-					onChange={handleCheckChange}
-					aria-checked={isChecked}
-					disabled={isChecked}
-				/>
-				<h4 className="Item me-1 mb-0"> {item.name} </h4>
-				<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
-
-				<Button
-					className="me-3"
-					variant="danger"
-					onClick={() => deleteItemHandler()}
-				>
-					Delete Item
-				</Button>
-			</div>
-		</div>
+			<Row className="ListItemBox col-12 p-3 m-3">
+				<Col fluid>
+					<Form.Check
+						className="me-3"
+						type="checkbox"
+						id={`checkbox-${item.id}`}
+						aria-label={`Mark ${item.name} as purchased.`}
+						value={item.id}
+						checked={isChecked}
+						onChange={handleCheckChange}
+						aria-checked={isChecked}
+						disabled={isChecked}
+					/>
+				</Col>
+				<Col>
+					<h4 className="Item me-1 mb-0"> {item.name} </h4>
+				</Col>
+				<Col>
+					<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
+				</Col>
+				<Col>
+					<Button
+						className="me-3"
+						variant="danger"
+						onClick={() => deleteItemHandler()}
+					>
+						Delete Item
+					</Button>
+				</Col>
+			</Row>
+		</Container>
 	);
 }
