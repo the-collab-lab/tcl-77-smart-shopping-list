@@ -123,9 +123,9 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	return (
 		<Container className="d-flex flex-column justify-content-center mt-4">
 			<span className="UrgencyStatus ms-5 px-5">{getUrgencyStatus(item)}</span>
-			<section className="ListItemBox d-flex flex-nowrap p-2 m-2">
-				<Row>
-					<Col className="d-flex">
+			<section className="ListItemBox p-2 m-2">
+				<Row className="d-flex container-fluid">
+					<Col xs={5} className="d-flex">
 						<Form.Check
 							className="me-3"
 							type="checkbox"
@@ -140,15 +140,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 						<h4 className="Item me-1 mb-0"> {item.name} </h4>
 					</Col>
 
-					<Col className="d-flex">
+					<Col xs={5} className="d-flex">
 						<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
 					</Col>
-					<Col>
-						<Button
-							className=""
-							variant="danger"
-							onClick={() => deleteItemHandler()}
-						>
+					<Col xs={2}>
+						<Button variant="danger" onClick={() => deleteItemHandler()}>
 							<span className="d-none d-md-inline">Delete</span>
 							<MdOutlineDeleteForever className="DeleteIcon d-block d-md-none" />
 						</Button>
