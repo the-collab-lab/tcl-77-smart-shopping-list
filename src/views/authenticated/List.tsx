@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 interface Props {
@@ -63,40 +63,34 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	// Main content when list is not empty
 	return (
-		<Container fluid>
-			<Row>
-				<h2 className="ListName  mt-2">{listName}</h2>
+		<>
+			<header>
+				<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
 				<Header />
-			</Row>
-			<section className="d-flex sticky-top justify-content-center">
-				<Row>
-					<Col>
-						{unfilteredListItems.length > 0 && (
-							<FilterListInput
-								searchTerm={searchTerm}
-								setSearchTerm={setSearchTerm}
-							/>
-						)}
-					</Col>
-					<Col>
-						<Button
-							className="ms-5"
-							onClick={() => navigate("/manage-list")}
-							aria-label="Navigate to add more items to your list"
-						>
-							{"Add items"}
-						</Button>
-					</Col>
-				</Row>
+			</header>
+
+			<section className="d-flex sticky-top flex-nowrap align-items-center justify-content-center">
+				{unfilteredListItems.length > 0 && (
+					<FilterListInput
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+					/>
+				)}
+
+				<Button
+					className="ms-2"
+					onClick={() => navigate("/manage-list")}
+					aria-label="Navigate to add more items to your list"
+				>
+					{"Add items"}
+				</Button>
 			</section>
 
-			<section>
-				<Row>
-					{filteredListItems.map((item) => (
-						<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
-					))}
-				</Row>
+			<section className="ListItemContainer">
+				{filteredListItems.map((item) => (
+					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
+				))}
 			</section>
-		</Container>
+		</>
 	);
 }

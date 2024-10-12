@@ -4,11 +4,13 @@
 	align-items: baseline;
 	display: flex;
 	flex-direction: row;
+	gap: 10px;
 	font-size: 1.5em;
 	justify-content: space-between;
 	background-color: $primary-blue;
 	color: $primary-beige;
 	border-radius: 4px;
+	max-width: 100%;
 }
 
 .UrgencyStatus {

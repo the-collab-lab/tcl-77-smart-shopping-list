@@ -45,7 +45,7 @@ export function ItemQuantityForm({
 	return (
 		<>
 			<Form.Control
-				className="me-5 w-auto"
+				className="me-3 w-auto"
 				id="item-quantity"
 				aria-label="Item quantity"
 				type="number"

@@ -6,9 +6,14 @@
 	text-align: center;
 	border-radius: 4px;
 	font-size: 2.5em;
-	justify-content: center;
+	max-width: 100%;
 }
 
 .Header {
 	text-align: center;
+}
+
+.ListContainer {
+	max-width: 100%;
+	width: fit-content;
 }

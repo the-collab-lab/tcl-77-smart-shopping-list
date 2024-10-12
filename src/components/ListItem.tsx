@@ -6,7 +6,8 @@ import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Container, Col } from "react-bootstrap";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
 interface Props {
 	item: ListItem;
@@ -120,38 +121,40 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<Container fluid className="mt-3">
+		<Container className="d-flex flex-column justify-content-center mt-4">
 			<span className="UrgencyStatus ms-5 px-5">{getUrgencyStatus(item)}</span>
-			<Row className="ListItemBox col-12 p-3 m-3">
-				<Col fluid>
-					<Form.Check
-						className="me-3"
-						type="checkbox"
-						id={`checkbox-${item.id}`}
-						aria-label={`Mark ${item.name} as purchased.`}
-						value={item.id}
-						checked={isChecked}
-						onChange={handleCheckChange}
-						aria-checked={isChecked}
-						disabled={isChecked}
-					/>
-				</Col>
-				<Col>
-					<h4 className="Item me-1 mb-0"> {item.name} </h4>
-				</Col>
-				<Col>
-					<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
-				</Col>
-				<Col>
-					<Button
-						className="me-3"
-						variant="danger"
-						onClick={() => deleteItemHandler()}
-					>
-						Delete Item
-					</Button>
-				</Col>
-			</Row>
+			<section className="ListItemBox d-flex flex-nowrap p-2 m-2">
+				<Row>
+					<Col className="d-flex">
+						<Form.Check
+							className="me-3"
+							type="checkbox"
+							id={`checkbox-${item.id}`}
+							aria-label={`Mark ${item.name} as purchased.`}
+							value={item.id}
+							checked={isChecked}
+							onChange={handleCheckChange}
+							aria-checked={isChecked}
+							disabled={isChecked}
+						/>
+						<h4 className="Item me-1 mb-0"> {item.name} </h4>
+					</Col>
+
+					<Col className="d-flex">
+						<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
+					</Col>
+					<Col>
+						<Button
+							className=""
+							variant="danger"
+							onClick={() => deleteItemHandler()}
+						>
+							<span className="d-none d-md-inline">Delete</span>
+							<MdOutlineDeleteForever className="DeleteIcon d-block d-md-none" />
+						</Button>
+					</Col>
+				</Row>
+			</section>
 		</Container>
 	);
 }
