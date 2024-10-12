@@ -62,7 +62,9 @@ export function CreateList({ user, setListPath }: Props) {
 						aria-required="true" // Indicates that this field is required
 					/>
 					<br />
-					<Button aria-label="Create new shopping list">Create List</Button>
+					<Button type="submit" aria-label="Create new shopping list">
+						Create List
+					</Button>
 				</InputGroup>
 			</Form>
 		</>
