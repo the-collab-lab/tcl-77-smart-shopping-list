@@ -67,23 +67,30 @@ export function useShoppingLists(user: User | null) {
 		// When we get a userEmail, we use it to subscribe to real-time updates
 		const userDocRef = doc(db, "users", user.email);
 
+		// Listen to the user's sharedLists array in Firestore.
 		onSnapshot(userDocRef, (docSnap) => {
 			if (docSnap.exists()) {
 				// deserialize the list into a typed List
 				const data = docSnap.data().sharedLists.map((list: unknown) => {
+					// Validate the data
 					const decoded = ListModel.decode(list);
+					// If the data is invalid, throw an error.
 					if (isLeft(decoded)) {
+						// Log the error to the console and throw it as an exception so we can see it in the browser.
 						throw Error(
 							`Could not validate data: ${PathReporter.report(decoded).join("\n")}`,
 						);
 					}
 
+					// If the data is valid, return the data.
 					const model = decoded.right;
 					return {
 						name: model.id,
 						path: model.path,
 					};
 				});
+
+				// Update our React state with the new data.
 				setData(data);
 			}
 		});
@@ -131,7 +138,9 @@ export function useShoppingListData(listPath: string | null) {
 				// but it is very useful, so we add it to the data ourselves.
 				item.id = docSnapshot.id;
 
+				// Validate the data using our ListItemModel type.
 				const decoded = ListItemModel.decode(item);
+				// If the data is invalid, log an error to the console and throw an exception.
 				if (isLeft(decoded)) {
 					console.error("Validation failed for item:", item);
 					throw Error(
