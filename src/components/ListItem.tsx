@@ -146,7 +146,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					<Col xs={2}>
 						<Button variant="danger" onClick={() => deleteItemHandler()}>
 							<span className="d-none d-md-inline">Delete</span>
-							<MdOutlineDeleteForever className="DeleteIcon d-block d-md-none" />
+							<MdOutlineDeleteForever className=" d-block d-md-none" />
 						</Button>
 					</Col>
 				</Row>

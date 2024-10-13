@@ -21,3 +21,9 @@
 	max-width: 50%;
 	border-radius: 4px;
 }
+
+@media (min-width: 576px) {
+	.EditItem {
+		display: flex;
+	}
+}
