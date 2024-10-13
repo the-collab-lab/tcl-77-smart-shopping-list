@@ -46,7 +46,7 @@ export function ItemQuantityForm({
 	};
 
 	return (
-		<>
+		<div className="d-flex">
 			<Form.Control
 				className="me-3 w-auto"
 				id="item-quantity"
@@ -61,7 +61,7 @@ export function ItemQuantityForm({
 			/>
 			<div>
 				{edit ? (
-					<span>
+					<>
 						<Button onClick={updateItemQuantity}>
 							<span className="d-none d-md-inline"> Save </span>
 							<IoMdCheckmark className="d-block d-md-none" />
@@ -70,7 +70,7 @@ export function ItemQuantityForm({
 							<span className="d-none d-md-inline">Cancel</span>
 							<GiCancel className="d-block d-md-none" />
 						</Button>
-					</span>
+					</>
 				) : (
 					<Button onClick={toggleEdit}>
 						<span className="d-none d-md-inline">Edit</span>
@@ -78,6 +78,6 @@ export function ItemQuantityForm({
 					</Button>
 				)}
 			</div>
-		</>
+		</div>
 	);
 }

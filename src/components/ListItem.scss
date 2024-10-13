@@ -2,15 +2,14 @@
 
 .ListItemBox {
 	align-items: baseline;
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
 	font-size: 1.5em;
 	justify-content: space-between;
 	background-color: $primary-blue;
 	color: $primary-beige;
 	border-radius: 4px;
 	max-width: 100%;
+	overflow-wrap: break-word;
+	box-sizing: border-box;
 }
 
 .UrgencyStatus {
@@ -19,11 +18,12 @@
 	color: $primary-beige;
 	font-size: 1.25em;
 	max-width: 50%;
+	width: 100%;
 	border-radius: 4px;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
 	.EditItem {
-		display: flex;
+		flex-direction: column;
 	}
 }

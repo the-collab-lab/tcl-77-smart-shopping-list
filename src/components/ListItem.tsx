@@ -6,7 +6,6 @@ import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Row, Container, Col } from "react-bootstrap";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
 interface Props {
@@ -121,36 +120,39 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<Container className="d-flex flex-column justify-content-center mt-4">
-			<span className="UrgencyStatus ms-5 px-5">{getUrgencyStatus(item)}</span>
-			<section className="ListItemBox p-2 m-2">
-				<Row className="d-flex container-fluid">
-					<Col xs={5} className="d-flex">
-						<Form.Check
-							className="me-3"
-							type="checkbox"
-							id={`checkbox-${item.id}`}
-							aria-label={`Mark ${item.name} as purchased.`}
-							value={item.id}
-							checked={isChecked}
-							onChange={handleCheckChange}
-							aria-checked={isChecked}
-							disabled={isChecked}
-						/>
-						<h4 className="Item me-1 mb-0"> {item.name} </h4>
-					</Col>
+		<div className="d-flex flex-column justify-content-center mt-4">
+			<span className="UrgencyStatus text-nowrap ms-5 px-5">
+				{getUrgencyStatus(item)}
+			</span>
+			<section className="ListItemBox d-flex p-2 m-1">
+				<section className="d-flex flex-grow-1 PurchaseItem">
+					<Form.Check
+						className="me-3"
+						type="checkbox"
+						id={`checkbox-${item.id}`}
+						aria-label={`Mark ${item.name} as purchased.`}
+						value={item.id}
+						checked={isChecked}
+						onChange={handleCheckChange}
+						aria-checked={isChecked}
+						disabled={isChecked}
+					/>
+					<h4 className="text-nowrap me-1 mb-0"> {item.name} </h4>
+				</section>
 
-					<Col xs={5} className="d-flex">
-						<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
-					</Col>
-					<Col xs={2}>
-						<Button variant="danger" onClick={() => deleteItemHandler()}>
-							<span className="d-none d-md-inline">Delete</span>
-							<MdOutlineDeleteForever className=" d-block d-md-none" />
-						</Button>
-					</Col>
-				</Row>
+				<section className="EditItem d-flex ms-auto gap-sm-4">
+					<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
+
+					<Button
+						className="mt-auto w-auto ms-2 flex-shrink-0"
+						variant="danger"
+						onClick={() => deleteItemHandler()}
+					>
+						<span className="d-none d-md-inline">Delete</span>
+						<MdOutlineDeleteForever className=" ms-auto d-block d-md-none" />
+					</Button>
+				</section>
 			</section>
-		</Container>
+		</div>
 	);
 }
