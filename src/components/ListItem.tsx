@@ -140,16 +140,16 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 					<h4 className="text-nowrap me-1 mb-0"> {item.name} </h4>
 				</section>
 
-				<section className="EditItem d-flex ms-auto gap-sm-4">
+				<section className="EditItem d-flex  gap-sm-4 align-items-end">
 					<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
 
 					<Button
-						className="mt-auto w-auto ms-2 flex-shrink-0"
+						className="DeleteButton mt-auto w-auto ms-2 "
 						variant="danger"
 						onClick={() => deleteItemHandler()}
 					>
 						<span className="d-none d-md-inline">Delete</span>
-						<MdOutlineDeleteForever className=" ms-auto d-block d-md-none" />
+						<MdOutlineDeleteForever className="  d-block d-md-none" />
 					</Button>
 				</section>
 			</section>
