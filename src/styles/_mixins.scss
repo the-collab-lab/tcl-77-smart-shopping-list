@@ -1,0 +1,12 @@
+// ====== MEDIA ========
+@mixin tablet {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media (min-width: 375px) {
+		@content;
+	}
+}

@@ -1,7 +1,14 @@
+@use "../../styles/mixins.scss" as *;
+
 .lists {
+	display: block;
 	margin-top: 20px;
 	padding: 0;
-	display: flex;
-	justify-content: space-between;
-	flex-flow: wrap;
+
+	@include tablet {
+		padding: 0;
+		display: flex;
+		justify-content: space-between;
+		flex-flow: wrap;
+	}
 }

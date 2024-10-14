@@ -1,13 +1,15 @@
+@use "../styles/mixins.scss" as *;
 @import "../views/unauthenticated/UnauthenticatedHome.scss";
 
 .SingleList {
 	@extend .custom-button-wrapper;
-	// @extend .button;
-	align-items: baseline;
-	font-size: 1.2em;
-	width: 120px;
+	list-style-type: none;
 }
 
-.SingleList-label {
-	margin-left: 0.2em;
+.SingleList button {
+	width: 100%;
+	margin: 5px;
+	@include tablet {
+		margin: 5px;
+	}
 }

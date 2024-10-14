@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { SingleList, CreateList } from "../../components";
 import { List, User } from "../../api";
 import "./AuthenticatedHome.scss";
