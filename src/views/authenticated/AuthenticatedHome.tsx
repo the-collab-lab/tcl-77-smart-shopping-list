@@ -15,6 +15,7 @@ export function AuthenticatedHome({ data, setListPath, user }: Props) {
 			{user && (
 				<>
 					<CreateList user={user} setListPath={setListPath} />
+					<h3 className="heading-text">Your Lists</h3>
 					<ul className="lists">
 						{data.map((list, index) => (
 							<SingleList
