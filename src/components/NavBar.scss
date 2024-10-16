@@ -41,7 +41,7 @@
 	font-weight: bold;
 	border: none;
 
-	&:hover {
+	@media (hover: hover) {
 		background-color: $secondary-blue;
 		color: $primary-beige;
 	}

@@ -14,7 +14,7 @@ export function AuthenticatedNavBar() {
 			expand="md"
 			className="bg-secondary rounded-bottom-3 pt-0"
 		>
-			<Container>
+			<Container className="align-items-center justify-content-evenly">
 				<Navbar.Brand className="bg-primary rounded-bottom-3 text-center mb-3 px-3 text-dark fw-bolder shadow">
 					GrocerEase
 				</Navbar.Brand>
@@ -33,8 +33,8 @@ export function AuthenticatedNavBar() {
 							Manage List
 						</Nav.Link>
 					</Nav>
-					<SignOutButton />
 				</Navbar.Collapse>
+				<SignOutButton />
 			</Container>
 		</Navbar>
 	);
