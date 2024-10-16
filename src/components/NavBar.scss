@@ -36,14 +36,14 @@
 }
 
 .navbar button {
-	background-color: $secondary-blue;
-	color: $primary-beige;
+	background-color: $primary-beige;
+	color: $secondary-blue;
 	font-weight: bold;
 	border: none;
 
 	&:hover {
-		background-color: $primary-beige;
-		color: $secondary-blue;
+		background-color: $secondary-blue;
+		color: $primary-beige;
 	}
 
 	@media (min-width: 431px) {
@@ -52,9 +52,5 @@
 		border: none;
 		padding: 0.5rem;
 		width: 11rem;
-	}
-
-	@media (max-width: 430px) {
-		background-color: $primary-beige;
 	}
 }

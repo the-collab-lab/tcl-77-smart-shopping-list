@@ -190,7 +190,7 @@ export function About() {
 									target="_blank"
 								>
 									The Collab Lab
-								</a>
+								</a>{" "}
 								for the opportunity!
 							</p>
 						</Card.Body>
