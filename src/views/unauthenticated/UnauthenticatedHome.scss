@@ -1,0 +1,41 @@
+@use "../../styles/variables.scss" as *;
+
+.home {
+	background-color: rgba($primary-beige, 0.9);
+	border-radius: 5%;
+	padding: 40px;
+}
+
+.heading-text {
+	color: $secondary-blue;
+	text-align: center;
+	padding: 12px;
+}
+
+.normal-text {
+	color: $light-blue;
+	text-align: center;
+}
+
+.button {
+	background-color: $primary-blue;
+	border: none;
+	color: $primary-beige;
+	text-align: center;
+	padding: 10px 40px;
+	width: 170px;
+
+	&:hover {
+		background-color: $secondary-blue;
+	}
+}
+
+.custom-button-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.custom-button-wrapper button {
+	@extend .button;
+}
