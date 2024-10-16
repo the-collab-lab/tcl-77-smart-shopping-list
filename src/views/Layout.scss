@@ -20,7 +20,7 @@
 		margin: 0 auto;
 		padding-block: 0;
 		padding-block-end: 6.26rem;
-		width: 100vw;
+		width: min(72ch, 100%);
 		height: 100dvh;
 	}
 }
