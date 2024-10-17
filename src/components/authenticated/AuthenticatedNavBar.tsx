@@ -32,6 +32,14 @@ export function AuthenticatedNavBar() {
 						>
 							Manage List
 						</Nav.Link>
+						<Nav.Link
+							as={NavLink}
+							to="/about"
+							aria-label="About"
+							eventKey={"3"}
+						>
+							About
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 				<SignOutButton />

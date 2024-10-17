@@ -27,8 +27,10 @@ export function UnauthenticatedHome() {
 
 			<article>
 				<h5 className="heading-text">New to GrocerEase?</h5>
-				<div className="custom-button-wrapper">
+				<div className="custom-button-wrapper justify-content-evenly">
 					<Button
+						className="custom-button"
+						type="button"
 						onClick={() => navigate("/about")}
 						aria-label="Navigate to the about application page."
 					>

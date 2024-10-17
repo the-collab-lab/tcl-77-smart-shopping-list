@@ -64,7 +64,11 @@ export function CreateList({ user, setListPath }: Props) {
 					/>
 					<br />
 					<div className="custom-button-wrapper">
-						<Button aria-label="Create new shopping list" type="submit">
+						<Button
+							className="custom-button"
+							aria-label="Create new shopping list"
+							type="submit"
+						>
 							Create List
 						</Button>
 					</div>

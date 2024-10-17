@@ -26,7 +26,7 @@ body {
 	text-align: center;
 	border: none;
 	padding: 0.5rem;
-	width: 13rem;
+	width: max-content;
 
 	&:hover {
 		background-color: $secondary-blue;
