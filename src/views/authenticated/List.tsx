@@ -48,6 +48,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 						Let’s get started by adding your first item!
 					</h3>
 					<Button
+						className="custom-button"
 						onClick={() => navigate("/manage-list")}
 						aria-label="Start adding items to your list"
 					>
@@ -74,6 +75,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				)}
 				<h3>Want to add more items to your list?</h3>
 				<Button
+					className="custom-button"
 					onClick={() => navigate("/manage-list")}
 					aria-label="Navigate to add more items to your list"
 				>

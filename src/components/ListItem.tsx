@@ -134,7 +134,9 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			{item.name}{" "}
 			<span>
 				{getUrgencyStatus(item)}
-				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
+				<Button className="custom-button" onClick={() => deleteItemHandler()}>
+					Delete Item
+				</Button>
 			</span>
 		</div>
 	);

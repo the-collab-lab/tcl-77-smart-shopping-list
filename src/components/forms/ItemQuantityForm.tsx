@@ -57,11 +57,17 @@ export function ItemQuantityForm({
 			/>
 			{edit ? (
 				<span>
-					<Button onClick={updateItemQuantity}>Save!</Button>{" "}
-					<Button onClick={toggleEdit}>Cancel!</Button>
+					<Button className="custom-button" onClick={updateItemQuantity}>
+						Save!
+					</Button>{" "}
+					<Button className="custom-button" onClick={toggleEdit}>
+						Cancel!
+					</Button>
 				</span>
 			) : (
-				<Button onClick={toggleEdit}>Edit!</Button>
+				<Button className="custom-button" onClick={toggleEdit}>
+					Edit!
+				</Button>
 			)}
 		</>
 	);

@@ -1,9 +1,39 @@
 @import "../styles/variables.scss";
 
+$theme-colors: (
+	"primary": $primary-beige,
+	"secondary": $primary-blue,
+	"info": $tertiary-blue,
+	"dark": $secondary-blue,
+);
+
+$font-size-root: null;
+$font-size-base: 1.13rem; // Assumes the browser default, typically `16px`
+
+@import "~bootstrap/scss/bootstrap";
+
 body {
 	font-family: "Nunito", sans-serif;
 	font-optical-sizing: auto;
 	font-weight: 400;
 	font-style: normal;
 	background-color: $primary-beige;
+}
+
+.custom-button {
+	background-color: $primary-blue;
+	color: $primary-beige;
+	text-align: center;
+	border: none;
+	padding: 0.5rem;
+	width: 11rem;
+
+	&:hover {
+		background-color: $secondary-blue;
+		color: $primary-beige;
+	}
+}
+
+a svg {
+	fill: $primary-beige;
 }

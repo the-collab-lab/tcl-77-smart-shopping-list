@@ -11,26 +11,16 @@
 	display: flex;
 	flex-direction: column;
 	height: 100dvh;
-}
 
-// .Layout > * {
-// 	padding-inline: min(5dvw, 3.2rem);
-// }
+	> *:not(header) {
+		padding-inline: min(5dvw, 3.2rem);
+	}
 
-.Layout-header {
-	background-color: var(--color-bg);
-	padding-bottom: 0.5rem;
-	padding-top: max(env(safe-area-inset-top), 1rem);
-	text-align: center;
-}
-
-.Layout-header > h1 {
-	margin: 0;
-}
-
-.Layout-main {
-	margin: 0 auto;
-	padding-block: 0;
-	padding-block-end: 6.26rem;
-	width: min(72ch, 100%);
+	&-main {
+		margin: 0 auto;
+		padding-block: 0;
+		padding-block-end: 6.26rem;
+		width: min(72ch, 100%);
+		height: 100dvh;
+	}
 }
