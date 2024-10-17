@@ -1,11 +1,9 @@
-import { useRef } from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
 import "./AddItemForm.scss";
 
 interface Props {
@@ -26,8 +24,6 @@ const purchaseTimelines = {
 };
 
 export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
-	const navigate = useNavigate();
-
 	const [itemName, setItemName] = useState("");
 	const [itemNextPurchaseTimeline, setItemNextPurchaseTimeline] = useState(
 		PurchaseTime.soon,
@@ -177,11 +173,11 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						/>
 						Not soon -- Within {purchaseTimelines[PurchaseTime.notSoon]} days!
 					</Form.Label>
+					<Button type="submit" aria-label="Add item to shopping list">
+						Submit Item
+					</Button>
 				</fieldset>
 			</Form>
-			<Button type="submit" aria-label="Add item to shopping list">
-				Submit Item
-			</Button>
 		</section>
 	);
 }

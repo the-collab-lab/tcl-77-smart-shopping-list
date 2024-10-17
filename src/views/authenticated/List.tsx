@@ -30,7 +30,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	const Header = () => {
 		return (
-			<p className="Header">
+			<p className="Header text-center">
 				Your list items are organized based on when you need to buy them. Items
 				that need to be purchased soonest are at the top. If two or more items
 				are due at the same time, they will be sorted alphabetically. If an
@@ -51,7 +51,8 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		return (
 			<Container>
 				<h2 className="ListName">{listName}</h2>
-				<section>
+				<section className="d-flex flex-column justify-content-center text-center align-items-center">
+					<Header />
 					<h3>
 						You haven’t added any items yet.
 						<br />
@@ -103,11 +104,11 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					)}
 
 					<Button
-						className="ms-2"
+						className="ms-2 d-md-none"
 						onClick={scrollToAddShareItem}
 						aria-label="Navigate to add more items to your list"
 					>
-						{"Add items"}
+						<span className="text-nowrap">Add items</span>
 					</Button>
 				</section>
 
@@ -128,9 +129,10 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				<div className="Share-ListForm ">
 					<ShareListForm listPath={listPath} />
 				</div>
+				<Button className="d-md-none mt-3" onClick={scrollToViewList}>
+					{"View List"}
+				</Button>
 			</section>
-
-			<Button onClick={scrollToViewList}>{"View List"}</Button>
 		</Container>
 	);
 }

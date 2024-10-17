@@ -47,7 +47,7 @@ const ShareListForm = ({ listPath }: Props) => {
 			className="custom-borders d-flex flex-column align-items-center mt-3"
 			onSubmit={(e) => handleInvite(e, listPath)}
 		>
-			<Form.Label className="h3 " htmlFor="recipient-email">
+			<Form.Label className="h3 text-center " htmlFor="recipient-email">
 				Invite friends and family to view your list!
 			</Form.Label>
 			<InputGroup>

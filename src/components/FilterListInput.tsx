@@ -25,7 +25,7 @@ export function FilterListInput({
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form className="w-100 w-lg-auto" onSubmit={handleSubmit}>
 			<InputGroup className="d-flex align-items-center">
 				<Form.Label htmlFor="filterList" className="me-2 mb-0">
 					{" "}
