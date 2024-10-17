@@ -16,3 +16,15 @@
 .ListPageContainer {
 	width: 100%;
 }
+
+.Add-ShareList {
+	flex-grow: 1;
+	width: 50%;
+}
+
+.ListItemSection,
+.Add-ShareList {
+	flex-grow: 1; /* Both sections will take up equal width */
+	width: 50%;
+	align-items: flex-end;
+}

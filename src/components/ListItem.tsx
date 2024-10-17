@@ -124,7 +124,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 			<span className="UrgencyStatus text-nowrap ms-5 px-5">
 				{getUrgencyStatus(item)}
 			</span>
-			<section className="ListItemBox d-flex p-2 m-1">
+			<section className="ListItemBox custom-borders d-flex p-2 m-1">
 				<section className="d-flex flex-grow-1 PurchaseItem">
 					<Form.Check
 						className="me-3"

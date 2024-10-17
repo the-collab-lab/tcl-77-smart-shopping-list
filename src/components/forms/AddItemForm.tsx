@@ -104,11 +104,11 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	};
 
 	return (
-		<section className="custom-borders d-flex flex-column align-items-center p-2 ">
+		<section className="custom-borders d-flex flex-column align-items-center">
 			<Form onSubmit={(e) => handleSubmit(e, listPath)}>
-				<h3>New Item</h3>
+				<h3 className="text-center">Add Item</h3>
+
 				<Form.Label htmlFor="item-name">
-					<h5>Item Name:</h5>
 					<Form.Control
 						id="item-name"
 						type="text"
@@ -121,7 +121,6 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 					/>
 				</Form.Label>
 				<label htmlFor="item-quantity">
-					<h5>Item Quantity: </h5>
 					<Form.Control
 						id="item-quantity"
 						type="number"
@@ -135,8 +134,8 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						aria-required
 					/>
 				</label>
-				<br />
-				<fieldset className="custom-borders ">
+
+				<fieldset className="custom-borders d-flex flex-column mb-3">
 					<legend className="legend-text">When to buy:</legend>
 
 					<Form.Label htmlFor={PurchaseTime.soon} className="d-flex gap-2 ">
@@ -184,12 +183,12 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						/>
 						Not soon -- Within {purchaseTimelines[PurchaseTime.notSoon]} days!
 					</Form.Label>
-					<Button type="submit" aria-label="Add item to shopping list">
-						Submit Item
-					</Button>
 				</fieldset>
 			</Form>
-			{/*<Button onClick={navigateToListPage}>{"View List"}</Button>*/}
+			<Button type="submit" aria-label="Add item to shopping list">
+				Submit Item
+			</Button>
+			<Button onClick={navigateToListPage}>{"View List"}</Button>
 		</section>
 	);
 }

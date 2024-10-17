@@ -25,6 +25,14 @@
 	width: fit-content;
 }
 
+.custom-borders {
+	border: 2px solid $secondary-blue !important;
+	border-radius: 4px !important;
+	padding: 20px;
+	margin-top: 20px;
+	position: relative;
+}
+
 @media (max-width: 576px) {
 	.EditItem {
 		flex-direction: column;

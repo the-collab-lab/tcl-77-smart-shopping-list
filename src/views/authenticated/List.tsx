@@ -30,9 +30,13 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	const Header = () => {
 		return (
 			<p className="Header">
-				For your ease, items are sorted by next purchase date. View and edit
-				shopping list items on the go. Mark items as purchased. Shopping has
-				never been easier.
+				Your list items are organized based on when you need to buy them. Items
+				that need to be purchased soonest are at the top. If two or more items
+				are due at the same time, they will be sorted alphabetically. If an
+				items purchase date has passed, it will be marked as overdue and placed
+				at the top of the list. Additionally, items that have not been used
+				recently will be labeled as inactive and moved to the bottom of your
+				list.
 			</p>
 		);
 	};
@@ -68,8 +72,9 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		<Container className="ListPageContainer">
 			<header>
 				<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
+				<Header />
 			</header>
-			<div className="ListContainer d-flex">
+			<div className="d-flex">
 				{/* This is the div for the filter and adding items. */}
 				{/* Width should be 100% */}
 				<div className="ListItemSection">
@@ -81,13 +86,14 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 							/>
 						)}
 
-						<Button
+						{/*<Button
 							className="ms-2"
 							onClick={() => navigate("/manage-list")}
 							aria-label="Navigate to add more items to your list"
 						>
 							{"Add items"}
 						</Button>
+						*/}
 					</section>
 
 					<section className="ListItemContainer">
@@ -98,14 +104,11 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</div>
 
 				{/* Width of this section should be 50%. */}
-				<section className="ItemFunctions d-flex flex-column">
-					<div>
-						<Header />
-					</div>
-					<div>
+				<section className="Add-ShareList d-flex flex-column justify-content-start align-items-center ">
+					<div className="ItemFunctions ">
 						<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
 					</div>
-					<div>
+					<div className="ItemFunctions ">
 						<ShareListForm listPath={listPath} />
 					</div>
 				</section>

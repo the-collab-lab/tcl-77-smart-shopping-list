@@ -1,10 +1,10 @@
+import "./ShareListForm.scss";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { shareList } from "../../api";
 import { getUser } from "../ProtectedRoute";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { InputGroup } from "react-bootstrap";
-
 import toast from "react-hot-toast";
 
 interface Props {
@@ -43,8 +43,13 @@ const ShareListForm = ({ listPath }: Props) => {
 	};
 
 	return (
-		<Form onSubmit={(e) => handleInvite(e, listPath)}>
-			<Form.Label htmlFor="recipient-email">Recipient Email:</Form.Label>
+		<Form
+			className="custom-borders d-flex flex-column align-items-center mt-3"
+			onSubmit={(e) => handleInvite(e, listPath)}
+		>
+			<Form.Label className="h3 " htmlFor="recipient-email">
+				Invite friends and family to view your list!
+			</Form.Label>
 			<InputGroup>
 				<Form.Control
 					id="recipient-email"
@@ -58,7 +63,7 @@ const ShareListForm = ({ listPath }: Props) => {
 					aria-required
 				/>
 				<Button type="submit" aria-label="submits form to share shopping list">
-					Invite User
+					Share List
 				</Button>
 			</InputGroup>
 		</Form>
