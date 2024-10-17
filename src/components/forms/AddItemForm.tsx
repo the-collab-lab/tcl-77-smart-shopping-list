@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
@@ -96,13 +97,6 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 		}
 	};
 
-	const navigateToListPage = () => {
-		if (listPath) {
-			const listName = listPath.split("/").pop();
-			navigate(`/list/${listName}`);
-		}
-	};
-
 	return (
 		<section className="custom-borders d-flex flex-column align-items-center">
 			<Form onSubmit={(e) => handleSubmit(e, listPath)}>
@@ -188,7 +182,6 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 			<Button type="submit" aria-label="Add item to shopping list">
 				Submit Item
 			</Button>
-			<Button onClick={navigateToListPage}>{"View List"}</Button>
 		</section>
 	);
 }

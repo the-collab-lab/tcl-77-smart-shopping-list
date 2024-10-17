@@ -77,6 +77,15 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		}
 	};
 
+	const viewListRef = useRef<HTMLElement | null>(null);
+
+	// Function to handle scrolling to the Add-ShareList section
+	const scrollToViewList = () => {
+		if (viewListRef.current) {
+			viewListRef.current.scrollIntoView({ behavior: "smooth" });
+		}
+	};
+
 	// Main content when list is not empty
 	return (
 		<Container className="ListPageContainer">
@@ -102,7 +111,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					</Button>
 				</section>
 
-				<section>
+				<section ref={viewListRef}>
 					{filteredListItems.map((item) => (
 						<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
 					))}
@@ -120,6 +129,8 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					<ShareListForm listPath={listPath} />
 				</div>
 			</section>
+
+			<Button onClick={scrollToViewList}>{"View List"}</Button>
 		</Container>
 	);
 }
