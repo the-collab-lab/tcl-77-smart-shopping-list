@@ -98,7 +98,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</div>
 
 				{/* Width of this section should be 50%. */}
-				<section className="ItemFunctions">
+				<section className="ItemFunctions d-flex flex-column">
 					<div>
 						<Header />
 					</div>

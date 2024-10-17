@@ -1,0 +1,20 @@
+@import "../../styles/variables";
+
+.custom-borders {
+	border: 2px solid $secondary-blue !important;
+	border-radius: 4px !important;
+	padding: 20px;
+	margin-top: 20px;
+	position: relative;
+}
+
+.legend-text {
+	font-weight: bold;
+	padding: 0 10px; /* Creates space between the border and text */
+	color: #001f3f; /* Optional: text color */
+	position: relative;
+	top: -40px;
+	left: 10px;
+	background-color: #f3ecd3;
+	width: 80%;
+}
