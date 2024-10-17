@@ -1,5 +1,6 @@
 import "./List.scss";
 import { useParams, useNavigate } from "react-router-dom";
+import { useRef } from "react";
 import { useState, useMemo } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
@@ -67,6 +68,15 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		);
 	}
 
+	const addShareListRef = useRef<HTMLElement | null>(null);
+
+	// Function to handle scrolling to the Add-ShareList section
+	const scrollToAddShareItem = () => {
+		if (addShareListRef.current) {
+			addShareListRef.current.scrollIntoView({ behavior: "smooth" });
+		}
+	};
+
 	// Main content when list is not empty
 	return (
 		<Container className="ListPageContainer">
@@ -74,45 +84,42 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
 				<Header />
 			</header>
-			<div className="d-flex">
-				{/* This is the div for the filter and adding items. */}
-				{/* Width should be 100% */}
-				<div className="ListItemSection">
-					<section className="d-flex sticky-top flex-nowrap align-items-center justify-content-center">
-						{unfilteredListItems.length > 0 && (
-							<FilterListInput
-								searchTerm={searchTerm}
-								setSearchTerm={setSearchTerm}
-							/>
-						)}
+			<div className="ListItemSection">
+				<section className="d-flex sticky-top flex-nowrap align-items-center justify-content-center">
+					{unfilteredListItems.length > 0 && (
+						<FilterListInput
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+						/>
+					)}
 
-						{/*<Button
-							className="ms-2"
-							onClick={() => navigate("/manage-list")}
-							aria-label="Navigate to add more items to your list"
-						>
-							{"Add items"}
-						</Button>
-						*/}
-					</section>
+					<Button
+						className="ms-2"
+						onClick={scrollToAddShareItem}
+						aria-label="Navigate to add more items to your list"
+					>
+						{"Add items"}
+					</Button>
+				</section>
 
-					<section className="ListItemContainer">
-						{filteredListItems.map((item) => (
-							<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
-						))}
-					</section>
-				</div>
-
-				{/* Width of this section should be 50%. */}
-				<section className="Add-ShareList d-flex flex-column justify-content-start align-items-center ">
-					<div className="ItemFunctions ">
-						<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
-					</div>
-					<div className="ItemFunctions ">
-						<ShareListForm listPath={listPath} />
-					</div>
+				<section>
+					{filteredListItems.map((item) => (
+						<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
+					))}
 				</section>
 			</div>
+
+			<section
+				ref={addShareListRef}
+				className="Add-ShareList d-flex flex-column justify-content-start align-items-center "
+			>
+				<div className="Add-ItemForm ">
+					<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
+				</div>
+				<div className="Share-ListForm ">
+					<ShareListForm listPath={listPath} />
+				</div>
+			</section>
 		</Container>
 	);
 }

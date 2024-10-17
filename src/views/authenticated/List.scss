@@ -9,22 +9,45 @@
 	max-width: 100%;
 }
 
-.Header {
-	text-align: center;
-}
-
 .ListPageContainer {
 	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
 }
 
 .Add-ShareList {
-	flex-grow: 1;
-	width: 50%;
+	flex-basis: 20%;
+}
+
+.Share-ListForm {
+	flex-basis: 80%;
+}
+
+.Add-ItemForm {
+	flex-basis: 80%;
 }
 
 .ListItemSection,
 .Add-ShareList {
 	flex-grow: 1; /* Both sections will take up equal width */
-	width: 50%;
+	flex-shrink: 1;
 	align-items: flex-end;
+	flex-wrap: column;
+}
+
+@media (max-width: 1000px) {
+	.ListItemSection,
+	.Add-ShareList {
+		flex-basis: 50%;
+		margin: auto;
+		align-items: flex-end;
+	}
+}
+
+@media (max-width: 575px) {
+	.Add-ShareList {
+		flex-basis: 100%; /* Full width for both sections */
+		flex-wrap: wrap;
+	}
 }
