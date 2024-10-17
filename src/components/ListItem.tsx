@@ -6,6 +6,7 @@ import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
 interface Props {
 	item: ListItem;
@@ -119,23 +120,39 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<div className="ListItem">
-			<Form.Check
-				type="checkbox"
-				id={`checkbox-${item.id}`}
-				aria-label={`Mark ${item.name} as purchased.`}
-				value={item.id}
-				checked={isChecked}
-				onChange={handleCheckChange}
-				aria-checked={isChecked}
-				disabled={isChecked}
-			/>
-			<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} /> x{" "}
-			{item.name}{" "}
-			<span>
+		<div className="d-flex flex-column justify-content-center mt-4">
+			<span className="UrgencyStatus text-nowrap ms-5 px-5">
 				{getUrgencyStatus(item)}
-				<Button onClick={() => deleteItemHandler()}>Delete Item</Button>
 			</span>
+			<section className="ListItemBox custom-borders d-flex p-2 m-1">
+				<section className="d-flex flex-grow-1 PurchaseItem">
+					<Form.Check
+						className="me-3"
+						type="checkbox"
+						id={`checkbox-${item.id}`}
+						aria-label={`Mark ${item.name} as purchased.`}
+						value={item.id}
+						checked={isChecked}
+						onChange={handleCheckChange}
+						aria-checked={isChecked}
+						disabled={isChecked}
+					/>
+					<h4 className="text-nowrap me-1 mb-0"> {item.name} </h4>
+				</section>
+
+				<section className="EditItem d-flex  gap-sm-4 align-items-end">
+					<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
+
+					<Button
+						className="DeleteButton mt-auto w-auto ms-2 "
+						variant="danger"
+						onClick={() => deleteItemHandler()}
+					>
+						<span className="d-none d-md-inline">Delete</span>
+						<MdOutlineDeleteForever className="  d-block d-md-none" />
+					</Button>
+				</section>
+			</section>
 		</div>
 	);
 }
