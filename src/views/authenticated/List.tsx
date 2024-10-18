@@ -90,7 +90,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
 				</header>
 
-				<section className="d-flex sticky-top flex-nowrap align-items-center justify-content-center">
+				<section className="filter-list d-flex sticky-top flex-nowrap align-items-center justify-content-center">
 					{unfilteredListItems.length > 0 && (
 						<FilterListInput
 							searchTerm={searchTerm}
