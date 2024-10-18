@@ -82,7 +82,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</header>
 
 				<section className="AddItemForm">
-					<section />
 					<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
 				</section>
 
