@@ -1,35 +1,56 @@
-.Nav {
-	background-color: var(--color-bg);
-	border-top: 1px solid var(--color-border);
-	bottom: 0;
-	display: flex;
-	flex-direction: row;
-	padding-bottom: max(env(safe-area-inset-bottom), 1rem);
-	padding-top: 1rem;
-	place-content: center;
-	position: fixed;
-	width: 100%;
+@import "../styles/variables.scss";
 
-	&__container {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-		width: min(72ch, 100%);
+.navbar {
+	.navbar-brand {
+		font-size: 3.5rem !important;
+
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
+		@media (max-width: 430px) {
+			font-size: 3rem !important;
+		}
+		@media (max-width: 375px) {
+			font-size: 2.5rem !important;
+		}
 	}
 
-	&__link {
-		--color-text: var(--color-accent);
-		color: var(--color-text);
-		font-size: 1.4em;
-		flex: 0 1 auto;
+	.nav-link {
+		color: $primary-beige;
+		font-size: 1.5rem;
 		line-height: 1;
-		padding: 0.8rem;
-		text-align: center;
-		text-underline-offset: 0.1em;
 
 		&.active {
-			text-decoration-thickness: 0.22em;
-			text-underline-offset: 0.1em;
+			text-decoration: underline;
+			color: $primary-beige !important;
+			text-underline-offset: 0.3em;
 		}
+
+		&:hover {
+			color: $secondary-blue;
+		}
+	}
+
+	.navbar .navbar-toggler {
+		background-color: $primary-beige;
+	}
+}
+
+.navbar button {
+	background-color: $primary-beige;
+	color: $secondary-blue;
+	font-weight: bold;
+	border: none;
+
+	@media (hover: hover) {
+		background-color: $secondary-blue;
+		color: $primary-beige;
+	}
+
+	@media (min-width: 431px) {
+		font-size: 1.5rem;
+		text-align: center;
+		border: none;
+		padding: 0.5rem;
+		width: 11rem;
 	}
 }

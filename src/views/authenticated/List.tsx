@@ -53,6 +53,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 						Let’s get started by adding your first item!
 					</h3>
 					<Button
+						className="custom-button"
 						onClick={() => navigate("/manage-list")}
 						aria-label="Start adding items to your list"
 					>
@@ -79,7 +80,9 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				<header>
 					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
 				</header>
-
+  	    <section className="AddItemForm">
+						<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
+					</section>
 				<section className="list-functions mt-3 d-flex  sticky-top align-items-center justify-content-center">
 					{unfilteredListItems.length > 0 && (
 						<FilterListInput
@@ -90,9 +93,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</section>
 
 				<section ref={viewListRef}>
-					<section className="AddItemForm">
-						<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
-					</section>
+
 					<section className="ListItemCheckBox">
 						{filteredListItems.map((item) => (
 							<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
@@ -101,10 +102,12 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</section>
 			</div>
 
+
 			<ShareListForm listPath={listPath} />
 			<Button className="d-md-none mt-3" onClick={scrollToViewList}>
 				{"View List"}
 			</Button>
 		</Container>
+
 	);
 }

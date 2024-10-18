@@ -59,25 +59,27 @@ export function ItemQuantityForm({
 				onChange={(e) => setItemQuantity(Number(e.target.value))}
 				disabled={!edit}
 			/>
+
 			<div>
 				{edit ? (
 					<>
-						<Button onClick={updateItemQuantity}>
+						<Button className="custom-button" onClick={updateItemQuantity}>
 							<span className="d-none d-md-inline"> Save </span>
 							<IoMdCheckmark className="d-block d-md-none" />
 						</Button>{" "}
-						<Button onClick={toggleEdit}>
+						<Button className="custom-button" onClick={toggleEdit}>
 							<span className="d-none d-md-inline">Cancel</span>
 							<GiCancel className="d-block d-md-none" />
 						</Button>
 					</>
 				) : (
-					<Button onClick={toggleEdit}>
+					<Button className="custom-button" onClick={toggleEdit}>
 						<span className="d-none d-md-inline">Edit</span>
 						<FaEdit className="d-block d-md-none" />
 					</Button>
 				)}
 			</div>
 		</div>
+
 	);
 }

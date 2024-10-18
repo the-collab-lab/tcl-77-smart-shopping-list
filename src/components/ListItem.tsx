@@ -122,6 +122,7 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
+
 		<div className="d-flex flex-column justify-content-center mt-5">
 			<span
 				className={`UrgencyStatus text-nowrap ms-5 px-5 ${urgencyStatus.replace(/\s/g, "-")}`}

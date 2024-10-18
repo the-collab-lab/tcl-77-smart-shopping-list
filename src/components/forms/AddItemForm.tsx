@@ -180,11 +180,13 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						/>
 						Not soon -- Within {purchaseTimelines[PurchaseTime.notSoon]} days!
 					</Form.Label>
-					<Button type="submit" aria-label="Add item to shopping list">
+					<Button className="custom-button" type="submit" aria-label="Add item to shopping list">
 						Add Item
 					</Button>
 				</fieldset>
+
 			</Form>
+
 		</section>
 	);
 }

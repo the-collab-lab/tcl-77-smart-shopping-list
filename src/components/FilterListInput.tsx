@@ -38,7 +38,10 @@ export function FilterListInput({
 					aria-label="Filter items in the list"
 					placeholder="Search items..."
 				/>
-				<Button onClick={handleClear}>Clear</Button>
+				<Button className="custom-button" onClick={handleClear}>
+					Clear
+				</Button>
+
 			</InputGroup>
 		</Form>
 	);
