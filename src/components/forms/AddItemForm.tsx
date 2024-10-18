@@ -94,7 +94,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	};
 
 	return (
-		<section className="custom-borders d-flex flex-column align-items-center">
+		<section className="custom-borders d-flex flex-column align-items-center ">
 			<Form onSubmit={(e) => handleSubmit(e, listPath)}>
 				<h3 className="text-center">Add Item</h3>
 

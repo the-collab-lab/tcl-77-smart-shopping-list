@@ -64,6 +64,8 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		return "kind of soon";
 	};
 
+	const urgencyStatus = getUrgencyStatus(item);
+
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedState = e.target.checked;
 
@@ -120,9 +122,11 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<div className="d-flex flex-column justify-content-center mt-4">
-			<span className="UrgencyStatus text-nowrap ms-5 px-5">
-				{getUrgencyStatus(item)}
+		<div className="d-flex flex-column justify-content-center mt-5">
+			<span
+				className={`UrgencyStatus text-nowrap ms-5 px-5 ${urgencyStatus.replace(/\s/g, "-")}`}
+			>
+				{urgencyStatus}
 			</span>
 			<section className="ListItemBox custom-borders d-flex p-2 m-1">
 				<section className="d-flex flex-grow-1 PurchaseItem">

@@ -30,14 +30,10 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	const Header = () => {
 		return (
-			<p className="Header text-center">
-				Your list items are organized based on when you need to buy them. Items
-				that need to be purchased soonest are at the top. If two or more items
-				are due at the same time, they will be sorted alphabetically. If an
+			<p className="Header text-center h4">
+				Your list items are organized based on when you need to buy them. If an
 				items purchase date has passed, it will be marked as overdue and placed
-				at the top of the list. Additionally, items that have not been used
-				recently will be labeled as inactive and moved to the bottom of your
-				list.
+				at the top of the list.
 			</p>
 		);
 	};
@@ -52,8 +48,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 			<Container>
 				<h2 className="ListName">{listName}</h2>
 				<section className="d-flex flex-column justify-content-center text-center align-items-center">
-					<Header />
-					<h3>
+					<h3 className="mt-5">
 						You haven’t added any items yet.
 						<br />
 						Let’s get started by adding your first item!
@@ -90,11 +85,11 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Main content when list is not empty
 	return (
 		<Container className="ListPageContainer">
-			<header>
-				<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
-				<Header />
-			</header>
 			<div className="ListItemSection">
+				<header>
+					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
+				</header>
+
 				<section className="d-flex sticky-top flex-nowrap align-items-center justify-content-center">
 					{unfilteredListItems.length > 0 && (
 						<FilterListInput
