@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+
+.ListName {
+	color: $primary-beige;
+	background-color: $primary-blue;
+	text-align: center;
+	border-radius: 4px;
+	font-size: 2.5em;
+	max-width: 100%;
+}
+
+.ListPageContainer {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	flex-direction: column;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+.list-functions {
+	background-color: rgb(241, 230, 204);
+	z-index: 1020;
+}
+
+//.Share-ListForm {
+//flex-basis: 50%;
+//}
+
+//.Add-ItemForm {
+//flex-basis: 80%;
+//}
+
+//.ListItemSection {
+
+//flex-grow: 1; /* Both sections will take up equal width */
+//flex-shrink: 1;
+//flex-wrap: column;
+
+//}
+
+/*@media (max-width: 1000px) {
+	.ListItemSection,
+	.Add-ShareList {
+		//flex-basis: 50%;
+		//margin: auto;
+		//align-items: flex-end;
+	}
+} */

@@ -25,9 +25,11 @@ export function FilterListInput({
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<InputGroup>
-				<Form.Label htmlFor="filterList">Filter List:</Form.Label>
+		<Form className="w-100 w-lg-auto" onSubmit={handleSubmit}>
+			<InputGroup className="d-flex align-items-center mt-1">
+				<Form.Label htmlFor="filterList" className="me-2 mb-0">
+					<span className="fw-bold">Filter List:</span>
+				</Form.Label>
 				<Form.Control
 					type="text"
 					onChange={handleChange}
@@ -37,8 +39,9 @@ export function FilterListInput({
 					placeholder="Search items..."
 				/>
 				<Button className="custom-button" onClick={handleClear}>
-					x
+					Clear
 				</Button>
+
 			</InputGroup>
 		</Form>
 	);

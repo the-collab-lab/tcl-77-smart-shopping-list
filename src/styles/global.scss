@@ -5,6 +5,7 @@ $theme-colors: (
 	"secondary": $primary-blue,
 	"info": $tertiary-blue,
 	"dark": $secondary-blue,
+	"danger": #dc3545,
 );
 
 $font-size-root: null;
@@ -26,7 +27,6 @@ body {
 	text-align: center;
 	border: none;
 	padding: 0.5rem;
-	width: 11rem;
 
 	&:hover {
 		background-color: $secondary-blue;
@@ -34,6 +34,6 @@ body {
 	}
 }
 
-a svg {
+svg {
 	fill: $primary-beige;
 }

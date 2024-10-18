@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.custom-borders {
+	border: 2px solid $secondary-blue !important;
+	border-radius: 4px !important;
+	padding: 20px;
+	margin-top: 20px;
+	position: relative;
+}
+
+.Share-ListForm {
+	background-color: rgb(241, 230, 204);
+}
