@@ -4,7 +4,7 @@ import { useState, useMemo, useRef } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import ShareListForm from "../../components/forms/ShareListForm";
 import { AddItemForm } from "../../components/forms/AddItemForm";
@@ -75,7 +75,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	// Main content when list is not empty
 	return (
-		<Container className="ListPageContainer ">
+		<Container>
 			<div className="ListItemSection">
 				<header>
 					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
@@ -104,7 +104,10 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 			</div>
 
 			<ShareListForm listPath={listPath} />
-			<Button className="d-md-none mt-3" onClick={scrollToViewList}>
+			<Button
+				className="d-md-none mt-3 custom-button align-self-center"
+				onClick={scrollToViewList}
+			>
 				{"View List"}
 			</Button>
 		</Container>
