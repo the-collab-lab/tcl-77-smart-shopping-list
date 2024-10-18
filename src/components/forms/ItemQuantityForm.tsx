@@ -63,23 +63,22 @@ export function ItemQuantityForm({
 			<div>
 				{edit ? (
 					<>
-						<Button className="custom-button" onClick={updateItemQuantity}>
-							<span className="d-none d-md-inline"> Save </span>
+						<Button variant="dark" onClick={updateItemQuantity}>
+							<span className="d-none d-md-inline text-primary">Save</span>
 							<IoMdCheckmark className="d-block d-md-none" />
 						</Button>{" "}
-						<Button className="custom-button" onClick={toggleEdit}>
-							<span className="d-none d-md-inline">Cancel</span>
+						<Button variant="dark" onClick={toggleEdit}>
+							<span className="d-none d-md-inline text-primary">Cancel</span>
 							<GiCancel className="d-block d-md-none" />
 						</Button>
 					</>
 				) : (
-					<Button className="custom-button" onClick={toggleEdit}>
-						<span className="d-none d-md-inline">Edit</span>
+					<Button variant="dark" onClick={toggleEdit}>
+						<span className="d-none d-md-inline text-primary">Edit</span>
 						<FaEdit className="d-block d-md-none" />
 					</Button>
 				)}
 			</div>
 		</div>
-
 	);
 }
