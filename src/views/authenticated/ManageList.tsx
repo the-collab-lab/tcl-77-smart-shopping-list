@@ -29,7 +29,6 @@ export function ManageList({ listPath, data }: Props) {
 	return (
 		<div>
 			<AddItemForm listPath={listPath} data={data || []} />
-			<ShareListForm listPath={listPath} />
 		</div>
 	);
 }

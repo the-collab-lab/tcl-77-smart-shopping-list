@@ -5,6 +5,7 @@ import { getUser } from "../ProtectedRoute";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { InputGroup } from "react-bootstrap";
+import { FaRegShareSquare } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -44,7 +45,7 @@ const ShareListForm = ({ listPath }: Props) => {
 
 	return (
 		<Form
-			className="custom-borders d-flex flex-column align-items-center mt-3"
+			className="d-flex flex-column align-items-center mt-3"
 			onSubmit={(e) => handleInvite(e, listPath)}
 		>
 			<Form.Label className="h3 text-center " htmlFor="recipient-email">
@@ -63,7 +64,8 @@ const ShareListForm = ({ listPath }: Props) => {
 					aria-required
 				/>
 				<Button type="submit" aria-label="submits form to share shopping list">
-					Share List
+					<FaRegShareSquare />
+					<span>Share</span>
 				</Button>
 			</InputGroup>
 		</Form>

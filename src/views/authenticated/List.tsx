@@ -1,14 +1,13 @@
 import "./List.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import { useRef } from "react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
-import { Container } from "react-bootstrap";
-import { AddItemForm } from "../../components/forms/AddItemForm";
+import { Container, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ShareListForm from "../../components/forms/ShareListForm";
+import { FaRegShareSquare } from "react-icons/fa";
 
 interface Props {
 	data: ListItem[];
@@ -19,6 +18,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const { listName } = useParams<{ listName: string }>();
+	const [showShareModal, setShowShareModal] = useState(false);
 
 	const filteredListItems = useMemo(() => {
 		return unfilteredListItems
@@ -64,15 +64,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 		);
 	}
 
-	const addShareListRef = useRef<HTMLElement | null>(null);
-
-	// Function to handle scrolling to the Add-ShareList section
-	const scrollToAddShareItem = () => {
-		if (addShareListRef.current) {
-			addShareListRef.current.scrollIntoView({ behavior: "smooth" });
-		}
-	};
-
 	const viewListRef = useRef<HTMLElement | null>(null);
 
 	// Function to handle scrolling to the Add-ShareList section
@@ -84,27 +75,36 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	// Main content when list is not empty
 	return (
-		<Container className="ListPageContainer">
+		<Container className="ListPageContainer ">
 			<div className="ListItemSection">
 				<header>
 					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
 				</header>
 
-				<section className="filter-list d-flex sticky-top flex-nowrap align-items-center justify-content-center">
+				<section className="list-functions mt-3 d-flex flex-column sticky-top align-items-center justify-content-center">
+					<div>
+						<Button
+							className="ms-2"
+							onClick={() => navigate("/manage-list")}
+							aria-label="Navigate to add more items to your list"
+						>
+							<span className="text-nowrap">Add items</span>
+						</Button>
+						<Button
+							className="ms-2"
+							onClick={() => setShowShareModal(true)}
+							aria-label="Share your list"
+						>
+							<FaRegShareSquare />
+							<span className="text-nowrap ms-1">Share</span>
+						</Button>
+					</div>
 					{unfilteredListItems.length > 0 && (
 						<FilterListInput
 							searchTerm={searchTerm}
 							setSearchTerm={setSearchTerm}
 						/>
 					)}
-
-					<Button
-						className="ms-2 d-md-none"
-						onClick={scrollToAddShareItem}
-						aria-label="Navigate to add more items to your list"
-					>
-						<span className="text-nowrap">Add items</span>
-					</Button>
 				</section>
 
 				<section ref={viewListRef}>
@@ -114,20 +114,23 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</section>
 			</div>
 
-			<section
-				ref={addShareListRef}
-				className="Add-ShareList d-flex flex-column justify-content-start align-items-center "
-			>
-				<div className="Add-ItemForm ">
-					<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
-				</div>
-				<div className="Share-ListForm ">
+			<Modal show={showShareModal} onHide={() => setShowShareModal(false)}>
+				<Modal.Header closeButton>
+					<Modal.Title>Share Your List</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
 					<ShareListForm listPath={listPath} />
-				</div>
-				<Button className="d-md-none mt-3" onClick={scrollToViewList}>
-					{"View List"}
-				</Button>
-			</section>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={() => setShowShareModal(false)}>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
+
+			<Button className="d-md-none mt-3" onClick={scrollToViewList}>
+				{"View List"}
+			</Button>
 		</Container>
 	);
 }

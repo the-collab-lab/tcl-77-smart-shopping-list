@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
@@ -30,6 +31,9 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	);
 
 	const [addedQuantity, setAddedQuantity] = useState(1);
+
+	const navigate = useNavigate();
+	const listName = listPath.split("/").pop();
 
 	const handleItemNameTextChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setItemName(e.target.value);
@@ -87,6 +91,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 					},
 				},
 			);
+			navigate(`/list/${listName}`);
 			console.log("Quantity added from Add Item form:", addedQuantity);
 		} catch (error) {
 			console.error("Failed to add item:", error);
@@ -94,11 +99,12 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 	};
 
 	return (
-		<section className="custom-borders d-flex flex-column align-items-center ">
+		<section className="d-flex flex-column align-items-center ">
 			<Form onSubmit={(e) => handleSubmit(e, listPath)}>
-				<h3 className="text-center">Add Item</h3>
+				<h1 className="text-center mt-5">New Item</h1>
 
 				<Form.Label htmlFor="item-name">
+					<h4>Item Name:</h4>
 					<Form.Control
 						id="item-name"
 						type="text"
@@ -111,6 +117,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 					/>
 				</Form.Label>
 				<label htmlFor="item-quantity">
+					<h4>Item Quantity</h4>
 					<Form.Control
 						id="item-quantity"
 						type="number"

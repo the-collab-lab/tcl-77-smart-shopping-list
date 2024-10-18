@@ -14,10 +14,12 @@
 	display: flex;
 	flex-wrap: wrap;
 	box-sizing: border-box;
+	flex-direction: column;
 }
 
-.filter-list {
+.list-functions {
 	background-color: rgb(241, 230, 204);
+	z-index: 1020;
 }
 
 .Add-ShareList {
