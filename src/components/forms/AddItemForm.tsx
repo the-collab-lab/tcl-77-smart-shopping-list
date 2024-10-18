@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addItem, ListItem } from "../../api";
 import { validateItemName } from "../../utils";
 import toast from "react-hot-toast";
@@ -181,7 +181,7 @@ export function AddItemForm({ listPath, data: unfilteredListItems }: Props) {
 						Not soon -- Within {purchaseTimelines[PurchaseTime.notSoon]} days!
 					</Form.Label>
 					<Button type="submit" aria-label="Add item to shopping list">
-						Submit Item
+						Add Item
 					</Button>
 				</fieldset>
 			</Form>

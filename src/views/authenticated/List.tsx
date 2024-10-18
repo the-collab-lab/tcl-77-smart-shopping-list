@@ -4,10 +4,10 @@ import { useState, useMemo, useRef } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
-import { Container, Modal } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ShareListForm from "../../components/forms/ShareListForm";
-import { FaRegShareSquare } from "react-icons/fa";
+import { AddItemForm } from "../../components/forms/AddItemForm";
 
 interface Props {
 	data: ListItem[];
@@ -18,7 +18,6 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const { listName } = useParams<{ listName: string }>();
-	const [showShareModal, setShowShareModal] = useState(false);
 
 	const filteredListItems = useMemo(() => {
 		return unfilteredListItems
@@ -81,24 +80,7 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
 				</header>
 
-				<section className="list-functions mt-3 d-flex flex-column sticky-top align-items-center justify-content-center">
-					<div>
-						<Button
-							className="ms-2"
-							onClick={() => navigate("/manage-list")}
-							aria-label="Navigate to add more items to your list"
-						>
-							<span className="text-nowrap">Add items</span>
-						</Button>
-						<Button
-							className="ms-2"
-							onClick={() => setShowShareModal(true)}
-							aria-label="Share your list"
-						>
-							<FaRegShareSquare />
-							<span className="text-nowrap ms-1">Share</span>
-						</Button>
-					</div>
+				<section className="list-functions mt-3 d-flex  sticky-top align-items-center justify-content-center">
 					{unfilteredListItems.length > 0 && (
 						<FilterListInput
 							searchTerm={searchTerm}
@@ -108,26 +90,18 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</section>
 
 				<section ref={viewListRef}>
-					{filteredListItems.map((item) => (
-						<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
-					))}
+					<section className="AddItemForm">
+						<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
+					</section>
+					<section className="ListItemCheckBox">
+						{filteredListItems.map((item) => (
+							<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
+						))}
+					</section>
 				</section>
 			</div>
 
-			<Modal show={showShareModal} onHide={() => setShowShareModal(false)}>
-				<Modal.Header closeButton>
-					<Modal.Title>Share Your List</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<ShareListForm listPath={listPath} />
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={() => setShowShareModal(false)}>
-						Close
-					</Button>
-				</Modal.Footer>
-			</Modal>
-
+			<ShareListForm listPath={listPath} />
 			<Button className="d-md-none mt-3" onClick={scrollToViewList}>
 				{"View List"}
 			</Button>
