@@ -24,14 +24,7 @@ export function AuthenticatedNavBar() {
 						<Nav.Link as={NavLink} to="/" aria-label="Home" eventKey={"1"}>
 							Home
 						</Nav.Link>
-						<Nav.Link
-							as={NavLink}
-							to="/manage-list"
-							aria-label="Manage List"
-							eventKey={"2"}
-						>
-							Manage List
-						</Nav.Link>
+
 						<Nav.Link
 							as={NavLink}
 							to="/about"
