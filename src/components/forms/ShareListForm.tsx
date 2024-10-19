@@ -52,7 +52,7 @@ const ShareListForm = ({ listPath }: Props) => {
 				className="h3 Share-ListForm text-center "
 				htmlFor="recipient-email"
 			>
-				Invite friends and family to view your list!
+				Invite others to view your list!
 			</Form.Label>
 			<InputGroup>
 				<Form.Control
@@ -67,10 +67,13 @@ const ShareListForm = ({ listPath }: Props) => {
 					aria-required
 				/>
 
-				<Button className="custom-button" type="submit" aria-label="submits form to share shopping list">
+				<Button
+					className="custom-button"
+					type="submit"
+					aria-label="submits form to share shopping list"
+				>
 					<FaRegShareSquare />
 					<span>Share</span>
-			
 				</Button>
 			</InputGroup>
 		</Form>

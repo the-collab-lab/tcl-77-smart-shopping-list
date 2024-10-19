@@ -103,13 +103,16 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 				</section>
 			</div>
 
-			<ShareListForm listPath={listPath} />
-			<Button
-				className="d-md-none mt-3 custom-button align-self-center"
-				onClick={scrollToViewList}
-			>
-				{"View List"}
-			</Button>
+			<div className="d-flex justify-content center flex-column ">
+				<Button
+					className="d-md-none mt-3 custom-button justify-content-center"
+					onClick={scrollToViewList}
+				>
+					{"View List"}
+				</Button>
+
+				<ShareListForm listPath={listPath} />
+			</div>
 		</Container>
 	);
 }
