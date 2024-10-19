@@ -7,7 +7,12 @@ import Card from "react-bootstrap/Card";
 import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
-import SampleImage from "../../assets/images/sample.png";
+import SignInImage from "../../assets/images/sign_in.png";
+import AddListImage from "../../assets/images/add_list_name.png";
+import ClickListImage from "../../assets/images/click_list_name.png";
+import AddFormImage from "../../assets/images/add_item_form.png";
+import ListPageImage from "../../assets/images/list_page.png";
+import ShareFormImage from "../../assets/images/share_form.png";
 
 export function About() {
 	const [stepIndex, setStepIndex] = useState(0);
@@ -22,68 +27,70 @@ export function About() {
 				<Card.Body>
 					<Card.Title className="fs-3">How it works</Card.Title>
 					<Carousel
+						variant="dark"
 						activeIndex={stepIndex}
 						onSelect={handleStepIndexChoice}
 						touch
 					>
 						<Carousel.Item>
-							<Container className="w-50">
-								<Image src={SampleImage} fluid />
+							<Container>
+								<Image src={SignInImage} fluid />
 							</Container>
-							<Carousel.Caption>
-								<p>
-									Create a list for different stores or different grouping of
-									items.
-								</p>
-							</Carousel.Caption>
+							<p className="text-info m-5">
+								Click the sign in button to be prompted to use your google
+								account to login.
+							</p>
 						</Carousel.Item>
 						<Carousel.Item>
-							<Container className="w-50">
-								<Image src={SampleImage} fluid />
+							<Container>
+								<Image src={AddListImage} fluid />
 							</Container>
-							<Carousel.Caption>
-								<p>Select a list that you&apos;d like to add items on.</p>
-							</Carousel.Caption>
+							<p className="text-info m-5">
+								Create a list for different stores or different grouping of
+								items.
+							</p>
 						</Carousel.Item>
 						<Carousel.Item>
-							<Container className="w-50">
-								<Image src={SampleImage} fluid />
+							<Container>
+								<Image src={ClickListImage} fluid />
 							</Container>
-							<Carousel.Caption>
-								<p>
-									Open the list manager, to start adding items and choosing when
-									you will need to restock next.
-								</p>
-							</Carousel.Caption>
+							<p className="text-info m-5">
+								Select a list that you&apos;d like to add items on.
+							</p>
 						</Carousel.Item>
 						<Carousel.Item>
-							<Container className="w-50">
-								<Image src={SampleImage} fluid />
+							<Container>
+								<Image src={AddFormImage} fluid />
 							</Container>
-							<Carousel.Caption>
-								<p>
-									Now that your new list has items you can start checking off
-									items as you shop!
-								</p>
-								<p>
+							<p className="text-info m-5">
+								At the top of the page you will be able to add items to your new
+								list and set their urgency status
+							</p>
+						</Carousel.Item>
+						<Carousel.Item>
+							<Container>
+								<Image src={ListPageImage} fluid />
+							</Container>
+							<p className="text-info m-5">
+								Now that your new list has items you can start checking off
+								items as you shop!
+								<li>
 									Each time an item is marked purchase the application evaluates
 									your shopping habits! Supporting you by adjusting your next
 									purchase predictions base on when your previous shopping
 									history!
-								</p>
-							</Carousel.Caption>
+								</li>
+							</p>
 						</Carousel.Item>
 						<Carousel.Item>
-							<Container className="w-50">
-								<Image src={SampleImage} fluid />
+							<Container>
+								<Image src={ShareFormImage} fluid />
 							</Container>
-							<Carousel.Caption>
-								<p>
-									If someone else needs to be let into to the shopping time you
-									can easily share specific lists with with in the list manager
-									so they can see and mark items as purchased too!
-								</p>
-							</Carousel.Caption>
+							<p className="text-info m-5">
+								If someone else needs to be let into to the shopping time you
+								can easily share specific lists with with in the list manager so
+								they can see and mark items as purchased too!
+							</p>
 						</Carousel.Item>
 					</Carousel>
 					<SignInButton isSignIn={false} />
