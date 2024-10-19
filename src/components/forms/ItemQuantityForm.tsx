@@ -46,9 +46,9 @@ export function ItemQuantityForm({
 	};
 
 	return (
-		<div className="d-flex">
+		<div className="d-flex align-items-center">
 			<Form.Control
-				className="me-3 w-auto"
+				className="w-auto p-0 me-1 text-center"
 				id="item-quantity"
 				aria-label="Item quantity"
 				type="number"
