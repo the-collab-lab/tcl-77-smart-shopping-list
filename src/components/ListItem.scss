@@ -1,15 +1,66 @@
-.ListItem {
+@import "../styles/_variables";
+
+.ListItemBox {
 	align-items: baseline;
-	display: flex;
-	flex-direction: row;
-	font-size: 1.2em;
+	font-size: 1.5em;
 	justify-content: space-between;
+	background-color: $primary-blue;
+	color: $primary-beige;
+	border-radius: 4px;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
-.ListItem-checkbox {
-	accent-color: var(--color-accent);
+.UrgencyStatus {
+	display: block;
+	background-color: $secondary-blue;
+	color: $primary-beige;
+	font-size: 1.25em;
+	max-width: 50%;
+	width: 80%;
+	border-radius: 4px;
+
+	// Default styles for urgency status
+	font-weight: bold;
+
+	&.inactive {
+		color: gray;
+	}
+
+	&.overdue {
+		color: red;
+	}
+
+	&.soon {
+		color: orange;
+	}
+
+	&.kind-of-soon {
+		color: yellow;
+	}
+
+	&.not-soon {
+		color: green;
+	}
 }
 
-.ListItem-label {
-	margin-left: 0.2em;
+.DeleteButton {
+	width: fit-content;
+}
+
+.custom-borders {
+	border: 2px solid $secondary-blue !important;
+	border-radius: 4px !important;
+	padding: 20px;
+	margin-top: 20px;
+	position: relative;
+}
+
+@media (max-width: 576px) {
+	.EditItem {
+		flex-direction: column;
+	}
+	.PurchaseItem {
+		font-size: 0.75em;
+	}
 }

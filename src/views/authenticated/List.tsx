@@ -1,9 +1,13 @@
+import "./List.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { ListItemCheckBox } from "../../components/ListItem";
 import { FilterListInput } from "../../components/FilterListInput";
 import { ListItem, comparePurchaseUrgency } from "../../api";
+import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import ShareListForm from "../../components/forms/ShareListForm";
+import { AddItemForm } from "../../components/forms/AddItemForm";
 
 interface Props {
 	data: ListItem[];
@@ -25,8 +29,10 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 
 	const Header = () => {
 		return (
-			<p>
-				Hello from the <code>/list</code> page!
+			<p className="Header text-center h4">
+				Your list items are organized based on when you need to buy them. If an
+				items purchase date has passed, it will be marked as overdue and placed
+				at the top of the list.
 			</p>
 		);
 	};
@@ -38,11 +44,10 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 	// Early return if the list is empty
 	if (unfilteredListItems.length === 0) {
 		return (
-			<>
-				<h2>{listName}</h2>
-				<Header />
-				<section>
-					<h3>
+			<Container>
+				<h2 className="ListName">{listName}</h2>
+				<section className="d-flex flex-column justify-content-center text-center align-items-center">
+					<h3 className="mt-5">
 						You haven’t added any items yet.
 						<br />
 						Let’s get started by adding your first item!
@@ -55,38 +60,59 @@ export function List({ data: unfilteredListItems, listPath }: Props) {
 						{"Get started!"}
 					</Button>
 				</section>
-			</>
+			</Container>
 		);
 	}
 
+	const viewListRef = useRef<HTMLElement | null>(null);
+
+	// Function to handle scrolling to the Add-ShareList section
+	const scrollToViewList = () => {
+		if (viewListRef.current) {
+			viewListRef.current.scrollIntoView({ behavior: "smooth" });
+		}
+	};
+
 	// Main content when list is not empty
 	return (
-		<>
-			<h2>{listName}</h2>
+		<Container>
+			<div className="ListItemSection">
+				<header>
+					<h2 className="ListName p-1 m-2 mt-2">{listName}</h2>
+				</header>
 
-			<Header />
+				<section className="AddItemForm">
+					<AddItemForm listPath={listPath} data={unfilteredListItems || []} />
+				</section>
 
-			<section className="sticky-top bg-dark">
-				{unfilteredListItems.length > 0 && (
-					<FilterListInput
-						searchTerm={searchTerm}
-						setSearchTerm={setSearchTerm}
-					/>
-				)}
-				<h3>Want to add more items to your list?</h3>
+				<section className="list-functions mt-3 d-flex  sticky-top align-items-center justify-content-center">
+					{unfilteredListItems.length > 0 && (
+						<FilterListInput
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+						/>
+					)}
+				</section>
+
+				<section ref={viewListRef}>
+					<section className="ListItemCheckBox">
+						{filteredListItems.map((item) => (
+							<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
+						))}
+					</section>
+				</section>
+			</div>
+
+			<div className="d-flex justify-content center flex-column ">
 				<Button
-					className="custom-button"
-					onClick={() => navigate("/manage-list")}
-					aria-label="Navigate to add more items to your list"
+					className="d-md-none mt-3 custom-button justify-content-center"
+					onClick={scrollToViewList}
 				>
-					{"Add items"}
+					{"View List"}
 				</Button>
-			</section>
-			<section>
-				{filteredListItems.map((item) => (
-					<ListItemCheckBox key={item.id} item={item} listPath={listPath} />
-				))}
-			</section>
-		</>
+
+				<ShareListForm listPath={listPath} />
+			</div>
+		</Container>
 	);
 }

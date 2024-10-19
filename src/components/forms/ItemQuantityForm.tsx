@@ -3,6 +3,9 @@ import { ListItem } from "../../api";
 import { toast } from "react-hot-toast";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { FaEdit } from "react-icons/fa";
+import { IoMdCheckmark } from "react-icons/io";
+import { GiCancel } from "react-icons/gi";
 
 interface ItemQuantityFormProps {
 	saveItemQuantity: (quantity: number) => void;
@@ -43,8 +46,9 @@ export function ItemQuantityForm({
 	};
 
 	return (
-		<>
+		<div className="d-flex align-items-center">
 			<Form.Control
+				className="w-auto p-0 me-1 text-center"
 				id="item-quantity"
 				aria-label="Item quantity"
 				type="number"
@@ -55,20 +59,26 @@ export function ItemQuantityForm({
 				onChange={(e) => setItemQuantity(Number(e.target.value))}
 				disabled={!edit}
 			/>
-			{edit ? (
-				<span>
-					<Button className="custom-button" onClick={updateItemQuantity}>
-						Save!
-					</Button>{" "}
-					<Button className="custom-button" onClick={toggleEdit}>
-						Cancel!
+
+			<div>
+				{edit ? (
+					<>
+						<Button variant="dark" onClick={updateItemQuantity}>
+							<span className="d-none d-md-inline text-primary">Save</span>
+							<IoMdCheckmark className="d-block d-md-none" />
+						</Button>{" "}
+						<Button variant="dark" onClick={toggleEdit}>
+							<span className="d-none d-md-inline text-primary">Cancel</span>
+							<GiCancel className="d-block d-md-none" />
+						</Button>
+					</>
+				) : (
+					<Button variant="dark" onClick={toggleEdit}>
+						<span className="d-none d-md-inline text-primary">Edit</span>
+						<FaEdit className="d-block d-md-none" />
 					</Button>
-				</span>
-			) : (
-				<Button className="custom-button" onClick={toggleEdit}>
-					Edit!
-				</Button>
-			)}
-		</>
+				)}
+			</div>
+		</div>
 	);
 }

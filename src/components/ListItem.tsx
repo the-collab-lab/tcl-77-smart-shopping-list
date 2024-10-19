@@ -6,6 +6,7 @@ import { moreThan24HoursPassed, getDaysBetweenDates } from "../utils";
 import { ItemQuantityForm } from "./forms/ItemQuantityForm";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
 interface Props {
 	item: ListItem;
@@ -63,6 +64,8 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 		return "kind of soon";
 	};
 
+	const urgencyStatus = getUrgencyStatus(item);
+
 	const handleCheckChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedState = e.target.checked;
 
@@ -119,25 +122,41 @@ export function ListItemCheckBox({ item, listPath }: Props) {
 	};
 
 	return (
-		<div className="ListItem">
-			<Form.Check
-				type="checkbox"
-				id={`checkbox-${item.id}`}
-				aria-label={`Mark ${item.name} as purchased.`}
-				value={item.id}
-				checked={isChecked}
-				onChange={handleCheckChange}
-				aria-checked={isChecked}
-				disabled={isChecked}
-			/>
-			<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} /> x{" "}
-			{item.name}{" "}
-			<span>
-				{getUrgencyStatus(item)}
-				<Button className="custom-button" onClick={() => deleteItemHandler()}>
-					Delete Item
-				</Button>
+		<div className="d-flex flex-column justify-content-center mt-5">
+			<span
+				className={`UrgencyStatus text-center text-nowrap ms-5 w-auto p-1 ${urgencyStatus.replace(/\s/g, "-")}`}
+			>
+				{urgencyStatus}
 			</span>
+			<section className="ListItemBox custom-borders d-flex p-2 m-1 align-items-center">
+				<section className="PurchaseItem d-flex flex-grow-1">
+					<Form.Check
+						className="me-3"
+						type="checkbox"
+						id={`checkbox-${item.id}`}
+						aria-label={`Mark ${item.name} as purchased.`}
+						value={item.id}
+						checked={isChecked}
+						onChange={handleCheckChange}
+						aria-checked={isChecked}
+						disabled={isChecked}
+					/>
+					<Form.Label>{item.name}</Form.Label>
+				</section>
+
+				<section className="EditItem d-flex gap-2 align-items-end">
+					<ItemQuantityForm saveItemQuantity={editItemQuantity} item={item} />
+
+					<Button
+						className="DeleteButton w-auto"
+						variant="danger"
+						onClick={() => deleteItemHandler()}
+					>
+						<span className="d-none d-md-inline">Delete</span>
+						<MdOutlineDeleteForever className="  d-block d-md-none" />
+					</Button>
+				</section>
+			</section>
 		</div>
 	);
 }
